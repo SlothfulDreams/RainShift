@@ -94,7 +94,7 @@ export function FileUpload({ onFileLoaded }: FileUploadProps) {
         onClick={handleClick}
         className={`
           relative cursor-pointer
-          holo-card corner-accents
+          holo-card
           p-12 rounded-sm
           transition-all duration-300
           ${isDragging ? "border-neon-cyan shadow-[0_0_30px_rgba(0,240,255,0.3)]" : ""}

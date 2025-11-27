@@ -183,12 +183,12 @@ export function SaveEditor({
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.1 }}
-            className="lg:col-span-3 space-y-4"
+            className="lg:col-span-4 space-y-4 min-w-0"
           >
             {/* Stats Panel */}
-            <div className="holo-card corner-accents p-5 rounded-sm">
+            <div className="holo-card p-5 rounded-sm">
               <h2 className="font-display text-xs tracking-widest text-neon-cyan mb-4">
-                {"// STATISTICS"}
+                {"STATISTICS"}
               </h2>
 
               <div className="space-y-3">
@@ -230,9 +230,9 @@ export function SaveEditor({
             <CoinsEditor coins={saveData.coins} onChange={handleCoinsChange} />
 
             {/* Bulk Actions */}
-            <div className="holo-card corner-accents p-5 rounded-sm">
+            <div className="holo-card p-5 rounded-sm">
               <h2 className="font-display text-xs tracking-widest text-neon-cyan mb-4">
-                {"// BULK ACTIONS"}
+                {"BULK ACTIONS"}
               </h2>
 
               <div className="space-y-2">
@@ -262,7 +262,7 @@ export function SaveEditor({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="lg:col-span-9 space-y-4"
+            className="lg:col-span-8 space-y-4 min-w-0"
           >
             {/* Filters */}
             <div className="holo-card p-5 rounded-sm">

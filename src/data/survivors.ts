@@ -31,7 +31,7 @@ export const survivors: Survivor[] = [
     id: "engineer",
     name: "Engineer",
     dlc: "base",
-    unlockAchievement: "CompleteThreeStages",
+    unlockAchievement: "Complete30StagesCareer",
     description:
       "A survivor that creates turrets and shields to control the battlefield.",
   },
@@ -47,7 +47,7 @@ export const survivors: Survivor[] = [
     id: "mercenary",
     name: "Mercenary",
     dlc: "base",
-    unlockAchievement: "CompleteTeleporterWithoutObtainingGold",
+    unlockAchievement: "CompleteUnknownEnding",
     description:
       "A melee survivor with extreme mobility and invincibility frames.",
   },
@@ -55,7 +55,7 @@ export const survivors: Survivor[] = [
     id: "rex",
     name: "REX",
     dlc: "base",
-    unlockAchievement: "RepairTurret",
+    unlockAchievement: "RescueTreebot",
     description:
       "A plant-robot hybrid that trades health for powerful attacks.",
   },
@@ -63,7 +63,7 @@ export const survivors: Survivor[] = [
     id: "loader",
     name: "Loader",
     dlc: "base",
-    unlockAchievement: "ReachHighAltitude",
+    unlockAchievement: "DefeatSuperRoboBallBoss",
     description:
       "A powerful bruiser with a grappling hook for extreme mobility.",
   },
@@ -71,21 +71,21 @@ export const survivors: Survivor[] = [
     id: "acrid",
     name: "Acrid",
     dlc: "base",
-    unlockAchievement: "ReleaseAcrid",
+    unlockAchievement: "BeatArena",
     description: "A melee-ranged hybrid focused on poison damage over time.",
   },
   {
     id: "captain",
     name: "Captain",
     dlc: "base",
-    unlockAchievement: "DefeatMithrix",
+    unlockAchievement: "CompleteMainEnding",
     description: "A support survivor with powerful orbital abilities.",
   },
   {
     id: "bandit",
     name: "Bandit",
     dlc: "base",
-    unlockAchievement: "BanditRescue",
+    unlockAchievement: "CompleteThreeStages",
     description: "A high-skill combo character with devastating backstabs.",
   },
 
@@ -103,7 +103,7 @@ export const survivors: Survivor[] = [
     id: "voidfiend",
     name: "Void Fiend",
     dlc: "sotv",
-    unlockAchievement: "VoidSurvivorUnlock",
+    unlockAchievement: "CompleteVoidEnding",
     description:
       "A corrupted survivor that fluctuates between controlled and corrupted forms.",
   },
@@ -122,7 +122,7 @@ export const survivors: Survivor[] = [
     id: "chef",
     name: "CHEF",
     dlc: "sots",
-    unlockAchievement: "ChefUnlock",
+    unlockAchievement: "ActivateChef",
     description:
       "A culinary master using practiced skills in tandem for extra benefits.",
   },
@@ -130,7 +130,7 @@ export const survivors: Survivor[] = [
     id: "falseson",
     name: "False Son",
     dlc: "sots",
-    unlockAchievement: "FalseSonUnlock",
+    unlockAchievement: "UnlockFalseSon",
     description:
       "A slow but stalwart close-range warrior with extreme health and defense.",
   },
@@ -149,7 +149,7 @@ export const survivors: Survivor[] = [
     id: "drifter",
     name: "Drifter",
     dlc: "ac",
-    unlockAchievement: "DrifterUnlock",
+    unlockAchievement: "FreeDrifter",
     description:
       "A unique survivor who bags enemies and provides temporary items.",
   },
