@@ -123,16 +123,18 @@ export function SaveEditor({
       >
         <div className="max-w-[1600px] mx-auto px-6 py-4">
           <div className="flex items-center justify-between gap-4">
-            {/* Logo and file info */}
-            <div className="flex items-center gap-4">
+            {/* Logo and file info - clickable to return home */}
+            <button
+              type="button"
+              onClick={onReset}
+              className="flex items-center gap-4 group"
+            >
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-neon-cyan/10 rounded border border-neon-cyan/30 flex items-center justify-center">
-                  <span className="text-neon-cyan font-display font-bold text-lg">
-                    R
-                  </span>
+                <div className="w-10 h-12 flex items-center justify-center transition-transform group-hover:scale-110">
+                  <HeaderLogo />
                 </div>
-                <div>
-                  <h1 className="font-display text-text-bright tracking-wider text-sm">
+                <div className="text-left">
+                  <h1 className="font-display text-text-bright tracking-wider text-sm group-hover:text-neon-cyan transition-colors">
                     RAINSHIFT
                   </h1>
                   <p className="text-text-muted text-xs">
@@ -141,7 +143,7 @@ export function SaveEditor({
                   </p>
                 </div>
               </div>
-            </div>
+            </button>
 
             {/* Actions */}
             <div className="flex items-center gap-3">
@@ -471,4 +473,106 @@ function getDLCActiveStyle(dlc: DLC | "all"): string {
     default:
       return "bg-text-secondary text-void";
   }
+}
+
+// Small header logo - static raindrop with circuit pattern
+function HeaderLogo() {
+  const color = "#00f0ff";
+
+  return (
+    <svg
+      viewBox="0 0 100 130"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className="w-full h-full drop-shadow-[0_0_8px_rgba(0,240,255,0.5)]"
+      role="img"
+      aria-label="Rainshift logo"
+    >
+      <defs>
+        <linearGradient
+          id="headerDropGradient"
+          x1="50%"
+          y1="0%"
+          x2="50%"
+          y2="100%"
+        >
+          <stop offset="0%" stopColor={color} stopOpacity="0.9" />
+          <stop offset="50%" stopColor={color} stopOpacity="0.5" />
+          <stop offset="100%" stopColor={color} stopOpacity="0.2" />
+        </linearGradient>
+      </defs>
+
+      {/* Glow layer */}
+      <path
+        d="M50 8C50 8 14 52 14 82C14 104 30 120 50 120C70 120 86 104 86 82C86 52 50 8 50 8Z"
+        fill="none"
+        stroke={color}
+        strokeWidth="4"
+        strokeOpacity="0.2"
+        style={{ filter: "blur(2px)" }}
+      />
+
+      {/* Main raindrop */}
+      <path
+        d="M50 8C50 8 14 52 14 82C14 104 30 120 50 120C70 120 86 104 86 82C86 52 50 8 50 8Z"
+        fill="url(#headerDropGradient)"
+        stroke={color}
+        strokeWidth="2"
+      />
+
+      {/* Central hexagon */}
+      <g transform="translate(50, 82)">
+        <polygon
+          points="0,-12 10,-6 10,6 0,12 -10,6 -10,-6"
+          fill="none"
+          stroke={color}
+          strokeWidth="1.5"
+          strokeOpacity="0.6"
+        />
+        <polygon
+          points="0,-6 5,-3 5,3 0,6 -5,3 -5,-3"
+          fill={color}
+          fillOpacity="0.2"
+          stroke={color}
+          strokeWidth="1"
+          strokeOpacity="0.8"
+        />
+        <circle cx="0" cy="0" r="2" fill={color} />
+      </g>
+
+      {/* Circuit traces */}
+      <g
+        stroke={color}
+        strokeWidth="1"
+        strokeOpacity="0.5"
+        strokeLinecap="round"
+      >
+        <path d="M50 70 L50 50" />
+        <path d="M50 50 L40 62" />
+        <path d="M50 50 L60 62" />
+        <path d="M40 82 L32 82" />
+        <path d="M60 82 L68 82" />
+        <path d="M50 94 L50 108" />
+      </g>
+
+      {/* Nodes */}
+      <g fill={color}>
+        <circle cx="50" cy="50" r="2" fillOpacity="0.8" />
+        <circle cx="40" cy="62" r="1.5" fillOpacity="0.6" />
+        <circle cx="60" cy="62" r="1.5" fillOpacity="0.6" />
+        <circle cx="32" cy="82" r="1.5" fillOpacity="0.5" />
+        <circle cx="68" cy="82" r="1.5" fillOpacity="0.5" />
+        <circle cx="50" cy="108" r="2" fillOpacity="0.6" />
+      </g>
+
+      {/* Top highlight arc */}
+      <path
+        d="M35 45 Q50 30 65 45"
+        stroke={color}
+        strokeWidth="1"
+        strokeOpacity="0.3"
+        fill="none"
+      />
+    </svg>
+  );
 }
