@@ -271,7 +271,7 @@ export function SaveEditor({
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search..."
-              className="w-full pl-9 pr-8 py-2 text-sm ror-input bg-ror-bg-panel/50 focus:bg-ror-bg-panel"
+              className="w-full !pl-10 pr-8 py-2 text-sm ror-input bg-ror-bg-panel/50 focus:bg-ror-bg-panel"
             />
             {searchQuery && (
               <button
