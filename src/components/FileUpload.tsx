@@ -94,10 +94,12 @@ export function FileUpload({ onFileLoaded }: FileUploadProps) {
         onClick={handleClick}
         className={`
           relative cursor-pointer
-          holo-card
-          p-12 rounded-sm
-          transition-all duration-300
-          ${isDragging ? "border-neon-cyan shadow-[0_0_30px_rgba(0,240,255,0.3)]" : ""}
+          ror-card
+          p-12
+          transition-all duration-200
+          group
+          overflow-hidden
+          ${isDragging ? "border-ror-orange-accent bg-ror-bg-panel/80" : "hover:bg-ror-bg-panel/50"}
         `}
       >
         <input
@@ -108,105 +110,95 @@ export function FileUpload({ onFileLoaded }: FileUploadProps) {
           className="hidden"
         />
 
-        {/* Animated border on drag */}
-        {isDragging && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="absolute inset-0 rounded-sm border-2 border-neon-cyan pointer-events-none"
-          />
-        )}
+        {/* Scanning Line Animation */}
+        <motion.div
+          className="absolute inset-0 bg-gradient-to-b from-transparent via-ror-orange-accent/5 to-transparent pointer-events-none"
+          animate={{
+            y: ["-100%", "100%"],
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+        />
+
+        {/* Corner Accents (RoR2 Style) */}
+        <div
+          className={`absolute top-0 left-0 w-2 h-2 border-t border-l transition-colors ${isDragging ? "border-ror-orange-accent" : "border-ror-text-muted"}`}
+        />
+        <div
+          className={`absolute top-0 right-0 w-2 h-2 border-t border-r transition-colors ${isDragging ? "border-ror-orange-accent" : "border-ror-text-muted"}`}
+        />
+        <div
+          className={`absolute bottom-0 left-0 w-2 h-2 border-b border-l transition-colors ${isDragging ? "border-ror-orange-accent" : "border-ror-text-muted"}`}
+        />
+        <div
+          className={`absolute bottom-0 right-0 w-2 h-2 border-b border-r transition-colors ${isDragging ? "border-ror-orange-accent" : "border-ror-text-muted"}`}
+        />
 
         <div className="flex flex-col items-center justify-center gap-6 relative z-10">
-          {/* Upload icon with animation */}
+          {/* Icon Container */}
           <motion.div
             animate={{
-              y: isDragging ? -5 : 0,
+              rotate: isLoading ? 360 : 0,
+              scale: isDragging ? 1.1 : 1,
             }}
-            transition={{ type: "spring", stiffness: 300 }}
-            className="relative"
-          >
-            {/* Pulsing ring */}
-            <motion.div
-              className="absolute inset-0 border border-neon-cyan/30 rounded-full"
-              animate={{
-                scale: [1, 1.3, 1],
-                opacity: [0.5, 0, 0.5],
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: "easeOut",
-              }}
-              style={{ width: 80, height: 80, margin: -8 }}
-            />
-
-            <div
-              className={`
-              w-16 h-16 rounded-full
-              flex items-center justify-center
-              border-2 transition-colors duration-300
-              ${
-                isDragging
-                  ? "border-neon-cyan bg-neon-cyan/10"
-                  : "border-border bg-void-light"
-              }
+            transition={{
+              rotate: { duration: 2, repeat: Infinity, ease: "linear" },
+              scale: { duration: 0.2 },
+            }}
+            className={`
+              w-20 h-20 bg-ror-bg-main border border-ror-border flex items-center justify-center
+              transition-colors duration-300
+              ${isDragging ? "border-ror-orange-accent" : "group-hover:border-ror-text-muted"}
             `}
-            >
-              {isLoading ? (
-                <motion.div
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                  className="w-6 h-6 border-2 border-neon-cyan border-t-transparent rounded-full"
-                />
-              ) : (
-                <Upload
-                  size={24}
-                  className={
-                    isDragging ? "text-neon-cyan" : "text-text-secondary"
-                  }
-                />
-              )}
-            </div>
+          >
+            {isLoading ? (
+              <div className="w-8 h-8 border-2 border-ror-orange-accent border-t-transparent rounded-full" />
+            ) : (
+              <Upload
+                size={32}
+                className={`transition-colors ${isDragging ? "text-ror-orange-accent" : "text-ror-text-muted group-hover:text-ror-text-main"}`}
+              />
+            )}
           </motion.div>
 
           {/* Text */}
-          <div className="text-center">
-            <h3 className="text-lg font-display text-text-bright mb-2 tracking-wider">
-              {isDragging ? "DROP FILE HERE" : "UPLOAD SAVE FILE"}
+          <div className="text-center space-y-2">
+            <h3 className="text-lg font-display text-ror-text-main tracking-wider">
+              {isDragging ? "INITIATE TRANSFER" : "UPLOAD USER PROFILE"}
             </h3>
-            <p className="text-text-secondary text-sm">
+            <p className="text-ror-text-muted text-sm max-w-xs mx-auto">
               Drag and drop{" "}
-              <span className="text-neon-cyan font-semibold">
+              <span className="text-ror-text-main font-mono">
                 UserProfile.xml
               </span>{" "}
-              or click to browse
+              or click to browse local files.
             </p>
           </div>
 
-          {/* Action button */}
-          <button
-            type="button"
+          {/* Button-like visual */}
+          <div
             className={`
-              px-6 py-2 text-xs tracking-widest font-display
-              border transition-all duration-200
-              ${
-                isDragging
-                  ? "border-neon-cyan text-neon-cyan bg-neon-cyan/10"
-                  : "border-border text-text-secondary hover:border-neon-cyan/50 hover:text-neon-cyan"
-              }
-            `}
-            disabled={isLoading}
+            px-6 py-2 text-xs tracking-widest font-display uppercase
+            border transition-all duration-200
+            ${
+              isDragging
+                ? "border-ror-orange-accent text-ror-orange-accent bg-ror-orange-accent/10"
+                : "border-ror-border text-ror-text-dim group-hover:border-ror-text-muted group-hover:text-ror-text-main"
+            }
+          `}
           >
             {isLoading ? "PROCESSING..." : "SELECT FILE"}
-          </button>
+          </div>
 
           {/* Path hint */}
-          <div className="text-center">
-            <p className="text-text-muted text-[10px] tracking-wider mb-1">
-              DEFAULT LOCATION
+          <div className="text-center mt-4">
+            <p className="text-ror-text-dim text-[10px] tracking-wider mb-1 uppercase">
+              Target Directory
             </p>
-            <code className="text-neon-cyan/60 text-[10px] block">
+            <code className="text-ror-text-muted text-[10px] block font-mono bg-ror-bg-main px-2 py-1 rounded-sm border border-ror-border">
               Steam/userdata/[ID]/632360/remote/UserProfiles
             </code>
           </div>
@@ -217,35 +209,31 @@ export function FileUpload({ onFileLoaded }: FileUploadProps) {
       <AnimatePresence>
         {error && (
           <motion.div
-            initial={{ opacity: 0, y: -10, height: 0 }}
-            animate={{ opacity: 1, y: 0, height: "auto" }}
-            exit={{ opacity: 0, y: -10, height: 0 }}
-            className="mt-4"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="mt-4 p-4 border border-ror-legendary bg-ror-legendary/10 flex items-start gap-3"
           >
-            <div className="p-4 border border-neon-red/50 bg-neon-red/5 rounded-sm">
-              <div className="flex items-start gap-3">
-                <AlertCircle
-                  size={18}
-                  className="text-neon-red flex-shrink-0 mt-0.5"
-                />
-                <div className="flex-1">
-                  <p className="text-neon-red font-display text-sm tracking-wider">
-                    ERROR
-                  </p>
-                  <p className="text-text-secondary text-sm mt-1">{error}</p>
-                </div>
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setError(null);
-                  }}
-                  className="text-text-muted hover:text-neon-red transition-colors"
-                >
-                  <X size={16} />
-                </button>
-              </div>
+            <AlertCircle
+              size={18}
+              className="text-ror-legendary flex-shrink-0 mt-0.5"
+            />
+            <div className="flex-1">
+              <p className="text-ror-legendary font-display text-sm tracking-wider">
+                ERROR
+              </p>
+              <p className="text-ror-text-main text-sm mt-1">{error}</p>
             </div>
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                setError(null);
+              }}
+              className="text-ror-text-muted hover:text-ror-legendary transition-colors"
+            >
+              <X size={16} />
+            </button>
           </motion.div>
         )}
       </AnimatePresence>
