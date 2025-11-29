@@ -81,6 +81,7 @@ export interface RawUserProfile {
     discoveredPickups?: string;
     stats?: {
       stat?: RawStat | RawStat[];
+      unlock?: string | string[];
     };
     tutorialDifficulty?: string;
     tutorialSurvivor?: string;

@@ -18,7 +18,7 @@ const builderOptions = {
   ignoreAttributes: false,
   attributeNamePrefix: "@_",
   textNodeName: "#text",
-  format: true,
+  format: true, // Pretty printed
   indentBy: "  ",
   suppressEmptyNode: false,
   cdataPropName: "__cdata",
@@ -46,9 +46,8 @@ export function parseXml(xmlString: string): RawUserProfile {
  */
 export function serializeXml(data: RawUserProfile): string {
   try {
-    // Add XML declaration
-    const xmlContent = builder.build(data);
-    return `<?xml version="1.0" encoding="utf-8"?>\n${xmlContent}`;
+    // The ?xml declaration is preserved in the parsed object, so builder handles it
+    return builder.build(data);
   } catch (error) {
     throw new Error(
       `Failed to serialize XML: ${error instanceof Error ? error.message : "Unknown error"}`,
@@ -123,17 +122,8 @@ export function applySaveData(
   result.UserProfile.viewedUnlockablesList =
     saveData.viewedUnlockables.join(" ");
 
-  // Update stats
-  if (saveData.stats.size > 0) {
-    const statArray: RawStat[] = [];
-    for (const [name, value] of saveData.stats) {
-      statArray.push({
-        "@_name": name,
-        "#text": value,
-      });
-    }
-    result.UserProfile.stats = { stat: statArray };
-  }
+  // Note: We don't modify stats - they are preserved from the original raw object
+  // via structuredClone. Only achievements, coins, and unlockables are modified.
 
   return result;
 }
