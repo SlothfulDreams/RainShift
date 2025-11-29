@@ -357,7 +357,13 @@ export function SaveEditor({
         >
           <AnimatePresence mode="popLayout">
             {filteredChallenges.map((challenge) => (
-              <motion.div key={challenge.id} variants={itemVariants} layout>
+              <motion.div
+                key={challenge.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                layout
+              >
                 <ChallengeCard
                   challenge={challenge}
                   isUnlocked={saveData.achievements.includes(
