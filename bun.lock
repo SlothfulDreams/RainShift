@@ -12,7 +12,7 @@
         "file-saver": "^2.0.5",
         "framer-motion": "^12.23.24",
         "lucide-react": "^0.555.0",
-        "next": "16.0.4",
+        "next": "^16.0.4",
         "react": "19.2.0",
         "react-dom": "19.2.0",
       },
@@ -24,6 +24,7 @@
         "@types/react": "^19",
         "@types/react-dom": "^19",
         "babel-plugin-react-compiler": "1.0.0",
+        "baseline-browser-mapping": "^2.8.32",
         "tailwindcss": "^4",
         "typescript": "^5",
         "vitest": "^4.0.14",
@@ -302,6 +303,8 @@
     "assertion-error": ["assertion-error@2.0.1", "", {}, "sha512-Izi8RQcffqCeNVgFigKli1ssklIbpHnCYc6AknXGYoB6grJqyeby7jv12JUQgmTAnIDnbck1uxksT4dzN3PWBA=="],
 
     "babel-plugin-react-compiler": ["babel-plugin-react-compiler@1.0.0", "", { "dependencies": { "@babel/types": "^7.26.0" } }, "sha512-Ixm8tFfoKKIPYdCCKYTsqv+Fd4IJ0DQqMyEimo+pxUOMUR9cVPlwTrFt9Avu+3cb6Zp3mAzl+t1MrG2fxxKsxw=="],
+
+    "baseline-browser-mapping": ["baseline-browser-mapping@2.8.32", "", { "bin": { "baseline-browser-mapping": "dist/cli.js" } }, "sha512-OPz5aBThlyLFgxyhdwf/s2+8ab3OvT7AdTNvKHBwpXomIYeXqpUUuT8LrdtxZSsWJ4R4CU1un4XGh5Ez3nlTpw=="],
 
     "caniuse-lite": ["caniuse-lite@1.0.30001757", "", {}, "sha512-r0nnL/I28Zi/yjk1el6ilj27tKcdjLsNqAOZr0yVjWPrSQyHgKI2INaEWw21bAQSv2LXRt1XuCS/GomNpWOxsQ=="],
 
