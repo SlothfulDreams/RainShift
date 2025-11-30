@@ -118,8 +118,7 @@ export function SaveEditor({
 
   const handleExport = useCallback(() => {
     const modifiedXml = generateModifiedXml(rawProfile, saveData);
-    const exportFileName = fileName.replace(".xml", "_modified.xml");
-    downloadFile(modifiedXml, exportFileName, "text/xml");
+    downloadFile(modifiedXml, fileName, "text/xml");
   }, [rawProfile, saveData, fileName]);
 
   return (
