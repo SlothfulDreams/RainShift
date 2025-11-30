@@ -3,6 +3,7 @@
  */
 
 import { describe, expect, it } from "vitest";
+import type { SaveData } from "@/data/types";
 import {
   isAchievementUnlocked,
   lockAll,
@@ -10,7 +11,6 @@ import {
   unlockAll,
   updateCoins,
 } from "@/lib/save-operations";
-import type { SaveData } from "@/data/types";
 
 const createSaveData = (overrides: Partial<SaveData> = {}): SaveData => ({
   name: "Test",

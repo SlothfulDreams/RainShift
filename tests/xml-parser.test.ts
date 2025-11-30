@@ -4,10 +4,10 @@
 
 import { describe, expect, it } from "vitest";
 import {
+  applySaveData,
+  extractSaveData,
   parseXml,
   serializeXml,
-  extractSaveData,
-  applySaveData,
   validateSaveFile,
 } from "@/lib/xml-parser";
 
