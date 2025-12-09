@@ -34,13 +34,13 @@ export const achievementImages: Record<string, string> = {
   CleanupDuty: `${STEAM_CDN_BASE}/6322d79583c84913206c76296c6cf7603295e20e.jpg`, // Cleanup Duty
   AttackSpeed: `${STEAM_CDN_BASE}/c8701a660f57525f02d15e72054f9d29149ecd9c.jpg`, // Rapidfire
   NeverBackDown: `${STEAM_CDN_BASE}/b1015a4625a318ac72c45d860de59109a9b2c429.jpg`, // Never Back Down
-  RepeatedlyDuplicateItems: `${STEAM_CDN_BASE}/42f1bbf2d3be03c7d7195a3280de5c9f7ce8b8bd.jpg`, // ...Maybe One More.
+  RepeatedlyDuplicateItems: `${STEAM_CDN_BASE}/4bfa374ef709d46349233f113eb035bca5527578.jpg`, // ...Maybe One More.
   MaxHealingShrine: `${STEAM_CDN_BASE}/2df4124b539a944517fa00b7402820c7f85b371e.jpg`, // One with the Woods
   FindDevilAltar: `${STEAM_CDN_BASE}/4bfa374ef709d46349233f113eb035bca5527578.jpg`, // Her Concepts
   KillGoldTitanInOneCycle: `${STEAM_CDN_BASE}/45702bf45442c446c5700a78b1e0eab73d532b41.jpg`, // Blackout
   CompleteThreeStagesWithoutHealing: `${STEAM_CDN_BASE}/df2f1a888e9f21cfcfc6dca382019ededb045999.jpg`, // Naturopath
   KillElementalLemurians: `${STEAM_CDN_BASE}/a85359a4138d58422c11263bd183fe682cf55eb1.jpg`, // Death Do Us Part
-  AutomationActivation: `${STEAM_CDN_BASE}/36364d0ef7c7a57dcf7a9a8a11a2f6fa0b9de7d8.jpg`, // Automation Activation
+  AutomationActivation: `${STEAM_CDN_BASE}/557a88f7367b2e7d6ed888480b5c305672a90d55.jpg`, // Automation Activation
   CarryLunarItems: `${STEAM_CDN_BASE}/d339ae1698d03792a214d1b74c9c87ff97aaef03.jpg`, // Moon Worshipper
   FindTimedChest: `${STEAM_CDN_BASE}/3f2fd490ac6a4136f24a83d639971489efab9c1f.jpg`, // [REDACTED]
   HardEliteBossKill: `${STEAM_CDN_BASE}/65a71bd534e75dc533142a25aba47a31cd407fc3.jpg`, // Deicide
@@ -102,7 +102,7 @@ export const achievementImages: Record<string, string> = {
   // ARTIFICER SKILLS
   // ============================================
   MageFastBoss: `${STEAM_CDN_BASE}/7b5f8bcae777f4daff576f1677639ae5c4d21d0a.jpg`, // Chunked!
-  MageMultiKill: `${STEAM_CDN_BASE}/20cd457a8c5d041c0582c76c57a156ea6995f460.jpg`, // Massacre
+  MageMultiKill: `${STEAM_CDN_BASE}/ff2b755b4d65d290e5012322997ab8c1c5ee6025.jpg`, // Massacre
   MageAirborneMultiKill: `${STEAM_CDN_BASE}/8aff5d8b1388bab0dfae930aaf0884f33e0f8f98.jpg`, // Orbital Bombardment
 
   // ============================================
@@ -211,7 +211,7 @@ export const achievementImages: Record<string, string> = {
   RailgunnerClearGameMonsoon: `${STEAM_CDN_BASE}/d9836a468de7ee2229c612764360784efb943b89.jpg`, // Railgunner: Mastery
   VoidSurvivorClearGameMonsoon: `${STEAM_CDN_BASE}/2428e7a16e72c66a6472d09c35b06af4632c0670.jpg`, // Void Fiend: Mastery
   SeekerClearGameMonsoon: `${STEAM_CDN_BASE}/3f2fd490ac6a4136f24a83d639971489efab9c1f.jpg`, // Seeker: Mastery
-  ChefClearGameMonsoon: `${STEAM_CDN_BASE}/b24c335622fd2081c6c2b40cd17e2c33b13e21a3.jpg`, // CHEF: Mastery
+  ChefClearGameMonsoon: `${STEAM_CDN_BASE}/5d8b6afee91d036e3ae6a43b85103abedc4d0a93.jpg`, // CHEF: Mastery
   FalseSonClearGameMonsoon: `${STEAM_CDN_BASE}/f893340fb7ffd91b6117a89c6c2d36741ea23c81.jpg`, // False Son: Mastery
   DroneTechClearGameMonsoon: `${STEAM_CDN_BASE}/7616d5441c5c1a7ae46b1246547f2ad18669eb7c.jpg`, // Operator: Mastery
   DrifterClearGameMonsoon: `${STEAM_CDN_BASE}/5a7335da8ee57fcfe6bac947124731ed0e919d6b.jpg`, // Drifter: Mastery
@@ -259,14 +259,14 @@ export const achievementImages: Record<string, string> = {
   ObtainArtifactCommand: `${STEAM_CDN_BASE}/f88396917d385a425f02dba85f5db462cc53c020.jpg`, // Trial of Command
   ObtainArtifactSacrifice: `${STEAM_CDN_BASE}/7fc7f3c6696790d10c16e540635fdf2ac292fcb6.jpg`, // Trial of Sacrifice
   ObtainArtifactSwarms: `${STEAM_CDN_BASE}/41532d8fb64e707951f5c34f167630b7f7a7a97d.jpg`, // Trial of Swarms
-  ObtainArtifactSingleMonsterType: `${STEAM_CDN_BASE}/18f28388bd2132b54967b4c02930699c6438f7a3.jpg`, // Trial of Kin
-  ObtainArtifactMixEnemy: `${STEAM_CDN_BASE}/16c4f43ad3cf260239a95f2eca3beb2d486cd76.jpg`, // Trial of Dissonance
+  ObtainArtifactSingleMonsterType: `${STEAM_CDN_BASE}/0cbbaef83a57a2b0b40848973c70d1407337c18e.jpg`, // Trial of Kin
+  ObtainArtifactMixEnemy: `${STEAM_CDN_BASE}/0a290e61d496064f1a318467be8b82dc9780efd5.jpg`, // Trial of Dissonance
   ObtainArtifactGlass: `${STEAM_CDN_BASE}/6613b2b7c7cbc5cd127c6578314e95c188a9de0b.jpg`, // Trial of Glass
   ObtainArtifactShadowClone: `${STEAM_CDN_BASE}/0d7ed2d185c45f5f6fcc3c42dbb875faadac0ed4.jpg`, // Trial of Vengeance
   ObtainArtifactFriendlyFire: `${STEAM_CDN_BASE}/88f5e2c045178c2b2ce37e4d53207627dacb5deb.jpg`, // Trial of Chaos
   ObtainArtifactTeamDeath: `${STEAM_CDN_BASE}/f6ad0935eb2bab721fef80556778b3e4bd549f5a.jpg`, // Trial of Death
   ObtainArtifactEnigma: `${STEAM_CDN_BASE}/6bacc2d61aff797aba5d6ba34f294844b1be72c5.jpg`, // Trial of Enigma
-  ObtainArtifactRandomSurvivorOnRespawn: `${STEAM_CDN_BASE}/d87cff37e66fe880e70713d511890c7d84cc2b90.jpg`, // Trial of Metamorphosis
+  ObtainArtifactRandomSurvivorOnRespawn: `${STEAM_CDN_BASE}/6bacc2d61aff797aba5d6ba34f294844b1be72c5.jpg`, // Trial of Metamorphosis
   ObtainArtifactBomb: `${STEAM_CDN_BASE}/5cd9c5940fa89d37f15cb1b8db41936f5fb9aaee.jpg`, // Trial of Spite
   ObtainArtifactWispOnDeath: `${STEAM_CDN_BASE}/73f8da70c536dab29a72e57df5dc1e678ff0cc8b.jpg`, // Trial of Soul
   ObtainArtifactMonsterTeamGainsItems: `${STEAM_CDN_BASE}/92f067f53e4110b3d3e3e9f0f9635cf94ec21445.jpg`, // Trial of Evolution
