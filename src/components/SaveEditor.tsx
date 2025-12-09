@@ -37,7 +37,6 @@ const categories: (ChallengeCategory | "all")[] = [
   "skins",
   "items",
   "artifacts",
-  "misc",
 ];
 
 const dlcs: (DLC | "all")[] = ["all", "base", "sotv", "sots", "ac"];

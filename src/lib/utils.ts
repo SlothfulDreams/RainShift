@@ -104,8 +104,6 @@ export function getCategoryIcon(category: string): string {
       return "Package";
     case "artifacts":
       return "Gem";
-    case "misc":
-      return "Star";
     default:
       return "Circle";
   }

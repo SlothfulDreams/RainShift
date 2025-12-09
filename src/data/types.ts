@@ -14,8 +14,7 @@ export type ChallengeCategory =
   | "skills"
   | "skins"
   | "items"
-  | "artifacts"
-  | "misc";
+  | "artifacts";
 
 export const CATEGORY_NAMES: Record<ChallengeCategory, string> = {
   survivors: "Survivors",
@@ -23,7 +22,6 @@ export const CATEGORY_NAMES: Record<ChallengeCategory, string> = {
   skins: "Skins",
   items: "Items",
   artifacts: "Artifacts",
-  misc: "Miscellaneous",
 };
 
 // Item rarity for visual styling

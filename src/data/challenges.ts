@@ -10,7 +10,7 @@ export const challenges: Challenge[] = [
     description: "Defeat an Elite-type monster.",
     achievement: "KillEliteMonster",
     unlocks: [],
-    category: "misc",
+    category: "items",
     dlc: "base",
   },
   {
@@ -19,7 +19,7 @@ export const challenges: Challenge[] = [
     description: "Complete a Teleporter event.",
     achievement: "CompleteTeleporter",
     unlocks: [],
-    category: "misc",
+    category: "items",
     dlc: "base",
   },
   {
@@ -28,7 +28,7 @@ export const challenges: Challenge[] = [
     description: "Discover 10 unique white items.",
     achievement: "Discover10UniqueTier1",
     unlocks: [],
-    category: "misc",
+    category: "items",
     dlc: "base",
   },
   {
@@ -46,7 +46,7 @@ export const challenges: Challenge[] = [
     description: "Stay alive for 30 consecutive minutes.",
     achievement: "StayAlive1",
     unlocks: [],
-    category: "misc",
+    category: "items",
     dlc: "base",
   },
   {
@@ -55,7 +55,7 @@ export const challenges: Challenge[] = [
     description: "Die 5 times.",
     achievement: "Die5Times",
     unlocks: [],
-    category: "misc",
+    category: "items",
     dlc: "base",
   },
   {
@@ -64,7 +64,7 @@ export const challenges: Challenge[] = [
     description: "Collect $30,480 total gold.",
     achievement: "TotalMoneyCollected",
     unlocks: [],
-    category: "misc",
+    category: "items",
     dlc: "base",
   },
   {
@@ -73,7 +73,7 @@ export const challenges: Challenge[] = [
     description: "Pick up 5 different types of Equipment.",
     achievement: "Discover5Equipment",
     unlocks: [],
-    category: "misc",
+    category: "items",
     dlc: "base",
   },
   {
@@ -82,7 +82,7 @@ export const challenges: Challenge[] = [
     description: "Fail the Shrine of Chance 3 times in a row.",
     achievement: "FailShrineChance",
     unlocks: [],
-    category: "misc",
+    category: "items",
     dlc: "base",
   },
   {
@@ -91,7 +91,7 @@ export const challenges: Challenge[] = [
     description: "Defeat the Teleporter boss under 15 seconds.",
     achievement: "KillBossQuick",
     unlocks: [],
-    category: "misc",
+    category: "items",
     dlc: "base",
   },
   {
@@ -100,7 +100,7 @@ export const challenges: Challenge[] = [
     description: "Deal 5000 damage in one shot.",
     achievement: "HardHitter",
     unlocks: [],
-    category: "misc",
+    category: "items",
     dlc: "base",
   },
   {
@@ -109,7 +109,7 @@ export const challenges: Challenge[] = [
     description: "Collect 10 Monster or Environment Logs.",
     achievement: "LogCollector",
     unlocks: [],
-    category: "misc",
+    category: "items",
     dlc: "base",
   },
   {
@@ -118,7 +118,7 @@ export const challenges: Challenge[] = [
     description: "Loop back to the first stage.",
     achievement: "LoopOnce",
     unlocks: [],
-    category: "misc",
+    category: "items",
     dlc: "base",
   },
   {
@@ -127,7 +127,7 @@ export const challenges: Challenge[] = [
     description: "Kill 15 boss monsters in a single run.",
     achievement: "KillBossQuantityInRun",
     unlocks: [],
-    category: "misc",
+    category: "items",
     dlc: "base",
   },
   {
@@ -136,7 +136,7 @@ export const challenges: Challenge[] = [
     description: "Kill 15 enemies simultaneously.",
     achievement: "MajorMultikill",
     unlocks: [],
-    category: "misc",
+    category: "items",
     dlc: "base",
   },
   {
@@ -145,7 +145,7 @@ export const challenges: Challenge[] = [
     description: "Defeat 3000 enemies.",
     achievement: "KillTotalEnemies",
     unlocks: [],
-    category: "misc",
+    category: "items",
     dlc: "base",
   },
   {
@@ -154,7 +154,7 @@ export const challenges: Challenge[] = [
     description: "Die 20 times.",
     achievement: "Die20Times",
     unlocks: [],
-    category: "misc",
+    category: "items",
     dlc: "base",
   },
   {
@@ -163,7 +163,7 @@ export const challenges: Challenge[] = [
     description: "Discover and enter three unique portals.",
     achievement: "UseThreePortals",
     unlocks: [],
-    category: "misc",
+    category: "items",
     dlc: "base",
   },
   {
@@ -172,7 +172,7 @@ export const challenges: Challenge[] = [
     description: "Reach +300% movespeed (includes sprinting).",
     achievement: "MoveSpeed",
     unlocks: [],
-    category: "misc",
+    category: "items",
     dlc: "base",
   },
   {
@@ -181,7 +181,7 @@ export const challenges: Challenge[] = [
     description: "Repair 30 drones or turrets.",
     achievement: "TotalDronesRepaired",
     unlocks: [],
-    category: "misc",
+    category: "items",
     dlc: "base",
   },
   {
@@ -190,7 +190,7 @@ export const challenges: Challenge[] = [
     description: "Die three times while burning.",
     achievement: "BurnToDeath",
     unlocks: [],
-    category: "misc",
+    category: "items",
     dlc: "base",
   },
   {
@@ -200,7 +200,7 @@ export const challenges: Challenge[] = [
       "Defeat the Teleporter bosses after activating 2 Shrines of the Mountain.",
     achievement: "CompleteMultiBossShrine",
     unlocks: [],
-    category: "misc",
+    category: "items",
     dlc: "base",
   },
   {
@@ -209,7 +209,7 @@ export const challenges: Challenge[] = [
     description: "Defeat 500 elite monsters.",
     achievement: "KillElitesMilestone",
     unlocks: [],
-    category: "misc",
+    category: "items",
     dlc: "base",
   },
   {
@@ -218,7 +218,7 @@ export const challenges: Challenge[] = [
     description: "Complete 3 Combat Shrines in a single stage.",
     achievement: "MultiCombatShrine",
     unlocks: [],
-    category: "misc",
+    category: "items",
     dlc: "base",
   },
   {
@@ -227,7 +227,7 @@ export const challenges: Challenge[] = [
     description: "Destroy 20 flying rocks in Sky Meadow.",
     achievement: "CleanupDuty",
     unlocks: [],
-    category: "misc",
+    category: "items",
     dlc: "base",
   },
   {
@@ -236,7 +236,7 @@ export const challenges: Challenge[] = [
     description: "Reach +200% attack speed.",
     achievement: "AttackSpeed",
     unlocks: [],
-    category: "misc",
+    category: "items",
     dlc: "base",
   },
   {
@@ -246,7 +246,7 @@ export const challenges: Challenge[] = [
       "In 4 consecutive stages don't leave the teleporter radius until it is fully charged.",
     achievement: "NeverBackDown",
     unlocks: [],
-    category: "misc",
+    category: "items",
     dlc: "base",
   },
   {
@@ -255,7 +255,7 @@ export const challenges: Challenge[] = [
     description: "Duplicate the same item 7 times in a row with a 3D Printer.",
     achievement: "RepeatedlyDuplicateItems",
     unlocks: [],
-    category: "misc",
+    category: "items",
     dlc: "base",
   },
   {
@@ -264,7 +264,7 @@ export const challenges: Challenge[] = [
     description: "Fully upgrade a Shrine of the Woods.",
     achievement: "MaxHealingShrine",
     unlocks: [],
-    category: "misc",
+    category: "items",
     dlc: "base",
   },
   {
@@ -273,7 +273,7 @@ export const challenges: Challenge[] = [
     description: "Find the Altar to N'kuhana.",
     achievement: "FindDevilAltar",
     unlocks: [],
-    category: "misc",
+    category: "items",
     dlc: "base",
   },
   {
@@ -283,7 +283,7 @@ export const challenges: Challenge[] = [
       "Defeat the unique guardian of Gilded Coast without any beacons deactivating.",
     achievement: "KillGoldTitanInOneCycle",
     unlocks: [],
-    category: "misc",
+    category: "items",
     dlc: "base",
   },
   {
@@ -293,7 +293,7 @@ export const challenges: Challenge[] = [
       "Without healing, reach and complete the 3rd Teleporter event.",
     achievement: "CompleteThreeStagesWithoutHealing",
     unlocks: [],
-    category: "misc",
+    category: "items",
     dlc: "base",
   },
   {
@@ -302,7 +302,7 @@ export const challenges: Challenge[] = [
     description: "Discover the hidden chamber in the Abandoned Aqueduct.",
     achievement: "KillElementalLemurians",
     unlocks: [],
-    category: "misc",
+    category: "items",
     dlc: "base",
   },
   {
@@ -311,7 +311,7 @@ export const challenges: Challenge[] = [
     description: "Activate 6 turrets in a single run.",
     achievement: "AutomationActivation",
     unlocks: [],
-    category: "misc",
+    category: "items",
     dlc: "base",
   },
   {
@@ -320,7 +320,7 @@ export const challenges: Challenge[] = [
     description: "Carry 5 Lunar items in a single run.",
     achievement: "CarryLunarItems",
     unlocks: [],
-    category: "misc",
+    category: "items",
     dlc: "base",
   },
   {
@@ -329,7 +329,7 @@ export const challenges: Challenge[] = [
     description: "Open the Timed Security Chest on Rallypoint Delta.",
     achievement: "FindTimedChest",
     unlocks: [],
-    category: "misc",
+    category: "items",
     dlc: "base",
   },
   {
@@ -338,7 +338,7 @@ export const challenges: Challenge[] = [
     description: "Defeat an Elite boss on Monsoon difficulty.",
     achievement: "HardEliteBossKill",
     unlocks: [],
-    category: "misc",
+    category: "items",
     dlc: "base",
   },
   {
@@ -347,7 +347,7 @@ export const challenges: Challenge[] = [
     description: "Discover and activate 8 unique Newt Altars.",
     achievement: "FindUniqueNewtStatues",
     unlocks: [],
-    category: "misc",
+    category: "items",
     dlc: "base",
   },
   {
@@ -356,7 +356,7 @@ export const challenges: Challenge[] = [
     description: "Complete 20 stages in a single run.",
     achievement: "Complete20Stages",
     unlocks: [],
-    category: "misc",
+    category: "items",
     dlc: "base",
   },
   {
@@ -365,7 +365,7 @@ export const challenges: Challenge[] = [
     description: "Beat the game on Monsoon difficulty.",
     achievement: "CompleteMainEndingHard",
     unlocks: [],
-    category: "misc",
+    category: "items",
     dlc: "base",
   },
   {
@@ -374,7 +374,7 @@ export const challenges: Challenge[] = [
     description: "Complete a Prismatic Trial.",
     achievement: "CompletePrismaticTrial",
     unlocks: [],
-    category: "misc",
+    category: "items",
     dlc: "base",
   },
   {
@@ -383,7 +383,7 @@ export const challenges: Challenge[] = [
     description: "Charge the Teleporter with less than 10% health.",
     achievement: "ChargeTeleporterWhileNearDeath",
     unlocks: [],
-    category: "misc",
+    category: "items",
     dlc: "base",
   },
   {
@@ -393,7 +393,7 @@ export const challenges: Challenge[] = [
       "Kill 20 Hermit Crabs by chasing them off the edge of the map.",
     achievement: "SuicideHermitCrabs",
     unlocks: [],
-    category: "misc",
+    category: "items",
     dlc: "base",
   },
   {
@@ -402,7 +402,7 @@ export const challenges: Challenge[] = [
     description: "Journey to the Prime Meridian and defeat the False Son.",
     achievement: "DefeatFalseSon",
     unlocks: [],
-    category: "misc",
+    category: "items",
     dlc: "sots",
   },
 
