@@ -410,21 +410,21 @@ export const challenges: Challenge[] = [
   // SURVIVOR UNLOCKS
   // ============================================
   {
-    id: "huntress-unlock",
+    id: "mult-unlock",
     name: "Verified",
     description: "Complete the first Teleporter event 5 times.",
     achievement: "RepeatFirstTeleporter",
-    unlocks: ["Survivors.Huntress"],
+    unlocks: ["Survivors.Toolbot"],
     category: "survivors",
     dlc: "base",
   },
   {
-    id: "mult-unlock",
+    id: "flawless",
     name: "Flawless",
     description: "Fully charge a Teleporter without getting hit.",
     achievement: "CompleteTeleporterWithoutInjury",
-    unlocks: ["Survivors.Toolbot"],
-    category: "survivors",
+    unlocks: [],
+    category: "items",
     dlc: "base",
   },
   {
