@@ -18,6 +18,7 @@ const createSaveData = (overrides: Partial<SaveData> = {}): SaveData => ({
   achievements: [],
   unviewedAchievements: [],
   viewedUnlockables: [],
+  unlocks: [],
   stats: new Map(),
   ...overrides,
 });
@@ -61,16 +62,18 @@ describe("save-operations", () => {
     expect(result.viewedUnlockables.length).toBeGreaterThan(0);
   });
 
-  it("lockAll: clears achievements but preserves other fields", () => {
+  it("lockAll: clears achievements and unlocks but preserves other fields", () => {
     const data = createSaveData({
       coins: 999,
       achievements: ["A", "B"],
       viewedUnlockables: ["X"],
+      unlocks: ["Characters.Huntress", "Items.Clover"],
     });
     const result = lockAll(data);
 
     expect(result.achievements).toEqual([]);
     expect(result.viewedUnlockables).toEqual([]);
+    expect(result.unlocks).toEqual([]);
     expect(result.coins).toBe(999);
   });
 });

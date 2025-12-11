@@ -63,6 +63,7 @@ export interface SaveData {
   achievements: string[];
   unviewedAchievements: string[];
   viewedUnlockables: string[];
+  unlocks: string[]; // Actual unlocked content (Characters.X, Items.X, Skins.X, etc.)
   stats: Map<string, string>;
 }
 

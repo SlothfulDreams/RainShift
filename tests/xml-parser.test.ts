@@ -46,6 +46,7 @@ describe("xml-parser", () => {
     expect(data.coins).toBe(100);
     expect(typeof data.coins).toBe("number");
     expect(data.achievements).toEqual(["Ach1", "Ach2"]);
+    expect(data.unlocks).toEqual(["Characters.Huntress"]);
     expect(data.stats.get("totalKills")).toBe("5000");
     expect(data.stats.get("killsAs.CommandoBody")).toBe("100");
   });
@@ -75,6 +76,27 @@ describe("xml-parser", () => {
     // Stats preserved
     expect(serialized).toContain('name="totalKills"');
     expect(serialized).toContain(">5000<");
+  });
+
+  it("applies unlock changes correctly", () => {
+    const raw = parseXml(TEST_XML);
+    const data = extractSaveData(raw);
+
+    // Add new unlock
+    data.unlocks.push("Characters.Bandit2");
+
+    const updated = applySaveData(raw, data);
+    const serialized = serializeXml(updated);
+
+    expect(serialized).toContain("<unlock>Characters.Huntress</unlock>");
+    expect(serialized).toContain("<unlock>Characters.Bandit2</unlock>");
+
+    // Remove all unlocks
+    data.unlocks = [];
+    const cleared = applySaveData(raw, data);
+    const clearedSerialized = serializeXml(cleared);
+
+    expect(clearedSerialized).not.toContain("<unlock>");
   });
 
   it("validates save file structure", () => {

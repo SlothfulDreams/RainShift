@@ -92,12 +92,21 @@ export function extractSaveData(raw: RawUserProfile): SaveData {
     }
   }
 
+  // Parse unlocks from stats section
+  let unlocks: string[] = [];
+  if (profile.stats?.unlock) {
+    unlocks = Array.isArray(profile.stats.unlock)
+      ? profile.stats.unlock
+      : [profile.stats.unlock];
+  }
+
   return {
     name: profile.name || "Unknown",
     coins,
     achievements,
     unviewedAchievements,
     viewedUnlockables,
+    unlocks,
     stats,
   };
 }
@@ -122,8 +131,18 @@ export function applySaveData(
   result.UserProfile.viewedUnlockablesList =
     saveData.viewedUnlockables.join(" ");
 
-  // Note: We don't modify stats - they are preserved from the original raw object
-  // via structuredClone. Only achievements, coins, and unlockables are modified.
+  // Update unlocks in stats section
+  if (!result.UserProfile.stats) {
+    result.UserProfile.stats = {};
+  }
+  // Set unlocks array (or single string if only one, or undefined if empty)
+  if (saveData.unlocks.length === 0) {
+    delete result.UserProfile.stats.unlock;
+  } else if (saveData.unlocks.length === 1) {
+    result.UserProfile.stats.unlock = saveData.unlocks[0];
+  } else {
+    result.UserProfile.stats.unlock = saveData.unlocks;
+  }
 
   return result;
 }

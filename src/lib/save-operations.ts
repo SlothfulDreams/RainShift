@@ -50,6 +50,7 @@ export function toggleAchievement(
   const achievements = new Set(saveData.achievements);
   const unviewedAchievements = new Set(saveData.unviewedAchievements);
   const viewedUnlockables = new Set(saveData.viewedUnlockables);
+  const unlocks = new Set(saveData.unlocks);
 
   // Find the challenge data to get unlocks
   const challenge = challenges.find((c) => c.achievement === achievementId);
@@ -59,20 +60,22 @@ export function toggleAchievement(
     achievements.add(achievementId);
     // Add to unviewed (game will show notification)
     unviewedAchievements.add(achievementId);
-    // Add unlocks to viewed unlockables
+    // Add unlocks to viewed unlockables and actual unlocks
     if (challenge) {
       for (const unlock of challenge.unlocks) {
         viewedUnlockables.add(unlock);
+        unlocks.add(unlock);
       }
     }
   } else {
     // Remove achievement
     achievements.delete(achievementId);
     unviewedAchievements.delete(achievementId);
-    // Remove unlocks
+    // Remove from viewed unlockables and actual unlocks
     if (challenge) {
       for (const unlock of challenge.unlocks) {
         viewedUnlockables.delete(unlock);
+        unlocks.delete(unlock);
       }
     }
   }
@@ -82,6 +85,7 @@ export function toggleAchievement(
     achievements: Array.from(achievements),
     unviewedAchievements: Array.from(unviewedAchievements),
     viewedUnlockables: Array.from(viewedUnlockables),
+    unlocks: Array.from(unlocks),
   };
 }
 
@@ -91,12 +95,14 @@ export function toggleAchievement(
 export function unlockAll(saveData: SaveData): SaveData {
   const achievements = new Set(saveData.achievements);
   const viewedUnlockables = new Set(saveData.viewedUnlockables);
+  const unlocks = new Set(saveData.unlocks);
 
   // Add all achievements and their unlocks
   for (const challenge of challenges) {
     achievements.add(challenge.achievement);
     for (const unlock of challenge.unlocks) {
       viewedUnlockables.add(unlock);
+      unlocks.add(unlock);
     }
   }
 
@@ -105,6 +111,7 @@ export function unlockAll(saveData: SaveData): SaveData {
     achievements: Array.from(achievements),
     unviewedAchievements: [], // Clear unviewed since we're bulk unlocking
     viewedUnlockables: Array.from(viewedUnlockables),
+    unlocks: Array.from(unlocks),
   };
 }
 
@@ -117,6 +124,7 @@ export function lockAll(saveData: SaveData): SaveData {
     achievements: [],
     unviewedAchievements: [],
     viewedUnlockables: [],
+    unlocks: [],
   };
 }
 
