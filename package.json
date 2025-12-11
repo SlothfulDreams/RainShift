@@ -13,6 +13,7 @@
   "dependencies": {
     "@fontsource/jetbrains-mono": "^5.2.8",
     "@fontsource/orbitron": "^5.2.8",
+    "@vercel/analytics": "^1.6.1",
     "clsx": "^2.1.1",
     "fast-xml-parser": "^5.3.2",
     "file-saver": "^2.0.5",
