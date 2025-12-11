@@ -172,7 +172,6 @@ export default function Home() {
                   initialSaveData={loadedSave.saveData}
                   rawProfile={loadedSave.raw}
                   fileName={loadedSave.fileName}
-                  onReset={handleReset}
                 />
               )}
             </motion.div>

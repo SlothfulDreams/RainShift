@@ -27,7 +27,6 @@ interface SaveEditorProps {
   initialSaveData: SaveData;
   rawProfile: RawUserProfile;
   fileName: string;
-  onReset: () => void;
 }
 
 const categories: (ChallengeCategory | "all")[] = [
@@ -60,7 +59,6 @@ export function SaveEditor({
   initialSaveData,
   rawProfile,
   fileName,
-  onReset,
 }: SaveEditorProps) {
   const [saveData, setSaveData] = useState<SaveData>(initialSaveData);
   const [searchQuery, setSearchQuery] = useState("");
@@ -126,6 +124,18 @@ export function SaveEditor({
     const modifiedXml = generateModifiedXml(rawProfile, saveData);
     downloadFile(modifiedXml, fileName, "text/xml");
   }, [rawProfile, saveData, fileName]);
+
+  const handleReset = () => {
+    setSaveData({
+      ...initialSaveData,
+      achievements: [...initialSaveData.achievements],
+      unviewedAchievements: [...initialSaveData.unviewedAchievements],
+      viewedUnlockables: [...initialSaveData.viewedUnlockables],
+      unlocks: [...initialSaveData.unlocks],
+      stats: new Map(initialSaveData.stats),
+    });
+    setHasChanges(false);
+  };
 
   return (
     <div className="h-full flex flex-col lg:flex-row gap-6 p-6 max-w-[1800px] mx-auto w-full">
@@ -236,7 +246,7 @@ export function SaveEditor({
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 type="button"
-                onClick={onReset}
+                onClick={handleReset}
                 className="ror-button text-[10px] py-2 opacity-80 hover:opacity-100 flex items-center justify-center gap-2"
               >
                 <RotateCcw size={12} />
