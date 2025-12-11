@@ -34,7 +34,6 @@ export function ChallengeCard({
 
   return (
     <motion.div
-      layout
       onClick={handleToggle}
       whileHover={{ scale: 1.02, y: -2 }}
       whileTap={{ scale: 0.98 }}

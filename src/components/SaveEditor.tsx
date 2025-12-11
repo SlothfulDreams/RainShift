@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { Download, RotateCcw, Search, User, X } from "lucide-react";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { challenges } from "@/data/challenges";
 import type {
   ChallengeCategory,
@@ -64,11 +64,18 @@ export function SaveEditor({
 }: SaveEditorProps) {
   const [saveData, setSaveData] = useState<SaveData>(initialSaveData);
   const [searchQuery, setSearchQuery] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<
     ChallengeCategory | "all"
   >("all");
   const [selectedDLC, setSelectedDLC] = useState<DLC | "all">("all");
   const [hasChanges, setHasChanges] = useState(false);
+
+  // Debounce search to prevent animation lag
+  useEffect(() => {
+    const timer = setTimeout(() => setDebouncedSearch(searchQuery), 250);
+    return () => clearTimeout(timer);
+  }, [searchQuery]);
 
   const stats = calculateSaveStats(saveData);
 
@@ -77,8 +84,8 @@ export function SaveEditor({
     if (selectedCategory !== "all" && c.category !== selectedCategory)
       return false;
     if (selectedDLC !== "all" && c.dlc !== selectedDLC) return false;
-    if (searchQuery) {
-      const q = searchQuery.toLowerCase();
+    if (debouncedSearch) {
+      const q = debouncedSearch.toLowerCase();
       return (
         c.name.toLowerCase().includes(q) ||
         c.description.toLowerCase().includes(q) ||
