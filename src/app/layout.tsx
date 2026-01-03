@@ -24,6 +24,7 @@ export const metadata: Metadata = {
     "unlock",
     "achievements",
     "characters",
+    "items",
     "skills",
   ],
 };
