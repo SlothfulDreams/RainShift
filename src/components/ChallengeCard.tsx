@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Check, Lock } from "lucide-react";
+import { Book, Check, Lock } from "lucide-react";
 import Image from "next/image";
 import {
   DEFAULT_ACHIEVEMENT_IMAGE,
@@ -13,12 +13,14 @@ interface ChallengeCardProps {
   challenge: Challenge;
   isUnlocked: boolean;
   onToggle: (achievementId: string, enabled: boolean) => void;
+  linkedLogbookCount?: number;
 }
 
 export function ChallengeCard({
   challenge,
   isUnlocked,
   onToggle,
+  linkedLogbookCount = 0,
 }: ChallengeCardProps) {
   const handleToggle = () => {
     onToggle(challenge.achievement, !isUnlocked);
@@ -50,6 +52,17 @@ export function ChallengeCard({
 
       {/* Rarity Stripe */}
       <div className={`h-1 w-full ${rarityColorClass}`} />
+
+      {/* Logbook Connection Badge */}
+      {linkedLogbookCount > 0 && (
+        <div
+          className="absolute top-3 right-3 flex items-center gap-1 px-1.5 py-0.5 bg-ror-equipment/20 border border-ror-equipment/50 text-ror-equipment text-[8px] uppercase tracking-wider z-20"
+          title={`Affects ${linkedLogbookCount} logbook ${linkedLogbookCount === 1 ? "entry" : "entries"}`}
+        >
+          <Book size={10} />
+          {linkedLogbookCount}
+        </div>
+      )}
 
       <div className="p-3 flex gap-3 flex-1 relative z-10">
         {/* Image Container */}

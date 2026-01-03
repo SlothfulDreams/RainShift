@@ -34,6 +34,35 @@ export type ItemRarity =
   | "void"
   | "equipment";
 
+// Logbook categories for the logbook editor
+export type LogbookCategory =
+  | "monsters"
+  | "environments"
+  | "survivors"
+  | "items"
+  | "equipment";
+
+export const LOGBOOK_CATEGORY_NAMES: Record<LogbookCategory, string> = {
+  monsters: "Monster Logs",
+  environments: "Environment Logs",
+  survivors: "Survivor Logs",
+  items: "Items",
+  equipment: "Equipment",
+};
+
+// Logbook entry definition
+export interface LogbookEntry {
+  id: string;
+  name: string;
+  description?: string;
+  category: LogbookCategory;
+  unlockId: string; // ID in stats.unlock (e.g., "Logs.BeetleBody.0")
+  pickupId?: string; // ID in discoveredPickups for items/equipment (e.g., "ItemIndex.0")
+  dlc: DLC;
+  rarity?: ItemRarity; // For items/equipment
+  image?: string; // Image URL from wiki
+}
+
 // Challenge/Achievement definition
 export interface Challenge {
   id: string;
@@ -65,6 +94,9 @@ export interface SaveData {
   viewedUnlockables: string[];
   unlocks: string[]; // Actual unlocked content (Characters.X, Items.X, Skins.X, etc.)
   stats: Map<string, string>;
+  // Logbook fields
+  viewedViewables: string[]; // Viewed logbook entries
+  discoveredPickups: string[]; // Discovered items/equipment (ItemIndex.X, EquipmentIndex.X)
 }
 
 // Raw parsed XML structure (from fast-xml-parser)

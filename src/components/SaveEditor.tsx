@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { Download, RotateCcw, Search, User, X } from "lucide-react";
+import { Book, Download, RotateCcw, Search, Trophy, User, X } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import { challenges } from "@/data/challenges";
 import type {
@@ -11,7 +11,9 @@ import type {
   SaveData,
 } from "@/data/types";
 import { CATEGORY_NAMES, DLC_NAMES } from "@/data/types";
+import { getLogbookCountForChallenge } from "@/lib/challenge-logbook-mapping";
 import {
+  calculateLogbookStats,
   calculateSaveStats,
   generateModifiedXml,
   lockAll,
@@ -22,6 +24,7 @@ import {
 import { downloadFile } from "@/lib/utils";
 import { ChallengeCard } from "./ChallengeCard";
 import { CoinsEditor } from "./CoinsEditor";
+import { LogbookEditor } from "./LogbookEditor";
 
 interface SaveEditorProps {
   initialSaveData: SaveData;
@@ -68,6 +71,7 @@ export function SaveEditor({
   >("all");
   const [selectedDLC, setSelectedDLC] = useState<DLC | "all">("all");
   const [hasChanges, setHasChanges] = useState(false);
+  const [activeTab, setActiveTab] = useState<"achievements" | "logbook">("achievements");
 
   // Debounce search to prevent animation lag
   useEffect(() => {
@@ -76,6 +80,7 @@ export function SaveEditor({
   }, [searchQuery]);
 
   const stats = calculateSaveStats(saveData);
+  const logbookStats = calculateLogbookStats(saveData);
 
   // Filter challenges
   const filteredChallenges = challenges.filter((c) => {
@@ -125,6 +130,11 @@ export function SaveEditor({
     downloadFile(modifiedXml, fileName, "text/xml");
   }, [rawProfile, saveData, fileName]);
 
+  const handleLogbookChange = useCallback((newSaveData: SaveData) => {
+    setSaveData(newSaveData);
+    setHasChanges(true);
+  }, []);
+
   const handleReset = () => {
     setSaveData({
       ...initialSaveData,
@@ -133,6 +143,8 @@ export function SaveEditor({
       viewedUnlockables: [...initialSaveData.viewedUnlockables],
       unlocks: [...initialSaveData.unlocks],
       stats: new Map(initialSaveData.stats),
+      viewedViewables: [...initialSaveData.viewedViewables],
+      discoveredPickups: [...initialSaveData.discoveredPickups],
     });
     setHasChanges(false);
   };
@@ -198,6 +210,12 @@ export function SaveEditor({
                 value={stats.unlockedSkins}
                 max={42}
                 color="var(--ror-void)"
+              />
+              <StatBar
+                label="LOGBOOK"
+                value={logbookStats.unlockedEntries}
+                max={logbookStats.totalEntries}
+                color="var(--ror-equipment)"
               />
             </div>
           </div>
@@ -266,8 +284,50 @@ export function SaveEditor({
         </motion.div>
       </motion.aside>
 
-      {/* Main Content - Challenge Grid */}
+      {/* Main Content */}
       <div className="flex-1 min-w-0 flex flex-col gap-4 relative">
+        {/* Tab Navigation */}
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.25 }}
+          className="flex border-b border-ror-border"
+        >
+          <button
+            type="button"
+            onClick={() => setActiveTab("achievements")}
+            className={`
+              px-6 py-3 text-sm font-display uppercase tracking-wider transition-all flex items-center gap-2
+              ${
+                activeTab === "achievements"
+                  ? "text-ror-text-main border-b-2 border-ror-orange-accent"
+                  : "text-ror-text-dim hover:text-ror-text-main"
+              }
+            `}
+          >
+            <Trophy size={16} />
+            Achievements
+          </button>
+          <button
+            type="button"
+            onClick={() => setActiveTab("logbook")}
+            className={`
+              px-6 py-3 text-sm font-display uppercase tracking-wider transition-all flex items-center gap-2
+              ${
+                activeTab === "logbook"
+                  ? "text-ror-text-main border-b-2 border-ror-orange-accent"
+                  : "text-ror-text-dim hover:text-ror-text-main"
+              }
+            `}
+          >
+            <Book size={16} />
+            Logbook
+          </button>
+        </motion.div>
+
+        {/* Tab Content */}
+        {activeTab === "achievements" ? (
+          <>
         {/* Filters Bar */}
         <motion.div
           initial={{ opacity: 0, y: -10 }}
@@ -385,6 +445,7 @@ export function SaveEditor({
                     challenge.achievement,
                   )}
                   onToggle={handleToggleAchievement}
+                  linkedLogbookCount={getLogbookCountForChallenge(challenge.id)}
                 />
               </motion.div>
             ))}
@@ -400,6 +461,13 @@ export function SaveEditor({
             </motion.div>
           )}
         </motion.div>
+          </>
+        ) : (
+          <LogbookEditor
+            saveData={saveData}
+            onSaveDataChange={handleLogbookChange}
+          />
+        )}
       </div>
     </div>
   );

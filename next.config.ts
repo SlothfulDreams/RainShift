@@ -10,6 +10,11 @@ const nextConfig: NextConfig = {
         hostname: "cdn.fastly.steamstatic.com",
         pathname: "/steamcommunity/public/images/**",
       },
+      {
+        protocol: "https",
+        hostname: "riskofrain2.wiki.gg",
+        pathname: "/images/**",
+      },
     ],
   },
 };

@@ -78,6 +78,10 @@ export function extractSaveData(raw: RawUserProfile): SaveData {
     profile.viewedUnlockablesList,
   );
 
+  // Parse logbook fields
+  const viewedViewables = parseSpaceSeparatedList(profile.viewedViewables);
+  const discoveredPickups = parseSpaceSeparatedList(profile.discoveredPickups);
+
   // Parse stats into a Map
   const stats = new Map<string, string>();
   if (profile.stats?.stat) {
@@ -108,6 +112,8 @@ export function extractSaveData(raw: RawUserProfile): SaveData {
     viewedUnlockables,
     unlocks,
     stats,
+    viewedViewables,
+    discoveredPickups,
   };
 }
 
@@ -143,6 +149,10 @@ export function applySaveData(
   } else {
     result.UserProfile.stats.unlock = saveData.unlocks;
   }
+
+  // Update logbook fields (space-separated)
+  result.UserProfile.viewedViewables = saveData.viewedViewables.join(" ");
+  result.UserProfile.discoveredPickups = saveData.discoveredPickups.join(" ");
 
   return result;
 }
