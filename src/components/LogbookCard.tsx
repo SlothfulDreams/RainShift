@@ -32,13 +32,16 @@ export function LogbookCard({
     : "border-ror-border";
 
   return (
-    <motion.div
+    <motion.button
+      type="button"
       onClick={handleToggle}
+      aria-pressed={isUnlocked}
       whileHover={{ scale: 1.02, y: -2 }}
       whileTap={{ scale: 0.98 }}
       className={`
-        relative cursor-pointer ror-card h-full flex flex-col
+        relative cursor-pointer ror-card h-full w-full flex flex-col text-left
         group overflow-hidden
+        focus-visible:outline-2 focus-visible:outline-ror-orange-accent
         ${isUnlocked ? "bg-ror-bg-panel" : "bg-ror-bg-main opacity-80 hover:opacity-100"}
         ${borderColorClass}
         hover:border-ror-text-muted
@@ -149,7 +152,7 @@ export function LogbookCard({
           </div>
         </div>
       </div>
-    </motion.div>
+    </motion.button>
   );
 }
 
