@@ -353,6 +353,10 @@ export function calculateSaveStats(saveData: SaveData): {
 const isPickupEntry = (entry: LogbookEntry) =>
   entry.category === "items" || entry.category === "equipment";
 
+// GetMonsterStatus / GetStageStatus: the log unlockable alone
+const isLogEntry = (entry: LogbookEntry) =>
+  entry.category === "monsters" || entry.category === "environments";
+
 /**
  * Check if a logbook entry is unlocked
  */
@@ -367,6 +371,9 @@ export function isLogbookEntryUnlocked(
       saveData.discoveredPickups.includes(entry.pickupId) &&
       (!entry.unlockId || saveData.unlocks.includes(entry.unlockId))
     );
+  }
+  if (isLogEntry(entry)) {
+    return !!entry.unlockId && saveData.unlocks.includes(entry.unlockId);
   }
   return (
     !!entry.unlockId &&
@@ -418,6 +425,10 @@ function setLogbookEntries(
       ) {
         unlocks.add(entry.unlockId);
       }
+    } else if (isLogEntry(entry)) {
+      if (!entry.unlockId) continue;
+      if (enabled) unlocks.add(entry.unlockId);
+      else unlocks.delete(entry.unlockId);
     } else if (entry.unlockId) {
       if (enabled) {
         unlocks.add(entry.unlockId);

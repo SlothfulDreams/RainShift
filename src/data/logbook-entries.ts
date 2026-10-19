@@ -10,9 +10,8 @@ import type { LogbookEntry } from "./types";
  * Risk of Rain 2 Logbook Entries Data
  *
  * Data Sources:
- * - Items, Equipment: generated from the game files (scripts/generate-logbook.py)
- * - Monsters: https://riskofrain2.wiki.gg/wiki/Monsters
- * - Environments: https://riskofrain2.wiki.gg/wiki/Environments
+ * - Items, Equipment, Monsters, Environments: generated from the game files
+ *   (scripts/generate-logbook.py)
  * - Survivors: https://riskofrain2.wiki.gg/wiki/Survivors
  * - Icons: extracted from the game files by scripts/generate-logbook.py
  *
@@ -23,8 +22,9 @@ import type { LogbookEntry } from "./types";
  * - Alloyed Collective (AC): https://riskofrain2.wiki.gg/wiki/Alloyed_Collective
  *
  * Internal ID Naming Conventions:
- * - Monster Logs: Logs.{BodyName}.0 (e.g., Logs.BeetleBody.0)
- * - Environment Logs: Logs.Stages.{scenename} (e.g., Logs.Stages.blackbeach)
+ * - Monster/Environment logs: the log unlockable's own name, which does not
+ *   follow one pattern (Logs.BeetleBody.0, Logs.VoidInfestorBody, Log.SolusHeart,
+ *   Logs.Stages.blackbeach)
  * - Survivor Logs: Logs.{SurvivorName}Body.0 (e.g., Logs.CommandoBody.0)
  * - Items/Equipment: discoveredPickups ItemIndex.{Name} / EquipmentIndex.{Name},
  *   gated by the item's unlockable when it has one (e.g. Items.Medkit)

@@ -109,3 +109,28 @@ describe("logbook items and equipment", () => {
     expect(locked.discoveredPickups).toEqual([]);
   });
 });
+
+describe("logbook monsters and environments", () => {
+  it("use the game's log unlockable names", () => {
+    const log = (name: string) => entry(name).unlockId;
+    expect(log("Beetle")).toBe("Logs.BeetleBody.0");
+    expect(log("Void Infestor")).toBe("Logs.VoidInfestorBody");
+    expect(log("Solus Heart")).toBe("Log.SolusHeart");
+    expect(log("Xi Construct")).toBe("Logs.MegaConstructBody");
+    expect(log("Void Devastator")).toBe("Logs.VoidMegaCrab");
+    expect(log("Voidling")).toBe("Logs.MiniVoidRaidCrab");
+    expect(log("Distant Roost")).toBe("Logs.Stages.blackbeach");
+    expect(log("Pretender's Precipice")).toBe("Logs.Stages.nest");
+  });
+
+  it("toggle only the log unlockable", () => {
+    const beetle = entry("Beetle");
+    const on = toggleLogbookEntry(empty(), beetle, true);
+    expect(on.unlocks).toEqual(["Logs.BeetleBody.0"]);
+    expect(on.viewedViewables).toEqual([]);
+    expect(isLogbookEntryUnlocked(on, beetle)).toBe(true);
+    const off = toggleLogbookEntry(on, beetle, false);
+    expect(off.unlocks).toEqual([]);
+    expect(isLogbookEntryUnlocked(off, beetle)).toBe(false);
+  });
+});

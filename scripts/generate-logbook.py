@@ -161,7 +161,9 @@ def load_english(lang_dir: Path) -> dict:
 
 
 def clean(s: str) -> str:
-    return re.sub(r"<[^>]+>", "", s or "").strip().lower()
+    """Normalized text for comparing names (no rich text, straight quotes)."""
+    s = re.sub(r"<[^>]+>", "", s or "").replace("\u2019", "'")
+    return s.strip().lower()
 
 
 class Game:
@@ -260,7 +262,6 @@ class Game:
                     return obj.read().image
         return None
 
-
     def name_of(self, obj, pptr):
         """m_Name of the asset a PPtr points to (e.g. an UnlockableDef)."""
         target = self.deref(obj, pptr)
@@ -275,13 +276,21 @@ class Game:
 
     @property
     def unlockables(self) -> set:
+        """
+        Names of the log UnlockableDefs. The save key is the asset's m_Name,
+        which can differ in case from its file name (Logs.Stages.Nest.asset is
+        \"Logs.Stages.nest\"), and the game's lookup is case-sensitive.
+        """
         if not hasattr(self, "_unlockables"):
-            self._unlockables = {Path(p).stem for p in self.paths_of_type("UnlockableDef")}
-            self._unlockables |= {
-                Path(p).stem
-                for p in self.asset_bundles
-                if re.search(r"/Logs?\.[^/]*\.asset$", p)
-            }
+            self._unlockables = set()
+            for path in self.asset_bundles:
+                if not re.search(r"/Logs?\.[^/]*\.asset$", path):
+                    continue
+                stem = Path(path).stem.lower()
+                for _, t in self.defs_of(path):
+                    if t.get("m_Name", "").lower() == stem:
+                        self._unlockables.add(t["m_Name"])
+                        break
         return self._unlockables
 
 
@@ -362,7 +371,7 @@ def read_pickups(game: Game, type_name: str, prefix: str):
             out.append(
                 {
                     "internal": stem,
-                    "name": game.english.get(t["nameToken"]) or stem,
+                    "name": clean_name(game.english.get(t["nameToken"]) or stem),
                     "pickupId": f"{prefix}.{stem}",
                     "unlockId": game.name_of(obj, t.get("unlockableDef")),
                     "dlc": game.dlc_of(obj, t.get("requiredExpansion")),
@@ -393,7 +402,7 @@ def read_monsters(game: Game):
         token = body_t["baseNameToken"]
         entry = {
             "internal": body,
-            "name": game.english.get(token) or body,
+            "name": clean_name(game.english.get(token) or body),
             "unlockId": log,
             "dlc": dlc,
             "health": body_t.get("baseMaxHealth", 0),
@@ -425,7 +434,7 @@ def read_stages(game: Game):
             out.append(
                 {
                     "internal": base,
-                    "name": game.english.get(t.get("nameToken")) or base,
+                    "name": clean_name(game.english.get(t.get("nameToken")) or base),
                     "unlockId": log,
                     "dlc": game.dlc_of(obj, t.get("requiredExpansion")),
                     "icon": icon,
@@ -478,7 +487,9 @@ def read_drones(game: Game):
             out.append(
                 {
                     "internal": t["m_Name"],
-                    "name": game.english.get(t.get("nameToken")) or t["m_Name"],
+                    "name": clean_name(
+                        game.english.get(t.get("nameToken")) or t["m_Name"]
+                    ),
                     "pickupId": f"DroneIndex.{t['m_Name']}",
                     "body": game.name_of(obj, t["bodyPrefab"]),
                     "dlc": game.dlc_of(obj, t.get("requiredExpansion")),
@@ -489,14 +500,16 @@ def read_drones(game: Game):
 
 
 def clean_name(s: str) -> str:
-    """Strip rich text and the decorative brackets used by some names."""
+    """Strip rich text and the decorative glitch characters some names use."""
     s = re.sub(r"<[^>]+>", "", s or "")
-    return re.sub(r"[「』?]", "", s).strip()
+    return re.sub(r"[「」『』]|\?\?", "", s).strip()
 
 
 READERS = {
-    "items": lambda g: read_pickups(g, "ItemDef", "ItemIndex")
-    + read_pickups(g, "KeyItemDef", "KeyItemIndex"),
+    "items": lambda g: (
+        read_pickups(g, "ItemDef", "ItemIndex")
+        + read_pickups(g, "KeyItemDef", "KeyItemIndex")
+    ),
     "equipment": lambda g: read_pickups(g, "EquipmentDef", "EquipmentIndex"),
     "monsters": read_monsters,
     "environments": read_stages,
@@ -553,16 +566,37 @@ def match(existing: list, game_entry: dict, used: set):
     for e in existing:
         if e["id"] in used:
             continue
-        guess = re.sub(r"^(Logs\.(Stages\.)?|\w+Index\.)|\.0$", "", e.get("pickupId") or e.get("unlockId") or "")
+        guess = re.sub(
+            r"^(Logs\.(Stages\.)?|\w+Index\.)|\.0$",
+            "",
+            e.get("pickupId") or e.get("unlockId") or "",
+        )
         if guess.lower() in (internal, internal.removesuffix("body")):
             return e
-    names = [e for e in existing if e["id"] not in used and clean(e["name"]) == clean(game_entry["name"])]
+    names = [
+        e
+        for e in existing
+        if e["id"] not in used and clean(e["name"]) == clean(game_entry["name"])
+    ]
     return names[0] if len(names) == 1 else None
 
 
 def ts_entry(e: dict) -> str:
-    fields = ["id", "name", "description", "category", "unlockId", "pickupId", "body", "dlc", "rarity", "image"]
-    lines = [f"    {f}: {json.dumps(e[f], ensure_ascii=False)}," for f in fields if e.get(f)]
+    fields = [
+        "id",
+        "name",
+        "description",
+        "category",
+        "unlockId",
+        "pickupId",
+        "body",
+        "dlc",
+        "rarity",
+        "image",
+    ]
+    lines = [
+        f"    {f}: {json.dumps(e[f], ensure_ascii=False)}," for f in fields if e.get(f)
+    ]
     return "  {\n" + "\n".join(lines) + "\n  },"
 
 
@@ -585,20 +619,33 @@ def generate(game: Game, category: str, existing_all: list):
         rows.append((e, g))
 
     order = {e["id"]: i for i, e in enumerate(existing)}
-    rows.sort(key=lambda r: (order.get(r[0]["id"], 1e9) if r[0] else 1e9, clean(r[1]["name"])))
+    rows.sort(
+        key=lambda r: (order.get(r[0]["id"], 1e9) if r[0] else 1e9, clean(r[1]["name"]))
+    )
 
     taken = {e["id"] for e in existing_all}
-    out, report = [], {"changed": [], "added": [], "removed": [], "no_icon": []}
+    out = []
+    report = {"changed": [], "renamed": [], "added": [], "removed": [], "no_icon": []}
     for e, g in rows:
         if e:
-            entry_id, name = e["id"], e["name"]
+            entry_id = e["id"]
+            # Keep a disambiguated existing name (\"Lunar Chimera (Golem)\"),
+            # otherwise use the game's name.
+            same = clean(e["name"]).startswith(clean(g["name"]))
+            name = e["name"] if same else g["name"]
+            if not same:
+                report["renamed"].append(f"{entry_id}: {e['name']} -> {name}")
         else:
-            entry_id = ID_PREFIX[category] + slug(g["internal"] if category in ("items", "equipment", "environments") else g["name"])
+            entry_id = ID_PREFIX[category] + slug(
+                g["internal"]
+                if category in ("items", "equipment", "environments")
+                else g["name"]
+            )
             while entry_id in taken:
                 entry_id += "-2"
             taken.add(entry_id)
             name = g["name"]
-            report["added"].append(f'{entry_id} ({name})')
+            report["added"].append(f"{entry_id} ({name})")
         new = {
             "id": entry_id,
             "name": name,
@@ -611,7 +658,11 @@ def generate(game: Game, category: str, existing_all: list):
             "rarity": g.get("rarity") or (e or {}).get("rarity"),
         }
         if e:
-            diff = {k: (e.get(k), new[k]) for k in ("unlockId", "pickupId", "body", "dlc", "rarity") if e.get(k) != new[k]}
+            diff = {
+                k: (e.get(k), new[k])
+                for k in ("unlockId", "pickupId", "body", "dlc", "rarity")
+                if e.get(k) != new[k]
+            }
             if diff:
                 report["changed"].append(f"{entry_id}: {diff}")
         img = g["icon"]()
@@ -622,10 +673,18 @@ def generate(game: Game, category: str, existing_all: list):
             report["no_icon"].append(entry_id)
         out.append(new)
 
+    # Entries the game lists under the same name (e.g. the Bulwark's Ambry
+    # variants) get their internal name appended so they can be told apart.
+    seen = set()
+    for entry, (_, g) in zip(out, rows):
+        if clean(entry["name"]) in seen:
+            entry["name"] = f"{g['name']} ({g['internal']})"
+        seen.add(clean(entry["name"]))
+
     for e in existing:
         if e["id"] not in used:
-            report["removed"].append(f'{e["id"]} ({e["name"]})')
-            (OUT_DIR / f'{e["id"]}.webp').unlink(missing_ok=True)
+            report["removed"].append(f"{e['id']} ({e['name']})")
+            (OUT_DIR / f"{e['id']}.webp").unlink(missing_ok=True)
 
     body = "\n".join(ts_entry(e) for e in out)
     (ROOT / "src/data/logbook" / f"{category}.ts").write_text(
