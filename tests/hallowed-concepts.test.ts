@@ -6,7 +6,7 @@
 
 import { describe, expect, it } from "vitest";
 import { challenges } from "@/data/challenges";
-import { survivors } from "@/data/survivors";
+import { survivorEntries } from "@/data/logbook/survivors";
 import { DLC_NAMES } from "@/data/types";
 import { toggleAchievement } from "@/lib/save-operations";
 
@@ -32,17 +32,19 @@ describe("Hallowed Concepts", () => {
   });
 
   it("adds Enforcer and Acolyte survivors", () => {
-    const enforcer = survivors.find((s) => s.id === "enforcer");
-    const acolyte = survivors.find((s) => s.id === "acolyte");
+    const enforcer = survivorEntries.find((s) => s.id === "survivor-enforcer");
+    const acolyte = survivorEntries.find((s) => s.id === "survivor-acolyte");
     expect(enforcer?.dlc).toBe("hc");
-    expect(acolyte?.unlockAchievement).toBe("ChampRushRitualCompleted");
+    expect(acolyte?.unlockId).toBe("Characters.Acolyte");
     expect(
       hc.find((c) => c.achievement === "ChampRushRitualCompleted")?.unlocks,
     ).toEqual(["Characters.Acolyte"]);
   });
 
   it("every HC survivor reference points to an existing survivor", () => {
-    const ids = new Set(survivors.map((s) => s.id));
+    const ids = new Set(
+      survivorEntries.map((s) => s.id.replace(/^survivor-/, "")),
+    );
     for (const c of hc) {
       if (c.survivor) expect(ids.has(c.survivor)).toBe(true);
     }

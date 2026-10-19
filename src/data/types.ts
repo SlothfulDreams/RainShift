@@ -87,15 +87,6 @@ export interface Challenge {
   rarity?: ItemRarity; // For items
 }
 
-// Survivor definition
-export interface Survivor {
-  id: string;
-  name: string;
-  dlc: DLC;
-  unlockAchievement?: string; // Achievement needed to unlock (undefined = default unlocked)
-  description?: string;
-}
-
 // Parsed save data structure
 export interface SaveData {
   name: string;
