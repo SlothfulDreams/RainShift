@@ -19,6 +19,8 @@ const createSaveData = (overrides: Partial<SaveData> = {}): SaveData => ({
   viewedUnlockables: ["Original.Unlock"],
   unlocks: ["Characters.Commando"],
   stats: new Map([["totalKills", "5000"]]),
+  viewedViewables: [],
+  discoveredPickups: [],
   ...overrides,
 });
 

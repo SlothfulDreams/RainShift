@@ -1,5 +1,5 @@
 import { XMLBuilder, XMLParser } from "fast-xml-parser";
-import type { RawUserProfile, SaveData } from "@/data/types";
+import type { RawStat, RawUserProfile, SaveData } from "@/data/types";
 
 // Parser configuration for RoR2 save files
 const parserOptions = {
@@ -78,6 +78,10 @@ export function extractSaveData(raw: RawUserProfile): SaveData {
     profile.viewedUnlockablesList,
   );
 
+  // Parse logbook fields
+  const viewedViewables = parseSpaceSeparatedList(profile.viewedViewables);
+  const discoveredPickups = parseSpaceSeparatedList(profile.discoveredPickups);
+
   // Parse stats into a Map
   const stats = new Map<string, string>();
   if (profile.stats?.stat) {
@@ -108,6 +112,8 @@ export function extractSaveData(raw: RawUserProfile): SaveData {
     viewedUnlockables,
     unlocks,
     stats,
+    viewedViewables,
+    discoveredPickups,
   };
 }
 
@@ -135,6 +141,22 @@ export function applySaveData(
   if (!result.UserProfile.stats) {
     result.UserProfile.stats = {};
   }
+  // Write stat values back (e.g. per-survivor wins set by the logbook),
+  // keeping the original order and appending new stats
+  const original = result.UserProfile.stats.stat ?? [];
+  const originalStats = Array.isArray(original) ? original : [original];
+  const stats: RawStat[] = originalStats.map((stat) => {
+    const value = saveData.stats.get(stat["@_name"]);
+    return value === undefined || value === (stat["#text"] ?? "")
+      ? stat
+      : { ...stat, "#text": value };
+  });
+  const written = new Set(stats.map((stat) => stat["@_name"]));
+  for (const [name, value] of saveData.stats) {
+    if (!written.has(name)) stats.push({ "@_name": name, "#text": value });
+  }
+  if (stats.length > 0) result.UserProfile.stats.stat = stats;
+
   // Set unlocks array (or single string if only one, or undefined if empty)
   if (saveData.unlocks.length === 0) {
     delete result.UserProfile.stats.unlock;
@@ -143,6 +165,10 @@ export function applySaveData(
   } else {
     result.UserProfile.stats.unlock = saveData.unlocks;
   }
+
+  // Update logbook fields (space-separated)
+  result.UserProfile.viewedViewables = saveData.viewedViewables.join(" ");
+  result.UserProfile.discoveredPickups = saveData.discoveredPickups.join(" ");
 
   return result;
 }

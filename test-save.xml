@@ -6,13 +6,16 @@
   <achievementsList>RepeatFirstTeleporter CompleteTeleporterWithoutInjury CompleteThreeStages</achievementsList>
   <unviewedAchievementsList></unviewedAchievementsList>
   <viewedUnlockablesList>Survivors.Huntress Survivors.Toolbot Survivors.Engineer</viewedUnlockablesList>
-  <viewedViewables></viewedViewables>
-  <discoveredPickups></discoveredPickups>
+  <viewedViewables>Logs.BeetleBody.0 Logs.LemurianBody.0 Logs.Stages.blackbeach</viewedViewables>
+  <discoveredPickups>ItemIndex.Syringe ItemIndex.Hoof ItemIndex.Bear</discoveredPickups>
   <stats>
     <stat name="totalGamesPlayed">50</stat>
     <stat name="totalKills">5000</stat>
     <stat name="totalDeaths">25</stat>
     <stat name="highestLevel">15</stat>
+    <unlock>Logs.BeetleBody.0</unlock>
+    <unlock>Logs.LemurianBody.0</unlock>
+    <unlock>Logs.Stages.blackbeach</unlock>
   </stats>
   <tutorialDifficulty>Normal</tutorialDifficulty>
   <tutorialSurvivor>Commando</tutorialSurvivor>

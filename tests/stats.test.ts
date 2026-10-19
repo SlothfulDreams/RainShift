@@ -14,6 +14,8 @@ const empty = {
   viewedUnlockables: [],
   unlocks: [],
   stats: new Map(),
+  viewedViewables: [],
+  discoveredPickups: [],
 };
 
 const count = (cat: string) =>

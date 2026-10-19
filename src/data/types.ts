@@ -35,6 +35,43 @@ export type ItemRarity =
   | "void"
   | "equipment";
 
+// Logbook categories for the logbook editor
+export type LogbookCategory =
+  | "monsters"
+  | "environments"
+  | "survivors"
+  | "items"
+  | "equipment"
+  | "drones";
+
+export const LOGBOOK_CATEGORY_NAMES: Record<LogbookCategory, string> = {
+  monsters: "Monster Logs",
+  environments: "Environment Logs",
+  survivors: "Survivor Logs",
+  items: "Items",
+  equipment: "Equipment",
+  drones: "Drones",
+};
+
+// Logbook entry definition
+export interface LogbookEntry {
+  id: string;
+  name: string;
+  description?: string;
+  category: LogbookCategory;
+  // Unlockable in stats.unlock the game checks: the log for monsters/stages
+  // (e.g. "Logs.BeetleBody.0"), the item's gate for items/equipment
+  // (e.g. "Items.Medkit"; absent when the item is always available)
+  unlockId?: string;
+  // Entry in discoveredPickups (e.g. "ItemIndex.Syringe", "DroneIndex.Drone1")
+  pickupId?: string;
+  // Character body name for per-body stats (e.g. totalWins.CommandoBody)
+  body?: string;
+  dlc: DLC;
+  rarity?: ItemRarity; // For items/equipment
+  image?: string; // Icon path in public/ (from scripts/extract-logbook-icons.py)
+}
+
 // Challenge/Achievement definition
 export interface Challenge {
   id: string;
@@ -50,15 +87,6 @@ export interface Challenge {
   rarity?: ItemRarity; // For items
 }
 
-// Survivor definition
-export interface Survivor {
-  id: string;
-  name: string;
-  dlc: DLC;
-  unlockAchievement?: string; // Achievement needed to unlock (undefined = default unlocked)
-  description?: string;
-}
-
 // Parsed save data structure
 export interface SaveData {
   name: string;
@@ -68,6 +96,9 @@ export interface SaveData {
   viewedUnlockables: string[];
   unlocks: string[]; // Actual unlocked content (Characters.X, Items.X, Skins.X, etc.)
   stats: Map<string, string>;
+  // Logbook fields
+  viewedViewables: string[]; // Viewed logbook entries
+  discoveredPickups: string[]; // Discovered items/equipment (ItemIndex.X, EquipmentIndex.X)
 }
 
 // Raw parsed XML structure (from fast-xml-parser)

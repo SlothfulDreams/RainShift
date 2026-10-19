@@ -114,4 +114,25 @@ describe("xml-parser", () => {
     const reparsed = parseXml(serializeXml(parsed));
     expect(reparsed.UserProfile.name).toBe("Player<1>");
   });
+
+  it("writes changed stats back and appends new ones", () => {
+    const raw = parseXml(TEST_XML);
+    const data = extractSaveData(raw);
+    data.stats.set("totalKills", "6000");
+    data.stats.set("totalWins.MageBody", "1");
+    const out = extractSaveData(
+      parseXml(serializeXml(applySaveData(raw, data))),
+    );
+    expect(out.stats.get("totalKills")).toBe("6000");
+    expect(out.stats.get("killsAs.CommandoBody")).toBe("100");
+    expect(out.stats.get("totalWins.MageBody")).toBe("1");
+  });
+
+  it("leaves unchanged stats exactly as they were", () => {
+    const raw = parseXml(TEST_XML);
+    const applied = applySaveData(raw, extractSaveData(raw));
+    expect(applied.UserProfile.stats?.stat).toEqual(
+      raw.UserProfile.stats?.stat,
+    );
+  });
 });

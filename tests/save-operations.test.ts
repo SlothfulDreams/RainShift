@@ -20,6 +20,8 @@ const createSaveData = (overrides: Partial<SaveData> = {}): SaveData => ({
   viewedUnlockables: [],
   unlocks: [],
   stats: new Map(),
+  viewedViewables: [],
+  discoveredPickups: [],
   ...overrides,
 });
 

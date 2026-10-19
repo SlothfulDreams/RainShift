@@ -1,7 +1,15 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { Download, RotateCcw, Search, User, X } from "lucide-react";
+import {
+  Book,
+  Download,
+  RotateCcw,
+  Search,
+  Trophy,
+  User,
+  X,
+} from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import { challenges } from "@/data/challenges";
 import type {
@@ -11,7 +19,9 @@ import type {
   SaveData,
 } from "@/data/types";
 import { CATEGORY_NAMES, DLC_NAMES } from "@/data/types";
+import { getLogbookCountForChallenge } from "@/lib/challenge-logbook-mapping";
 import {
+  calculateLogbookStats,
   calculateSaveStats,
   generateModifiedXml,
   lockAll,
@@ -22,6 +32,7 @@ import {
 import { downloadFile } from "@/lib/utils";
 import { ChallengeCard } from "./ChallengeCard";
 import { CoinsEditor } from "./CoinsEditor";
+import { LogbookEditor } from "./LogbookEditor";
 
 interface SaveEditorProps {
   initialSaveData: SaveData;
@@ -63,6 +74,9 @@ export function SaveEditor({
   >("all");
   const [selectedDLC, setSelectedDLC] = useState<DLC | "all">("all");
   const [hasChanges, setHasChanges] = useState(false);
+  const [activeTab, setActiveTab] = useState<"achievements" | "logbook">(
+    "achievements",
+  );
   const [awardCoins, setAwardCoins] = useState(false);
 
   // Debounce search to prevent animation lag
@@ -72,6 +86,7 @@ export function SaveEditor({
   }, [searchQuery]);
 
   const stats = calculateSaveStats(saveData);
+  const logbookStats = calculateLogbookStats(saveData);
 
   // Filter challenges
   const filteredChallenges = challenges.filter((c) => {
@@ -123,6 +138,11 @@ export function SaveEditor({
     downloadFile(modifiedXml, fileName, "text/xml");
   }, [rawProfile, saveData, fileName]);
 
+  const handleLogbookChange = useCallback((newSaveData: SaveData) => {
+    setSaveData(newSaveData);
+    setHasChanges(true);
+  }, []);
+
   const handleReset = () => {
     setSaveData({
       ...initialSaveData,
@@ -131,6 +151,8 @@ export function SaveEditor({
       viewedUnlockables: [...initialSaveData.viewedUnlockables],
       unlocks: [...initialSaveData.unlocks],
       stats: new Map(initialSaveData.stats),
+      viewedViewables: [...initialSaveData.viewedViewables],
+      discoveredPickups: [...initialSaveData.discoveredPickups],
     });
     setHasChanges(false);
   };
@@ -196,6 +218,12 @@ export function SaveEditor({
                 value={stats.unlockedSkins}
                 max={stats.totals.skins}
                 color="var(--ror-void)"
+              />
+              <StatBar
+                label="LOGBOOK"
+                value={logbookStats.unlockedEntries}
+                max={logbookStats.totalEntries}
+                color="var(--ror-equipment)"
               />
             </div>
           </div>
@@ -274,47 +302,89 @@ export function SaveEditor({
         </motion.div>
       </motion.aside>
 
-      {/* Main Content - Challenge Grid */}
+      {/* Main Content */}
       <div className="flex-1 min-w-0 flex flex-col gap-4 relative">
-        {/* Filters Bar */}
+        {/* Tab Navigation */}
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="ror-card p-4 flex flex-col xl:flex-row gap-4 justify-between items-start xl:items-center sticky top-0 z-20 bg-ror-bg-main/95 backdrop-blur-md border-b border-ror-border shadow-lg"
+          transition={{ duration: 0.5, delay: 0.25 }}
+          className="flex border-b border-ror-border"
         >
-          {/* Search */}
-          <div className="relative w-full xl:w-64">
-            <Search
-              size={16}
-              className="absolute left-3 top-1/2 -translate-y-1/2 text-ror-text-muted"
-            />
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search..."
-              className="w-full !pl-10 pr-8 py-2 text-sm ror-input bg-ror-bg-panel/50 focus:bg-ror-bg-panel"
-            />
-            {searchQuery && (
-              <button
-                type="button"
-                onClick={() => setSearchQuery("")}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-ror-text-muted hover:text-ror-text-main"
-              >
-                <X size={14} />
-              </button>
-            )}
-          </div>
+          <button
+            type="button"
+            onClick={() => setActiveTab("achievements")}
+            className={`
+              px-6 py-3 text-sm font-display uppercase tracking-wider transition-all flex items-center gap-2
+              ${
+                activeTab === "achievements"
+                  ? "text-ror-text-main border-b-2 border-ror-orange-accent"
+                  : "text-ror-text-dim hover:text-ror-text-main"
+              }
+            `}
+          >
+            <Trophy size={16} />
+            Achievements
+          </button>
+          <button
+            type="button"
+            onClick={() => setActiveTab("logbook")}
+            className={`
+              px-6 py-3 text-sm font-display uppercase tracking-wider transition-all flex items-center gap-2
+              ${
+                activeTab === "logbook"
+                  ? "text-ror-text-main border-b-2 border-ror-orange-accent"
+                  : "text-ror-text-dim hover:text-ror-text-main"
+              }
+            `}
+          >
+            <Book size={16} />
+            Logbook
+          </button>
+        </motion.div>
 
-          {/* Categories */}
-          <div className="flex flex-wrap gap-1">
-            {categories.map((cat) => (
-              <button
-                type="button"
-                key={cat}
-                onClick={() => setSelectedCategory(cat)}
-                className={`
+        {/* Tab Content */}
+        {activeTab === "achievements" ? (
+          <>
+            {/* Filters Bar */}
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="ror-card p-4 flex flex-col xl:flex-row gap-4 justify-between items-start xl:items-center sticky top-0 z-20 bg-ror-bg-main/95 backdrop-blur-md border-b border-ror-border shadow-lg"
+            >
+              {/* Search */}
+              <div className="relative w-full xl:w-64">
+                <Search
+                  size={16}
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-ror-text-muted"
+                />
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search..."
+                  className="w-full !pl-10 pr-8 py-2 text-sm ror-input bg-ror-bg-panel/50 focus:bg-ror-bg-panel"
+                />
+                {searchQuery && (
+                  <button
+                    type="button"
+                    onClick={() => setSearchQuery("")}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-ror-text-muted hover:text-ror-text-main"
+                  >
+                    <X size={14} />
+                  </button>
+                )}
+              </div>
+
+              {/* Categories */}
+              <div className="flex flex-wrap gap-1">
+                {categories.map((cat) => (
+                  <button
+                    type="button"
+                    key={cat}
+                    onClick={() => setSelectedCategory(cat)}
+                    className={`
                   px-3 py-1 text-[10px] uppercase tracking-wider border transition-all
                   ${
                     selectedCategory === cat
@@ -322,20 +392,20 @@ export function SaveEditor({
                       : "bg-transparent text-ror-text-muted border-transparent hover:border-ror-text-dim hover:bg-ror-bg-panel"
                   }
                 `}
-              >
-                {cat === "all" ? "ALL" : CATEGORY_NAMES[cat]}
-              </button>
-            ))}
-          </div>
+                  >
+                    {cat === "all" ? "ALL" : CATEGORY_NAMES[cat]}
+                  </button>
+                ))}
+              </div>
 
-          {/* DLCs */}
-          <div className="flex flex-wrap gap-1 border-l border-ror-border pl-4">
-            {dlcs.map((dlc) => (
-              <button
-                type="button"
-                key={dlc}
-                onClick={() => setSelectedDLC(dlc)}
-                className={`
+              {/* DLCs */}
+              <div className="flex flex-wrap gap-1 border-l border-ror-border pl-4">
+                {dlcs.map((dlc) => (
+                  <button
+                    type="button"
+                    key={dlc}
+                    onClick={() => setSelectedDLC(dlc)}
+                    className={`
                   px-2 py-1 text-[10px] uppercase tracking-wider border transition-all
                   ${
                     selectedDLC === dlc
@@ -343,72 +413,83 @@ export function SaveEditor({
                       : "bg-transparent text-ror-text-dim border-transparent hover:text-ror-text-main"
                   }
                 `}
-              >
-                {dlc === "all"
-                  ? "ALL"
-                  : DLC_NAMES[dlc]
-                      .replace("Survivors of the Void", "SOTV")
-                      .replace("Seekers of the Storm", "SOTS")
-                      .replace("Alloyed Collective", "AC")
-                      .replace("Hallowed Concepts", "HC")}
-              </button>
-            ))}
-          </div>
-        </motion.div>
+                  >
+                    {dlc === "all"
+                      ? "ALL"
+                      : DLC_NAMES[dlc]
+                          .replace("Survivors of the Void", "SOTV")
+                          .replace("Seekers of the Storm", "SOTS")
+                          .replace("Alloyed Collective", "AC")
+                          .replace("Hallowed Concepts", "HC")}
+                  </button>
+                ))}
+              </div>
+            </motion.div>
 
-        {/* Results Info */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4 }}
-          className="flex items-center justify-between px-2"
-        >
-          <span className="text-ror-text-dim text-xs tracking-wider uppercase">
-            Showing {filteredChallenges.length} Entries
-          </span>
-          <span className="text-ror-text-dim text-xs tracking-wider uppercase">
-            <span className="text-ror-uncommon">{unlockedInView}</span> Unlocked
-          </span>
-        </motion.div>
-
-        {/* Grid */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="show"
-          className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3 overflow-y-auto pr-2 pb-4 custom-scrollbar"
-          style={{ maxHeight: "calc(100vh - 200px)" }}
-        >
-          <AnimatePresence mode="popLayout">
-            {filteredChallenges.map((challenge) => (
-              <motion.div
-                key={challenge.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                layout
-              >
-                <ChallengeCard
-                  challenge={challenge}
-                  isUnlocked={saveData.achievements.includes(
-                    challenge.achievement,
-                  )}
-                  onToggle={handleToggleAchievement}
-                />
-              </motion.div>
-            ))}
-          </AnimatePresence>
-
-          {filteredChallenges.length === 0 && (
+            {/* Results Info */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="col-span-full py-20 text-center text-ror-text-dim"
+              transition={{ delay: 0.4 }}
+              className="flex items-center justify-between px-2"
             >
-              NO DATA FOUND
+              <span className="text-ror-text-dim text-xs tracking-wider uppercase">
+                Showing {filteredChallenges.length} Entries
+              </span>
+              <span className="text-ror-text-dim text-xs tracking-wider uppercase">
+                <span className="text-ror-uncommon">{unlockedInView}</span>{" "}
+                Unlocked
+              </span>
             </motion.div>
-          )}
-        </motion.div>
+
+            {/* Grid */}
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              animate="show"
+              className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3 overflow-y-auto pr-2 pb-4 custom-scrollbar"
+              style={{ maxHeight: "calc(100vh - 200px)" }}
+            >
+              <AnimatePresence mode="popLayout">
+                {filteredChallenges.map((challenge) => (
+                  <motion.div
+                    key={challenge.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    layout
+                  >
+                    <ChallengeCard
+                      challenge={challenge}
+                      isUnlocked={saveData.achievements.includes(
+                        challenge.achievement,
+                      )}
+                      onToggle={handleToggleAchievement}
+                      linkedLogbookCount={getLogbookCountForChallenge(
+                        challenge.id,
+                      )}
+                    />
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+
+              {filteredChallenges.length === 0 && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="col-span-full py-20 text-center text-ror-text-dim"
+                >
+                  NO DATA FOUND
+                </motion.div>
+              )}
+            </motion.div>
+          </>
+        ) : (
+          <LogbookEditor
+            saveData={saveData}
+            onSaveDataChange={handleLogbookChange}
+          />
+        )}
       </div>
     </div>
   );

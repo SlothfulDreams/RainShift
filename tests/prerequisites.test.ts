@@ -20,6 +20,8 @@ const empty = (): SaveData => ({
   viewedUnlockables: [],
   unlocks: [],
   stats: new Map(),
+  viewedViewables: [],
+  discoveredPickups: [],
 });
 
 describe("prerequisites", () => {
