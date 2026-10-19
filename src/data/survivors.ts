@@ -153,6 +153,25 @@ export const survivors: Survivor[] = [
     description:
       "A unique survivor who bags enemies and provides temporary items.",
   },
+
+  // ============================================
+  // HALLOWED CONCEPTS DLC (2)
+  // ============================================
+  {
+    id: "enforcer",
+    name: "Enforcer",
+    dlc: "hc",
+    description:
+      "The Enforcer is a bastion of defensive and offensive capabilities using his impenetrable shield and ample firepower.",
+  },
+  {
+    id: "acolyte",
+    name: "Acolyte",
+    dlc: "hc",
+    unlockAchievement: "ChampRushRitualCompleted",
+    description:
+      "The Acolyte is a close-range whirlwind of death, conducting sacrifices to unleash the Anima Harvester that is bound to her. Balance shall be restored to Petrichor V.",
+  },
 ];
 
 // Helper to get survivor by ID

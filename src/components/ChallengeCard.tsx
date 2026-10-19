@@ -3,10 +3,16 @@
 import { motion } from "framer-motion";
 import { Book, Check, Lock } from "lucide-react";
 import Image from "next/image";
+import {
+  DEFAULT_ACHIEVEMENT_IMAGE,
+  getAchievementImage,
+} from "@/data/achievement-images";
+import { challenges } from "@/data/challenges";
 import type { Challenge } from "@/data/types";
 
-const DEFAULT_ACHIEVEMENT_IMAGE =
-  "https://cdn.fastly.steamstatic.com/steamcommunity/public/images/apps/632360/3ebb5f75a716aa6fcab12b7354c3b87e971bcfd5.jpg";
+const nameByAchievement = new Map(
+  challenges.map((c) => [c.achievement, c.name]),
+);
 
 interface ChallengeCardProps {
   challenge: Challenge;
@@ -25,7 +31,8 @@ export function ChallengeCard({
     onToggle(challenge.achievement, !isUnlocked);
   };
 
-  const imageUrl = challenge.image || DEFAULT_ACHIEVEMENT_IMAGE;
+  const imageUrl =
+    getAchievementImage(challenge.achievement) || DEFAULT_ACHIEVEMENT_IMAGE;
 
   const rarityColorClass = getRarityColorClass(challenge.rarity);
   const borderColorClass = isUnlocked
@@ -120,6 +127,14 @@ export function ChallengeCard({
             {challenge.description}
           </p>
 
+          {challenge.prerequisite && (
+            <p className="text-ror-text-dim text-[9px] uppercase tracking-wider mb-2">
+              Requires:{" "}
+              {nameByAchievement.get(challenge.prerequisite) ??
+                challenge.prerequisite}
+            </p>
+          )}
+
           <div className="mt-auto flex flex-wrap gap-1">
             {/* Tags */}
             <span
@@ -175,6 +190,8 @@ function getDLCStyle(dlc: string): string {
       return "border-ror-boss text-ror-boss bg-ror-boss/10"; // Using boss yellow/gold for SOTS
     case "ac":
       return "border-ror-lunar text-ror-lunar bg-ror-lunar/10";
+    case "hc":
+      return "border-ror-legendary text-ror-legendary bg-ror-legendary/10";
     default:
       return "border-ror-border text-ror-text-dim";
   }
@@ -185,6 +202,7 @@ function getDLCShortName(dlc: string): string {
     sotv: "VOID",
     sots: "STORM",
     ac: "ALLOYED",
+    hc: "HALLOWED",
   };
   return names[dlc] || dlc.toUpperCase();
 }

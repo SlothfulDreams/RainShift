@@ -7,8 +7,8 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "cdn.fastly.steamstatic.com",
-        pathname: "/steamcommunity/public/images/**",
+        hostname: "shared.fastly.steamstatic.com",
+        pathname: "/community_assets/images/apps/632360/**",
       },
       {
         protocol: "https",

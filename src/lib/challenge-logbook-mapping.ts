@@ -38,22 +38,44 @@ interface ChallengeLogbookMapping {
 // Prefixes that are mapped to logbook entries
 const MAPPED_PREFIXES = ["Items.", "Equipment."] as const;
 
+// The game names every item/equipment unlockable "Items.X" (even equipment),
+// while logbook entries use "Items.X" / "Equipment.X". Match on the name.
+const unlockName = (id: string) => id.slice(id.indexOf(".") + 1);
+
+// Unlockables that grant several logbook entries at once
+const GROUP_UNLOCKS: Record<string, string[]> = {
+  "Items.LunarSkillReplacements": [
+    "LunarPrimaryReplacement",
+    "LunarSecondaryReplacement",
+    "LunarUtilityReplacement",
+    "LunarSpecialReplacement",
+  ],
+  "Items.ElementalRings": ["FireRing", "IceRing"],
+};
+
 function buildMapping(): ChallengeLogbookMapping {
   const challengeToLogbook = new Map<string, string[]>();
   const logbookToChallenge = new Map<string, string[]>();
   const unlockIdToLogbook = new Map<string, LogbookEntry>();
   const pickupIdToLogbook = new Map<string, LogbookEntry>();
   const unlockIdToChallenges = new Map<string, Challenge[]>();
+  const nameToLogbook = new Map<string, LogbookEntry>();
 
   // Build unlockId/pickupId -> logbook entry maps (only for items/equipment)
   for (const entry of logbookEntries) {
     if (entry.category === "items" || entry.category === "equipment") {
       unlockIdToLogbook.set(entry.unlockId, entry);
+      nameToLogbook.set(unlockName(entry.unlockId), entry);
       if (entry.pickupId) {
         pickupIdToLogbook.set(entry.pickupId, entry);
       }
     }
   }
+
+  const logbookEntriesForUnlock = (unlock: string): LogbookEntry[] =>
+    (GROUP_UNLOCKS[unlock] ?? [unlockName(unlock)])
+      .map((name) => nameToLogbook.get(name))
+      .filter((entry): entry is LogbookEntry => entry !== undefined);
 
   // Build the bidirectional challenge <-> logbook mappings
   for (const challenge of challenges) {
@@ -66,8 +88,8 @@ function buildMapping(): ChallengeLogbookMapping {
       );
 
       if (isMappedPrefix) {
-        const logbookEntry = unlockIdToLogbook.get(unlock);
-        if (logbookEntry) {
+        const entries = logbookEntriesForUnlock(unlock);
+        for (const logbookEntry of entries) {
           linkedLogbookIds.push(logbookEntry.id);
 
           // Add to logbook -> challenge mapping
@@ -75,8 +97,10 @@ function buildMapping(): ChallengeLogbookMapping {
             logbookToChallenge.get(logbookEntry.id) || [];
           existingChallenges.push(challenge.id);
           logbookToChallenge.set(logbookEntry.id, existingChallenges);
+        }
 
-          // Add to unlockId -> challenges mapping
+        // Add to unlockId -> challenges mapping
+        if (entries.length > 0) {
           const challengesForUnlock = unlockIdToChallenges.get(unlock) || [];
           challengesForUnlock.push(challenge);
           unlockIdToChallenges.set(unlock, challengesForUnlock);
@@ -289,7 +313,7 @@ export function findUnmappedChallengeUnlocks(): Array<{
         unlock.startsWith(prefix),
       );
 
-      if (isMappedPrefix && !mapping.unlockIdToLogbook.has(unlock)) {
+      if (isMappedPrefix && !mapping.unlockIdToChallenges.has(unlock)) {
         unmapped.push({ challenge, unmappedUnlock: unlock });
       }
     }

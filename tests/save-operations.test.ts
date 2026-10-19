@@ -20,6 +20,8 @@ const createSaveData = (overrides: Partial<SaveData> = {}): SaveData => ({
   viewedUnlockables: [],
   unlocks: [],
   stats: new Map(),
+  viewedViewables: [],
+  discoveredPickups: [],
   ...overrides,
 });
 
@@ -62,18 +64,30 @@ describe("save-operations", () => {
     expect(result.viewedUnlockables.length).toBeGreaterThan(0);
   });
 
-  it("lockAll: clears achievements and unlocks but preserves other fields", () => {
+  it("lockAll: clears editor-managed achievements/unlocks, keeps the rest", () => {
     const data = createSaveData({
       coins: 999,
-      achievements: ["A", "B"],
-      viewedUnlockables: ["X"],
-      unlocks: ["Characters.Huntress", "Items.Clover"],
+      achievements: ["FreeMage", "Complete20Stages", "SomeUnknownAch"],
+      unviewedAchievements: ["FreeMage", "SomeUnknownAch"],
+      viewedUnlockables: ["Characters.Mage", "Logs.WispBody.0"],
+      unlocks: [
+        "Characters.Mage",
+        "Items.Clover",
+        "Logs.WispBody.0",
+        "NewtStatue.goolake.1",
+        "Logs.Stages.frozenwall",
+      ],
     });
     const result = lockAll(data);
 
-    expect(result.achievements).toEqual([]);
-    expect(result.viewedUnlockables).toEqual([]);
-    expect(result.unlocks).toEqual([]);
+    expect(result.achievements).toEqual(["SomeUnknownAch"]);
+    expect(result.unviewedAchievements).toEqual(["SomeUnknownAch"]);
+    expect(result.viewedUnlockables).toEqual(["Logs.WispBody.0"]);
+    expect(result.unlocks).toEqual([
+      "Logs.WispBody.0",
+      "NewtStatue.goolake.1",
+      "Logs.Stages.frozenwall",
+    ]);
     expect(result.coins).toBe(999);
   });
 });

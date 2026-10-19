@@ -1,11 +1,12 @@
 // DLC identifiers
-export type DLC = "base" | "sotv" | "sots" | "ac";
+export type DLC = "base" | "sotv" | "sots" | "ac" | "hc";
 
 export const DLC_NAMES: Record<DLC, string> = {
   base: "Base Game",
   sotv: "Survivors of the Void",
   sots: "Seekers of the Storm",
   ac: "Alloyed Collective",
+  hc: "Hallowed Concepts",
 };
 
 // Challenge categories for organizing the editor
@@ -71,12 +72,13 @@ export interface Challenge {
   name: string;
   description: string;
   achievement: string; // Achievement ID used in save file
+  prerequisite?: string; // Achievement the game requires first (RegisterAchievement)
+  lunarCoins: number; // Lunar coins the game awards for this achievement
   unlocks: string[]; // What gets unlocked (survivors, skills, items, etc.)
   category: ChallengeCategory;
   survivor?: string; // Associated survivor ID (for skills/skins)
   dlc: DLC;
   rarity?: ItemRarity; // For items
-  image?: string; // Steam achievement image URL
 }
 
 // Survivor definition

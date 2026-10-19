@@ -1,5 +1,5 @@
 import { XMLBuilder, XMLParser } from "fast-xml-parser";
-import type { RawStat, RawUserProfile, SaveData } from "@/data/types";
+import type { RawUserProfile, SaveData } from "@/data/types";
 
 // Parser configuration for RoR2 save files
 const parserOptions = {

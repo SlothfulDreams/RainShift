@@ -49,7 +49,7 @@ const categories: (ChallengeCategory | "all")[] = [
   "artifacts",
 ];
 
-const dlcs: (DLC | "all")[] = ["all", "base", "sotv", "sots", "ac"];
+const dlcs: (DLC | "all")[] = ["all", "base", "sotv", "sots", "ac", "hc"];
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -59,11 +59,6 @@ const containerVariants = {
       staggerChildren: 0.05,
     },
   },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0 },
 };
 
 export function SaveEditor({
@@ -82,6 +77,7 @@ export function SaveEditor({
   const [activeTab, setActiveTab] = useState<"achievements" | "logbook">(
     "achievements",
   );
+  const [awardCoins, setAwardCoins] = useState(false);
 
   // Debounce search to prevent animation lag
   useEffect(() => {
@@ -119,16 +115,18 @@ export function SaveEditor({
 
   const handleToggleAchievement = useCallback(
     (achievementId: string, enabled: boolean) => {
-      setSaveData((prev) => toggleAchievement(prev, achievementId, enabled));
+      setSaveData((prev) =>
+        toggleAchievement(prev, achievementId, enabled, { awardCoins }),
+      );
       setHasChanges(true);
     },
-    [],
+    [awardCoins],
   );
 
   const handleUnlockAll = useCallback(() => {
-    setSaveData((prev) => unlockAll(prev));
+    setSaveData((prev) => unlockAll(prev, { awardCoins }));
     setHasChanges(true);
-  }, []);
+  }, [awardCoins]);
 
   const handleLockAll = useCallback(() => {
     setSaveData((prev) => lockAll(prev));
@@ -206,19 +204,19 @@ export function SaveEditor({
               <StatBar
                 label="SURVIVORS"
                 value={stats.unlockedSurvivors}
-                max={13}
+                max={stats.totals.survivors}
                 color="var(--ror-orange-accent)"
               />
               <StatBar
                 label="ITEMS"
                 value={stats.unlockedItems}
-                max={44}
+                max={stats.totals.items}
                 color="var(--ror-uncommon)"
               />
               <StatBar
                 label="SKINS"
                 value={stats.unlockedSkins}
-                max={42}
+                max={stats.totals.skins}
                 color="var(--ror-void)"
               />
               <StatBar
@@ -253,6 +251,16 @@ export function SaveEditor({
                 LOCK ALL
               </motion.button>
             </div>
+
+            <label className="flex items-center gap-2 text-[10px] uppercase tracking-wider text-ror-text-muted cursor-pointer select-none">
+              <input
+                type="checkbox"
+                checked={awardCoins}
+                onChange={(e) => setAwardCoins(e.target.checked)}
+                className="accent-[var(--ror-lunar)]"
+              />
+              Award lunar coins for unlocks
+            </label>
 
             <div className="h-[1px] bg-ror-border/50 w-full" />
 
@@ -411,7 +419,8 @@ export function SaveEditor({
                       : DLC_NAMES[dlc]
                           .replace("Survivors of the Void", "SOTV")
                           .replace("Seekers of the Storm", "SOTS")
-                          .replace("Alloyed Collective", "AC")}
+                          .replace("Alloyed Collective", "AC")
+                          .replace("Hallowed Concepts", "HC")}
                   </button>
                 ))}
               </div>
