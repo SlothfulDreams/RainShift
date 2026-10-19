@@ -33,6 +33,7 @@ const categories: (LogbookCategory | "all")[] = [
   "survivors",
   "items",
   "equipment",
+  "drones",
 ];
 
 const dlcs: (DLC | "all")[] = ["all", "base", "sotv", "sots", "ac", "hc"];
