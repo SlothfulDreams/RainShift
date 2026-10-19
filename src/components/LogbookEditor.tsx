@@ -35,7 +35,7 @@ const categories: (LogbookCategory | "all")[] = [
   "equipment",
 ];
 
-const dlcs: (DLC | "all")[] = ["all", "base", "sotv", "sots", "ac"];
+const dlcs: (DLC | "all")[] = ["all", "base", "sotv", "sots", "ac", "hc"];
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -76,7 +76,7 @@ export function LogbookEditor({
       return (
         entry.name.toLowerCase().includes(q) ||
         entry.description?.toLowerCase().includes(q) ||
-        entry.unlockId.toLowerCase().includes(q)
+        entry.unlockId?.toLowerCase().includes(q)
       );
     }
     return true;
@@ -204,6 +204,7 @@ export function LogbookEditor({
                         .replace("Survivors of the Void", "SOTV")
                         .replace("Seekers of the Storm", "SOTS")
                         .replace("Alloyed Collective", "AC")
+                        .replace("Hallowed Concepts", "HC")
                         .replace("Base Game", "BASE")}
                 </button>
               ))}

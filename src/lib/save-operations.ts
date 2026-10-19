@@ -10,7 +10,6 @@ import {
   getChallengesForLogbookEntry,
   getLogbookEntriesForChallenge,
   isLogbookEntryProvidedByOtherChallenge,
-  shouldDisableChallengeForEntry,
 } from "./challenge-logbook-mapping";
 import {
   applySaveData,
@@ -118,7 +117,6 @@ function grant(
   const unviewedAchievements = new Set(saveData.unviewedAchievements);
   const viewedUnlockables = new Set(saveData.viewedUnlockables);
   const unlocks = new Set(saveData.unlocks);
-  const viewedViewables = new Set(saveData.viewedViewables);
   const discoveredPickups = new Set(saveData.discoveredPickups);
   const added: string[] = [];
 
@@ -132,10 +130,8 @@ function grant(
       viewedUnlockables.add(unlock);
       unlocks.add(unlock);
     }
-    // Sync related logbook entries (items/equipment)
+    // Discover the items/equipment this challenge unlocks (logbook entries)
     for (const entry of getLogbookEntriesForChallenge(challenge.id)) {
-      viewedViewables.add(entry.unlockId);
-      unlocks.add(entry.unlockId);
       if (entry.pickupId) discoveredPickups.add(entry.pickupId);
     }
   }
@@ -151,7 +147,6 @@ function grant(
     unviewedAchievements: Array.from(unviewedAchievements),
     viewedUnlockables: Array.from(viewedUnlockables),
     unlocks: Array.from(unlocks),
-    viewedViewables: Array.from(viewedViewables),
     discoveredPickups: Array.from(discoveredPickups),
   };
 }
@@ -179,19 +174,19 @@ export function toggleAchievement(
   );
   const achievements = saveData.achievements.filter((a) => !removed.has(a));
 
-  // Sync related logbook entries (only if no remaining challenge provides them)
+  // Undiscover linked items/equipment unless a remaining challenge unlocks them
   const remaining = new Set(achievements);
-  const removedViewables = new Set<string>();
   const removedPickups = new Set<string>();
   for (const id of removed) {
     const challenge = challengeByAchievement.get(id);
     if (!challenge) continue;
     for (const entry of getLogbookEntriesForChallenge(challenge.id)) {
-      if (isLogbookEntryProvidedByOtherChallenge(entry, id, remaining)) {
-        continue;
+      if (
+        entry.pickupId &&
+        !isLogbookEntryProvidedByOtherChallenge(entry, id, remaining)
+      ) {
+        removedPickups.add(entry.pickupId);
       }
-      removedViewables.add(entry.unlockId);
-      if (entry.pickupId) removedPickups.add(entry.pickupId);
     }
   }
 
@@ -204,12 +199,7 @@ export function toggleAchievement(
     viewedUnlockables: saveData.viewedUnlockables.filter(
       (u) => !removedUnlocks.has(u),
     ),
-    unlocks: saveData.unlocks.filter(
-      (u) => !removedUnlocks.has(u) && !removedViewables.has(u),
-    ),
-    viewedViewables: saveData.viewedViewables.filter(
-      (v) => !removedViewables.has(v),
-    ),
+    unlocks: saveData.unlocks.filter((u) => !removedUnlocks.has(u)),
     discoveredPickups: saveData.discoveredPickups.filter(
       (p) => !removedPickups.has(p),
     ),
@@ -237,22 +227,19 @@ export function unlockAll(
  * Lock all achievements managed by the editor.
  * Only removes achievements listed in the challenge data and the unlockables
  * they grant; logbook entries, newt statues, stages and any other unlocks the
- * game records on its own are preserved, except item/equipment logbook
- * entries linked to a challenge.
+ * game records on its own are preserved, except that items/equipment linked
+ * to a challenge are undiscovered.
  */
 export function lockAll(saveData: SaveData): SaveData {
   const managedAchievements = new Set(challenges.map((c) => c.achievement));
   const managedUnlocks = new Set(challenges.flatMap((c) => c.unlocks));
-  const linkedEntries = challenges.flatMap((c) =>
-    getLogbookEntriesForChallenge(c.id),
-  );
-  const linkedViewables = new Set(linkedEntries.map((e) => e.unlockId));
   const linkedPickups = new Set(
-    linkedEntries.flatMap((e) => (e.pickupId ? [e.pickupId] : [])),
+    challenges
+      .flatMap((c) => getLogbookEntriesForChallenge(c.id))
+      .flatMap((e) => (e.pickupId ? [e.pickupId] : [])),
   );
   const keepAchievement = (a: string) => !managedAchievements.has(a);
-  const keepUnlock = (u: string) =>
-    !managedUnlocks.has(u) && !linkedViewables.has(u);
+  const keepUnlock = (u: string) => !managedUnlocks.has(u);
 
   return {
     ...saveData,
@@ -260,9 +247,6 @@ export function lockAll(saveData: SaveData): SaveData {
     unviewedAchievements: saveData.unviewedAchievements.filter(keepAchievement),
     viewedUnlockables: saveData.viewedUnlockables.filter(keepUnlock),
     unlocks: saveData.unlocks.filter(keepUnlock),
-    viewedViewables: saveData.viewedViewables.filter(
-      (v) => !linkedViewables.has(v),
-    ),
     discoveredPickups: saveData.discoveredPickups.filter(
       (p) => !linkedPickups.has(p),
     ),
@@ -362,7 +346,12 @@ export function calculateSaveStats(saveData: SaveData): {
 
 // ============================================
 // LOGBOOK OPERATIONS
+// Mirrors RoR2.UI.LogBook.LogBookController: each category has its own
+// unlock condition in the save file.
 // ============================================
+
+const isPickupEntry = (entry: LogbookEntry) =>
+  entry.category === "items" || entry.category === "equipment";
 
 /**
  * Check if a logbook entry is unlocked
@@ -371,203 +360,106 @@ export function isLogbookEntryUnlocked(
   saveData: SaveData,
   entry: LogbookEntry,
 ): boolean {
-  // Check in stats.unlock for monster/environment/survivor logs
-  if (saveData.unlocks.includes(entry.unlockId)) {
-    return true;
+  if (isPickupEntry(entry)) {
+    // GetPickupStatus: the item's unlockable (if any) and a discovered pickup
+    return (
+      !!entry.pickupId &&
+      saveData.discoveredPickups.includes(entry.pickupId) &&
+      (!entry.unlockId || saveData.unlocks.includes(entry.unlockId))
+    );
+  }
+  return (
+    !!entry.unlockId &&
+    (saveData.unlocks.includes(entry.unlockId) ||
+      saveData.viewedViewables.includes(entry.unlockId))
+  );
+}
+
+/**
+ * Unlock or lock a set of logbook entries.
+ * Unlocking a gated item/equipment entry also unlocks the achievement that
+ * grants its unlockable (with prerequisites); locking only undiscovers it.
+ */
+function setLogbookEntries(
+  saveData: SaveData,
+  entries: LogbookEntry[],
+  enabled: boolean,
+): SaveData {
+  let data = saveData;
+  if (enabled) {
+    const owned = new Set(data.achievements);
+    const toGrant = new Set(
+      entries
+        .flatMap((e) => getChallengesForLogbookEntry(e.id))
+        .filter((c) => !owned.has(c.achievement))
+        .flatMap((c) => withPrerequisites(c.achievement)),
+    );
+    if (toGrant.size > 0) {
+      data = grant(data, Array.from(toGrant), entries.length === 1, {});
+    }
   }
 
-  // Check viewedViewables for viewed entries
-  if (saveData.viewedViewables.includes(entry.unlockId)) {
-    return true;
+  const unlocks = new Set(data.unlocks);
+  const viewedViewables = new Set(data.viewedViewables);
+  const discoveredPickups = new Set(data.discoveredPickups);
+
+  for (const entry of entries) {
+    if (isPickupEntry(entry)) {
+      if (!entry.pickupId) continue;
+      if (!enabled) {
+        discoveredPickups.delete(entry.pickupId);
+        continue;
+      }
+      discoveredPickups.add(entry.pickupId);
+      // Gate that no achievement grants: write the unlockable directly
+      if (
+        entry.unlockId &&
+        getChallengesForLogbookEntry(entry.id).length === 0
+      ) {
+        unlocks.add(entry.unlockId);
+      }
+    } else if (entry.unlockId) {
+      if (enabled) {
+        unlocks.add(entry.unlockId);
+        viewedViewables.add(entry.unlockId);
+      } else {
+        unlocks.delete(entry.unlockId);
+        viewedViewables.delete(entry.unlockId);
+      }
+    }
   }
 
-  // Check discoveredPickups for items/equipment
-  if (entry.pickupId && saveData.discoveredPickups.includes(entry.pickupId)) {
-    return true;
-  }
-
-  return false;
+  return {
+    ...data,
+    unlocks: Array.from(unlocks),
+    viewedViewables: Array.from(viewedViewables),
+    discoveredPickups: Array.from(discoveredPickups),
+  };
 }
 
 /**
  * Toggle a logbook entry (unlock or lock)
- * Also syncs related challenges (for items/equipment)
  */
 export function toggleLogbookEntry(
   saveData: SaveData,
   entry: LogbookEntry,
   enabled: boolean,
 ): SaveData {
-  const unlocks = new Set(saveData.unlocks);
-  const viewedViewables = new Set(saveData.viewedViewables);
-  const discoveredPickups = new Set(saveData.discoveredPickups);
-  const achievements = new Set(saveData.achievements);
-  const unviewedAchievements = new Set(saveData.unviewedAchievements);
-  const viewedUnlockables = new Set(saveData.viewedUnlockables);
-
-  if (enabled) {
-    // Add to unlocks (for logs)
-    unlocks.add(entry.unlockId);
-    // Add to viewedViewables (marks as viewed)
-    viewedViewables.add(entry.unlockId);
-    // Add to discoveredPickups if item/equipment
-    if (entry.pickupId) {
-      discoveredPickups.add(entry.pickupId);
-    }
-
-    // Sync related challenges (for items/equipment entries)
-    const relatedChallenges = getChallengesForLogbookEntry(entry.id);
-    for (const challenge of relatedChallenges) {
-      achievements.add(challenge.achievement);
-      unviewedAchievements.add(challenge.achievement);
-      for (const unlock of challenge.unlocks) {
-        viewedUnlockables.add(unlock);
-        unlocks.add(unlock);
-      }
-      // Also unlock other logbook entries from this challenge
-      const otherEntries = getLogbookEntriesForChallenge(challenge.id);
-      for (const otherEntry of otherEntries) {
-        viewedViewables.add(otherEntry.unlockId);
-        unlocks.add(otherEntry.unlockId);
-        if (otherEntry.pickupId) {
-          discoveredPickups.add(otherEntry.pickupId);
-        }
-      }
-    }
-  } else {
-    // Remove from all
-    unlocks.delete(entry.unlockId);
-    viewedViewables.delete(entry.unlockId);
-    if (entry.pickupId) {
-      discoveredPickups.delete(entry.pickupId);
-    }
-
-    // Sync related challenges (disable if appropriate)
-    const relatedChallenges = getChallengesForLogbookEntry(entry.id);
-    for (const challenge of relatedChallenges) {
-      if (shouldDisableChallengeForEntry(challenge, entry, viewedViewables)) {
-        achievements.delete(challenge.achievement);
-        unviewedAchievements.delete(challenge.achievement);
-        for (const unlock of challenge.unlocks) {
-          viewedUnlockables.delete(unlock);
-          unlocks.delete(unlock);
-        }
-        // Also remove other logbook entries from this challenge
-        const otherEntries = getLogbookEntriesForChallenge(challenge.id);
-        for (const otherEntry of otherEntries) {
-          viewedViewables.delete(otherEntry.unlockId);
-          unlocks.delete(otherEntry.unlockId);
-          if (otherEntry.pickupId) {
-            discoveredPickups.delete(otherEntry.pickupId);
-          }
-        }
-      }
-    }
-  }
-
-  return {
-    ...saveData,
-    achievements: Array.from(achievements),
-    unviewedAchievements: Array.from(unviewedAchievements),
-    viewedUnlockables: Array.from(viewedUnlockables),
-    unlocks: Array.from(unlocks),
-    viewedViewables: Array.from(viewedViewables),
-    discoveredPickups: Array.from(discoveredPickups),
-  };
+  return setLogbookEntries(saveData, [entry], enabled);
 }
 
 /**
  * Unlock all logbook entries
- * Also syncs all related challenges (for items/equipment)
  */
 export function unlockAllLogbook(saveData: SaveData): SaveData {
-  const unlocks = new Set(saveData.unlocks);
-  const viewedViewables = new Set(saveData.viewedViewables);
-  const discoveredPickups = new Set(saveData.discoveredPickups);
-  const achievements = new Set(saveData.achievements);
-  const viewedUnlockables = new Set(saveData.viewedUnlockables);
-
-  for (const entry of logbookEntries) {
-    unlocks.add(entry.unlockId);
-    viewedViewables.add(entry.unlockId);
-    if (entry.pickupId) {
-      discoveredPickups.add(entry.pickupId);
-    }
-
-    // Sync related challenges (for items/equipment)
-    const relatedChallenges = getChallengesForLogbookEntry(entry.id);
-    for (const challenge of relatedChallenges) {
-      achievements.add(challenge.achievement);
-      for (const unlock of challenge.unlocks) {
-        viewedUnlockables.add(unlock);
-        unlocks.add(unlock);
-      }
-    }
-  }
-
-  return {
-    ...saveData,
-    achievements: Array.from(achievements),
-    unviewedAchievements: [], // Clear unviewed since we're bulk unlocking
-    viewedUnlockables: Array.from(viewedUnlockables),
-    unlocks: Array.from(unlocks),
-    viewedViewables: Array.from(viewedViewables),
-    discoveredPickups: Array.from(discoveredPickups),
-  };
+  return setLogbookEntries(saveData, logbookEntries, true);
 }
 
 /**
- * Lock all logbook entries
- * Also locks challenges that only unlock items/equipment (no other unlocks)
+ * Lock all logbook entries (achievements are left to the achievements tab)
  */
 export function lockAllLogbook(saveData: SaveData): SaveData {
-  const currentUnlocks = new Set(saveData.unlocks);
-  const currentViewedViewables = new Set(saveData.viewedViewables);
-  const currentDiscoveredPickups = new Set(saveData.discoveredPickups);
-  const achievements = new Set(saveData.achievements);
-  const unviewedAchievements = new Set(saveData.unviewedAchievements);
-  const viewedUnlockables = new Set(saveData.viewedUnlockables);
-
-  // Track challenges that should be disabled
-  const challengesToDisable = new Set<string>();
-
-  // Remove only logbook-related entries, preserve others
-  for (const entry of logbookEntries) {
-    currentUnlocks.delete(entry.unlockId);
-    currentViewedViewables.delete(entry.unlockId);
-    if (entry.pickupId) {
-      currentDiscoveredPickups.delete(entry.pickupId);
-    }
-
-    // Find challenges to disable
-    const relatedChallenges = getChallengesForLogbookEntry(entry.id);
-    for (const challenge of relatedChallenges) {
-      challengesToDisable.add(challenge.achievement);
-    }
-  }
-
-  // Disable the related challenges
-  for (const achievementId of challengesToDisable) {
-    achievements.delete(achievementId);
-    unviewedAchievements.delete(achievementId);
-    const challenge = challenges.find((c) => c.achievement === achievementId);
-    if (challenge) {
-      for (const unlock of challenge.unlocks) {
-        viewedUnlockables.delete(unlock);
-        currentUnlocks.delete(unlock);
-      }
-    }
-  }
-
-  return {
-    ...saveData,
-    achievements: Array.from(achievements),
-    unviewedAchievements: Array.from(unviewedAchievements),
-    viewedUnlockables: Array.from(viewedUnlockables),
-    unlocks: Array.from(currentUnlocks),
-    viewedViewables: Array.from(currentViewedViewables),
-    discoveredPickups: Array.from(currentDiscoveredPickups),
-  };
+  return setLogbookEntries(saveData, logbookEntries, false);
 }
 
 /**

@@ -10,12 +10,11 @@ import type { LogbookEntry } from "./types";
  * Risk of Rain 2 Logbook Entries Data
  *
  * Data Sources:
- * - Items: https://riskofrain2.fandom.com/wiki/Module:Items/Data
- * - Equipment: https://riskofrain2.fandom.com/wiki/Module:Equipment/Data
+ * - Items, Equipment: generated from the game files (scripts/generate-logbook.py)
  * - Monsters: https://riskofrain2.wiki.gg/wiki/Monsters
  * - Environments: https://riskofrain2.wiki.gg/wiki/Environments
  * - Survivors: https://riskofrain2.wiki.gg/wiki/Survivors
- * - Icons: extracted from the game files by scripts/extract-logbook-icons.py
+ * - Icons: extracted from the game files by scripts/generate-logbook.py
  *
  * DLC Content:
  * - Base Game: https://riskofrain2.wiki.gg/wiki/Risk_of_Rain_2
@@ -27,8 +26,8 @@ import type { LogbookEntry } from "./types";
  * - Monster Logs: Logs.{BodyName}.0 (e.g., Logs.BeetleBody.0)
  * - Environment Logs: Logs.Stages.{scenename} (e.g., Logs.Stages.blackbeach)
  * - Survivor Logs: Logs.{SurvivorName}Body.0 (e.g., Logs.CommandoBody.0)
- * - Items: Items.{InternalName} / ItemIndex.{InternalName}
- * - Equipment: Equipment.{InternalName} / EquipmentIndex.{InternalName}
+ * - Items/Equipment: discoveredPickups ItemIndex.{Name} / EquipmentIndex.{Name},
+ *   gated by the item's unlockable when it has one (e.g. Items.Medkit)
  */
 export const logbookEntries: LogbookEntry[] = [
   ...monsterEntries,

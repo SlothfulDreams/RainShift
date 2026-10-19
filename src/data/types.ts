@@ -59,8 +59,14 @@ export interface LogbookEntry {
   name: string;
   description?: string;
   category: LogbookCategory;
-  unlockId: string; // ID in stats.unlock (e.g., "Logs.BeetleBody.0")
-  pickupId?: string; // ID in discoveredPickups for items/equipment (e.g., "ItemIndex.0")
+  // Unlockable in stats.unlock the game checks: the log for monsters/stages
+  // (e.g. "Logs.BeetleBody.0"), the item's gate for items/equipment
+  // (e.g. "Items.Medkit"; absent when the item is always available)
+  unlockId?: string;
+  // Entry in discoveredPickups (e.g. "ItemIndex.Syringe", "DroneIndex.Drone1")
+  pickupId?: string;
+  // Character body name for per-body stats (e.g. totalWins.CommandoBody)
+  body?: string;
   dlc: DLC;
   rarity?: ItemRarity; // For items/equipment
   image?: string; // Icon path in public/ (from scripts/extract-logbook-icons.py)
