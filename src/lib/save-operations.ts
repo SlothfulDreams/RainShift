@@ -353,19 +353,23 @@ export function calculateSaveStats(saveData: SaveData): {
 const isPickupEntry = (entry: LogbookEntry) =>
   entry.category === "items" || entry.category === "equipment";
 
-// GetMonsterStatus / GetStageStatus: the log unlockable alone
-const isLogEntry = (entry: LogbookEntry) =>
-  entry.category === "monsters" || entry.category === "environments";
-
-// GetSurvivorStatus: the survivor is unlocked and has at least one win
 const winsStat = (entry: LogbookEntry) => `totalWins.${entry.body}`;
-
-// DroneDef.HasUserDiscovered: the drone pickup was discovered, or the drone
-// has been summoned at least once
 const summonedStat = (entry: LogbookEntry) => `timesSummoned.${entry.body}`;
 
 const statValue = (saveData: SaveData, name: string) =>
   Number(saveData.stats.get(name) ?? 0) || 0;
+
+const hasPickup = (saveData: SaveData, entry: LogbookEntry) =>
+  !!entry.pickupId && saveData.discoveredPickups.includes(entry.pickupId);
+
+/** True when the entry has no gate or the profile owns it */
+const ownsGate = (saveData: SaveData, entry: LogbookEntry) =>
+  !entry.unlockId || saveData.unlocks.includes(entry.unlockId);
+
+function setMember(set: Set<string>, value: string, present: boolean) {
+  if (present) set.add(value);
+  else set.delete(value);
+}
 
 /**
  * Achievements that grant what a logbook entry needs: an item's gate, or a
@@ -387,32 +391,29 @@ export function isLogbookEntryUnlocked(
   saveData: SaveData,
   entry: LogbookEntry,
 ): boolean {
-  if (isPickupEntry(entry)) {
-    // GetPickupStatus: the item's unlockable (if any) and a discovered pickup
-    return (
-      !!entry.pickupId &&
-      saveData.discoveredPickups.includes(entry.pickupId) &&
-      (!entry.unlockId || saveData.unlocks.includes(entry.unlockId))
-    );
+  switch (entry.category) {
+    case "items":
+    case "equipment":
+      // GetPickupStatus: the item's unlockable (if any) and a discovered pickup
+      return hasPickup(saveData, entry) && ownsGate(saveData, entry);
+    case "monsters":
+    case "environments":
+      // GetMonsterStatus / GetStageStatus: the log unlockable
+      return !!entry.unlockId && saveData.unlocks.includes(entry.unlockId);
+    case "survivors":
+      // GetSurvivorStatus: the survivor is unlocked and has at least one win
+      return (
+        !!entry.body &&
+        ownsGate(saveData, entry) &&
+        statValue(saveData, winsStat(entry)) > 0
+      );
+    case "drones":
+      // DroneDef.HasUserDiscovered: discovered, or summoned at least once
+      return (
+        hasPickup(saveData, entry) ||
+        (!!entry.body && statValue(saveData, summonedStat(entry)) > 0)
+      );
   }
-  if (isLogEntry(entry)) {
-    return !!entry.unlockId && saveData.unlocks.includes(entry.unlockId);
-  }
-  if (entry.category === "drones") {
-    return (
-      (!!entry.pickupId &&
-        saveData.discoveredPickups.includes(entry.pickupId)) ||
-      (!!entry.body && statValue(saveData, summonedStat(entry)) > 0)
-    );
-  }
-  if (entry.category === "survivors") {
-    return (
-      !!entry.body &&
-      (!entry.unlockId || saveData.unlocks.includes(entry.unlockId)) &&
-      statValue(saveData, winsStat(entry)) > 0
-    );
-  }
-  return false;
 }
 
 /**
@@ -445,42 +446,49 @@ function setLogbookEntries(
   const discoveredPickups = new Set(data.discoveredPickups);
   const stats = new Map(data.stats);
 
+  // A gate that no achievement grants is written directly
+  const unlockUngrantedGate = (entry: LogbookEntry) => {
+    if (
+      enabled &&
+      entry.unlockId &&
+      challengesForLogbookEntry(entry).length === 0
+    ) {
+      unlocks.add(entry.unlockId);
+    }
+  };
+
   for (const entry of entries) {
-    if (isPickupEntry(entry)) {
-      if (!entry.pickupId) continue;
-      if (!enabled) {
-        discoveredPickups.delete(entry.pickupId);
-        continue;
-      }
-      discoveredPickups.add(entry.pickupId);
-      // Gate that no achievement grants: write the unlockable directly
-      if (entry.unlockId && challengesForLogbookEntry(entry).length === 0) {
-        unlocks.add(entry.unlockId);
-      }
-    } else if (entry.category === "drones") {
-      if (!entry.pickupId) continue;
-      if (enabled) {
-        discoveredPickups.add(entry.pickupId);
-      } else {
-        discoveredPickups.delete(entry.pickupId);
-        if (entry.body && statValue(data, summonedStat(entry)) > 0) {
+    switch (entry.category) {
+      case "items":
+      case "equipment":
+        if (!entry.pickupId) break;
+        setMember(discoveredPickups, entry.pickupId, enabled);
+        unlockUngrantedGate(entry);
+        break;
+      case "monsters":
+      case "environments":
+        if (entry.unlockId) setMember(unlocks, entry.unlockId, enabled);
+        break;
+      case "survivors":
+        if (!entry.body) break;
+        if (!enabled) {
+          stats.set(winsStat(entry), "0");
+        } else if (statValue(data, winsStat(entry)) < 1) {
+          stats.set(winsStat(entry), "1");
+        }
+        unlockUngrantedGate(entry);
+        break;
+      case "drones":
+        if (!entry.pickupId) break;
+        setMember(discoveredPickups, entry.pickupId, enabled);
+        if (
+          !enabled &&
+          entry.body &&
+          statValue(data, summonedStat(entry)) > 0
+        ) {
           stats.set(summonedStat(entry), "0");
         }
-      }
-    } else if (entry.category === "survivors") {
-      if (!entry.body) continue;
-      if (!enabled) {
-        stats.set(winsStat(entry), "0");
-        continue;
-      }
-      if (statValue(data, winsStat(entry)) < 1) stats.set(winsStat(entry), "1");
-      if (entry.unlockId && challengesForLogbookEntry(entry).length === 0) {
-        unlocks.add(entry.unlockId);
-      }
-    } else if (isLogEntry(entry)) {
-      if (!entry.unlockId) continue;
-      if (enabled) unlocks.add(entry.unlockId);
-      else unlocks.delete(entry.unlockId);
+        break;
     }
   }
 

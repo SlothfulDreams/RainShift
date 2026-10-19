@@ -143,14 +143,9 @@ export function applySaveData(
   }
   // Write stat values back (e.g. per-survivor wins set by the logbook),
   // keeping the original order and appending new stats
-  const originalStats = result.UserProfile.stats.stat;
-  const stats: RawStat[] = (
-    Array.isArray(originalStats)
-      ? originalStats
-      : originalStats
-        ? [originalStats]
-        : []
-  ).map((stat) => {
+  const original = result.UserProfile.stats.stat ?? [];
+  const originalStats = Array.isArray(original) ? original : [original];
+  const stats: RawStat[] = originalStats.map((stat) => {
     const value = saveData.stats.get(stat["@_name"]);
     return value === undefined || value === (stat["#text"] ?? "")
       ? stat

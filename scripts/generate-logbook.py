@@ -73,11 +73,9 @@ def load_catalog(aa: Path):
     entries = [struct.unpack_from("<7i", ed, 4 + 28 * i) for i in range(n_entries)]
 
     def internal_id(i):
-        return (
-            ids[entries[i][0]].split("\\")[-1]
-            if ids[entries[i][0]].endswith(".bundle")
-            else ids[entries[i][0]]
-        )
+        """Asset path, or just the file name for bundles."""
+        path = ids[entries[i][0]]
+        return path.split("\\")[-1] if path.endswith(".bundle") else path
 
     key_to_paths = {}
     for data_off, ents in buckets:
@@ -279,7 +277,7 @@ class Game:
         """
         Names of the log UnlockableDefs. The save key is the asset's m_Name,
         which can differ in case from its file name (Logs.Stages.Nest.asset is
-        \"Logs.Stages.nest\"), and the game's lookup is case-sensitive.
+        "Logs.Stages.nest"), and the game's lookup is case-sensitive.
         """
         if not hasattr(self, "_unlockables"):
             self._unlockables = set()
@@ -310,6 +308,11 @@ TIER_RARITY = {
     8: "void",
     9: "void",
 }
+
+
+def is_expansion_requirement(t: dict) -> bool:
+    """An ExpansionRequirementComponent: only requiredExpansion besides Unity's fields."""
+    return set(t) >= {"requiredExpansion", "m_Script"} and len(t) <= 6
 
 
 def body_icon(game: Game, body: str):
@@ -395,7 +398,7 @@ def read_monsters(game: Game):
                 body_t = t
             elif "logUnlockableDef" in t:
                 log = game.name_of(obj, t["logUnlockableDef"])
-            elif set(t) >= {"requiredExpansion", "m_Script"} and len(t) <= 6:
+            elif is_expansion_requirement(t):
                 dlc = game.dlc_of(obj, t["requiredExpansion"])
         if not body_t or not log or log not in game.unlockables:
             continue
@@ -447,7 +450,7 @@ def read_stages(game: Game):
 
 def body_dlc(game: Game, body: str) -> str:
     for obj, t in game.components_of(body):
-        if set(t) >= {"requiredExpansion", "m_Script"} and len(t) <= 6:
+        if is_expansion_requirement(t):
             return game.dlc_of(obj, t["requiredExpansion"])
     return "base"
 
@@ -632,7 +635,7 @@ def generate(game: Game, category: str, existing_all: list):
     for e, g in rows:
         if e:
             entry_id = e["id"]
-            # Keep a disambiguated existing name (\"Lunar Chimera (Golem)\"),
+            # Keep a disambiguated existing name ("Lunar Chimera (Golem)"),
             # otherwise use the game's name.
             same = clean(e["name"]).startswith(clean(g["name"]))
             name = e["name"] if same else g["name"]
