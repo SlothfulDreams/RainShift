@@ -456,7 +456,10 @@ def body_dlc(game: Game, body: str) -> str:
 
 
 def read_survivors(game: Game):
-    """Every SurvivorDef: survivor unlockable + body (for totalWins.<Body>)."""
+    """
+    Every SurvivorDef: survivor unlockable, body (for totalWins.<Body>) and
+    SurvivorDef.cachedName, its asset name (for Eclipse.<cachedName>.<level>).
+    """
     out = []
     for path in game.paths_of_type("SurvivorDef"):
         for obj, t in game.defs_of(path):
@@ -469,6 +472,7 @@ def read_survivors(game: Game):
                     "name": clean_name(game.english.get(t["displayNameToken"]) or body),
                     "unlockId": game.name_of(obj, t.get("unlockableDef")),
                     "body": body,
+                    "survivorDef": t["m_Name"],
                     "dlc": body_dlc(game, body),
                     "icon": lambda body=body: body_icon(game, body),
                 }
@@ -596,6 +600,7 @@ def ts_entry(e: dict) -> str:
         "unlockId",
         "pickupId",
         "body",
+        "survivorDef",
         "dlc",
         "rarity",
         "image",
@@ -660,13 +665,21 @@ def generate(game: Game, category: str, existing_all: list):
             "unlockId": g.get("unlockId"),
             "pickupId": g.get("pickupId"),
             "body": g.get("body"),
+            "survivorDef": g.get("survivorDef"),
             "dlc": g["dlc"],
             "rarity": g.get("rarity") or (e or {}).get("rarity"),
         }
         if e:
             diff = {
                 k: (e.get(k), new[k])
-                for k in ("unlockId", "pickupId", "body", "dlc", "rarity")
+                for k in (
+                    "unlockId",
+                    "pickupId",
+                    "body",
+                    "survivorDef",
+                    "dlc",
+                    "rarity",
+                )
                 if e.get(k) != new[k]
             }
             if diff:

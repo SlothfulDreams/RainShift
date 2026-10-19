@@ -67,6 +67,8 @@ export interface LogbookEntry {
   pickupId?: string;
   // Character body name for per-body stats (e.g. totalWins.CommandoBody)
   body?: string;
+  // SurvivorDef.cachedName for survivors, the key in Eclipse.<name>.<level>
+  survivorDef?: string;
   dlc: DLC;
   rarity?: ItemRarity; // For items/equipment
   image?: string; // Icon path in public/ (from scripts/extract-logbook-icons.py)
