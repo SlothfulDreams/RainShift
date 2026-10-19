@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import {
   Book,
   Download,
+  Moon,
   RotateCcw,
   Search,
   Trophy,
@@ -32,6 +33,7 @@ import {
 import { downloadFile } from "@/lib/utils";
 import { ChallengeCard } from "./ChallengeCard";
 import { CoinsEditor } from "./CoinsEditor";
+import { EclipseEditor } from "./EclipseEditor";
 import { LogbookEditor } from "./LogbookEditor";
 
 interface SaveEditorProps {
@@ -74,9 +76,9 @@ export function SaveEditor({
   >("all");
   const [selectedDLC, setSelectedDLC] = useState<DLC | "all">("all");
   const [hasChanges, setHasChanges] = useState(false);
-  const [activeTab, setActiveTab] = useState<"achievements" | "logbook">(
-    "achievements",
-  );
+  const [activeTab, setActiveTab] = useState<
+    "achievements" | "logbook" | "eclipse"
+  >("achievements");
   const [awardCoins, setAwardCoins] = useState(false);
 
   // Debounce search to prevent animation lag
@@ -341,6 +343,21 @@ export function SaveEditor({
             <Book size={16} />
             Logbook
           </button>
+          <button
+            type="button"
+            onClick={() => setActiveTab("eclipse")}
+            className={`
+              px-6 py-3 text-sm font-display uppercase tracking-wider transition-all flex items-center gap-2
+              ${
+                activeTab === "eclipse"
+                  ? "text-ror-text-main border-b-2 border-ror-orange-accent"
+                  : "text-ror-text-dim hover:text-ror-text-main"
+              }
+            `}
+          >
+            <Moon size={16} />
+            Eclipse
+          </button>
         </motion.div>
 
         {/* Tab Content */}
@@ -484,8 +501,13 @@ export function SaveEditor({
               )}
             </motion.div>
           </>
-        ) : (
+        ) : activeTab === "logbook" ? (
           <LogbookEditor
+            saveData={saveData}
+            onSaveDataChange={handleLogbookChange}
+          />
+        ) : (
+          <EclipseEditor
             saveData={saveData}
             onSaveDataChange={handleLogbookChange}
           />
