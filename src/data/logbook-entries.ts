@@ -10,9 +10,8 @@ import type { LogbookEntry } from "./types";
  * Risk of Rain 2 Logbook Entries Data
  *
  * Data Sources:
- * - Items, Equipment, Monsters, Environments: generated from the game files
- *   (scripts/generate-logbook.py)
- * - Survivors: https://riskofrain2.wiki.gg/wiki/Survivors
+ * - Items, Equipment, Monsters, Environments, Survivors: generated from the
+ *   game files (scripts/generate-logbook.py)
  * - Icons: extracted from the game files by scripts/generate-logbook.py
  *
  * DLC Content:
@@ -25,7 +24,8 @@ import type { LogbookEntry } from "./types";
  * - Monster/Environment logs: the log unlockable's own name, which does not
  *   follow one pattern (Logs.BeetleBody.0, Logs.VoidInfestorBody, Log.SolusHeart,
  *   Logs.Stages.blackbeach)
- * - Survivor Logs: Logs.{SurvivorName}Body.0 (e.g., Logs.CommandoBody.0)
+ * - Survivors: the character unlock (e.g. Characters.Mage, none for free
+ *   survivors) plus at least one win (stat totalWins.{Body})
  * - Items/Equipment: discoveredPickups ItemIndex.{Name} / EquipmentIndex.{Name},
  *   gated by the item's unlockable when it has one (e.g. Items.Medkit)
  */

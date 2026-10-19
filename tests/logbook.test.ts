@@ -134,3 +134,48 @@ describe("logbook monsters and environments", () => {
     expect(isLogbookEntryUnlocked(off, beetle)).toBe(false);
   });
 });
+
+describe("logbook survivors", () => {
+  it("lists every survivor with its body", () => {
+    const survivors = logbookEntries.filter((e) => e.category === "survivors");
+    expect(survivors).toHaveLength(21);
+    for (const s of survivors) expect(s.body, s.id).toMatch(/Body$/);
+    expect(entry("Enforcer").body).toBe("Enforcer2Body");
+    expect(entry("Acolyte").unlockId).toBe("Characters.Acolyte");
+  });
+
+  it("needs the survivor unlocked and a win", () => {
+    const mage = entry("Artificer");
+    const won = { ...empty(), stats: new Map([["totalWins.MageBody", "3"]]) };
+    expect(isLogbookEntryUnlocked(won, mage)).toBe(false);
+    expect(
+      isLogbookEntryUnlocked({ ...won, unlocks: ["Characters.Mage"] }, mage),
+    ).toBe(true);
+  });
+
+  it("unlocks the survivor and records a win; locking clears the wins", () => {
+    const mage = entry("Artificer");
+    const on = toggleLogbookEntry(empty(), mage, true);
+    expect(on.achievements).toContain("FreeMage");
+    expect(on.unlocks).toContain("Characters.Mage");
+    expect(on.stats.get("totalWins.MageBody")).toBe("1");
+    expect(isLogbookEntryUnlocked(on, mage)).toBe(true);
+
+    const off = toggleLogbookEntry(on, mage, false);
+    expect(off.stats.get("totalWins.MageBody")).toBe("0");
+    expect(off.unlocks).toContain("Characters.Mage");
+    expect(isLogbookEntryUnlocked(off, mage)).toBe(false);
+  });
+
+  it("keeps existing wins and needs no unlock for free survivors", () => {
+    const commando = entry("Commando");
+    const data = {
+      ...empty(),
+      stats: new Map([["totalWins.CommandoBody", "7"]]),
+    };
+    expect(isLogbookEntryUnlocked(data, commando)).toBe(true);
+    const on = toggleLogbookEntry(data, commando, true);
+    expect(on.stats.get("totalWins.CommandoBody")).toBe("7");
+    expect(on.unlocks).toEqual([]);
+  });
+});

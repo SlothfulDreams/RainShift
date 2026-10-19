@@ -357,6 +357,25 @@ const isPickupEntry = (entry: LogbookEntry) =>
 const isLogEntry = (entry: LogbookEntry) =>
   entry.category === "monsters" || entry.category === "environments";
 
+// GetSurvivorStatus: the survivor is unlocked and has at least one win
+const winsStat = (entry: LogbookEntry) => `totalWins.${entry.body}`;
+
+const statValue = (saveData: SaveData, name: string) =>
+  Number(saveData.stats.get(name) ?? 0) || 0;
+
+/**
+ * Achievements that grant what a logbook entry needs: an item's gate, or a
+ * survivor's character unlock.
+ */
+function challengesForLogbookEntry(entry: LogbookEntry): Challenge[] {
+  if (isPickupEntry(entry)) return getChallengesForLogbookEntry(entry.id);
+  if (entry.category === "survivors" && entry.unlockId) {
+    const unlock = entry.unlockId;
+    return challenges.filter((c) => c.unlocks.includes(unlock));
+  }
+  return [];
+}
+
 /**
  * Check if a logbook entry is unlocked
  */
@@ -375,6 +394,13 @@ export function isLogbookEntryUnlocked(
   if (isLogEntry(entry)) {
     return !!entry.unlockId && saveData.unlocks.includes(entry.unlockId);
   }
+  if (entry.category === "survivors") {
+    return (
+      !!entry.body &&
+      (!entry.unlockId || saveData.unlocks.includes(entry.unlockId)) &&
+      statValue(saveData, winsStat(entry)) > 0
+    );
+  }
   return (
     !!entry.unlockId &&
     (saveData.unlocks.includes(entry.unlockId) ||
@@ -384,8 +410,10 @@ export function isLogbookEntryUnlocked(
 
 /**
  * Unlock or lock a set of logbook entries.
- * Unlocking a gated item/equipment entry also unlocks the achievement that
- * grants its unlockable (with prerequisites); locking only undiscovers it.
+ * Unlocking a gated item/equipment entry or a locked survivor also unlocks
+ * the achievement that grants it (with prerequisites). Locking only removes
+ * what the logbook itself needs: the discovered pickup, the log, or the
+ * survivor's wins.
  */
 function setLogbookEntries(
   saveData: SaveData,
@@ -397,7 +425,7 @@ function setLogbookEntries(
     const owned = new Set(data.achievements);
     const toGrant = new Set(
       entries
-        .flatMap((e) => getChallengesForLogbookEntry(e.id))
+        .flatMap(challengesForLogbookEntry)
         .filter((c) => !owned.has(c.achievement))
         .flatMap((c) => withPrerequisites(c.achievement)),
     );
@@ -409,6 +437,7 @@ function setLogbookEntries(
   const unlocks = new Set(data.unlocks);
   const viewedViewables = new Set(data.viewedViewables);
   const discoveredPickups = new Set(data.discoveredPickups);
+  const stats = new Map(data.stats);
 
   for (const entry of entries) {
     if (isPickupEntry(entry)) {
@@ -419,10 +448,17 @@ function setLogbookEntries(
       }
       discoveredPickups.add(entry.pickupId);
       // Gate that no achievement grants: write the unlockable directly
-      if (
-        entry.unlockId &&
-        getChallengesForLogbookEntry(entry.id).length === 0
-      ) {
+      if (entry.unlockId && challengesForLogbookEntry(entry).length === 0) {
+        unlocks.add(entry.unlockId);
+      }
+    } else if (entry.category === "survivors") {
+      if (!entry.body) continue;
+      if (!enabled) {
+        stats.set(winsStat(entry), "0");
+        continue;
+      }
+      if (statValue(data, winsStat(entry)) < 1) stats.set(winsStat(entry), "1");
+      if (entry.unlockId && challengesForLogbookEntry(entry).length === 0) {
         unlocks.add(entry.unlockId);
       }
     } else if (isLogEntry(entry)) {
@@ -445,6 +481,7 @@ function setLogbookEntries(
     unlocks: Array.from(unlocks),
     viewedViewables: Array.from(viewedViewables),
     discoveredPickups: Array.from(discoveredPickups),
+    stats,
   };
 }
 

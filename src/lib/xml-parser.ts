@@ -1,5 +1,5 @@
 import { XMLBuilder, XMLParser } from "fast-xml-parser";
-import type { RawUserProfile, SaveData } from "@/data/types";
+import type { RawStat, RawUserProfile, SaveData } from "@/data/types";
 
 // Parser configuration for RoR2 save files
 const parserOptions = {
@@ -141,6 +141,27 @@ export function applySaveData(
   if (!result.UserProfile.stats) {
     result.UserProfile.stats = {};
   }
+  // Write stat values back (e.g. per-survivor wins set by the logbook),
+  // keeping the original order and appending new stats
+  const originalStats = result.UserProfile.stats.stat;
+  const stats: RawStat[] = (
+    Array.isArray(originalStats)
+      ? originalStats
+      : originalStats
+        ? [originalStats]
+        : []
+  ).map((stat) => {
+    const value = saveData.stats.get(stat["@_name"]);
+    return value === undefined || value === (stat["#text"] ?? "")
+      ? stat
+      : { ...stat, "#text": value };
+  });
+  const written = new Set(stats.map((stat) => stat["@_name"]));
+  for (const [name, value] of saveData.stats) {
+    if (!written.has(name)) stats.push({ "@_name": name, "#text": value });
+  }
+  if (stats.length > 0) result.UserProfile.stats.stat = stats;
+
   // Set unlocks array (or single string if only one, or undefined if empty)
   if (saveData.unlocks.length === 0) {
     delete result.UserProfile.stats.unlock;

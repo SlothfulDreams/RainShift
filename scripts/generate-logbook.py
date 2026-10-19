@@ -418,7 +418,9 @@ def read_stages(game: Game):
     out, seen = [], set()
     for path in game.paths_of_type("SceneDef"):
         for obj, t in game.defs_of(path):
-            if "previewTexture" not in t or not t.get("shouldIncludeInLogbook"):
+            if t.get("m_Name") != Path(path).stem or "previewTexture" not in t:
+                continue
+            if not t.get("shouldIncludeInLogbook"):
                 continue
             base = t.get("baseSceneNameOverride") or t.get("m_Name")
             log = f"Logs.Stages.{base}"
@@ -455,7 +457,7 @@ def read_survivors(game: Game):
     out = []
     for path in game.paths_of_type("SurvivorDef"):
         for obj, t in game.defs_of(path):
-            if "bodyPrefab" not in t or "displayNameToken" not in t:
+            if t.get("m_Name") != Path(path).stem or "displayNameToken" not in t:
                 continue
             body = game.name_of(obj, t["bodyPrefab"])
             out.append(
@@ -476,7 +478,7 @@ def read_drones(game: Game):
     out = []
     for path in game.paths_of_type("DroneDef"):
         for obj, t in game.defs_of(path):
-            if "bodyPrefab" not in t or "iconSprite" not in t:
+            if t.get("m_Name") != Path(path).stem or "iconSprite" not in t:
                 continue
 
             def icon(obj=obj, t=t):
