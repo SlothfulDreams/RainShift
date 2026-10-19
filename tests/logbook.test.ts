@@ -179,3 +179,55 @@ describe("logbook survivors", () => {
     expect(on.unlocks).toEqual([]);
   });
 });
+
+describe("logbook drones", () => {
+  it("use the drone pickup and body", () => {
+    const gunner = entry("Gunner Drone");
+    expect(gunner.pickupId).toBe("DroneIndex.Drone1");
+    expect(gunner.body).toBe("Drone1Body");
+    expect(logbookEntries.some((e) => e.name === "Best Buddy")).toBe(false);
+  });
+
+  it("count as discovered by pickup or by being summoned", () => {
+    const gunner = entry("Gunner Drone");
+    const summoned = {
+      ...empty(),
+      stats: new Map([["timesSummoned.Drone1Body", "2"]]),
+    };
+    expect(isLogbookEntryUnlocked(summoned, gunner)).toBe(true);
+
+    const on = toggleLogbookEntry(empty(), gunner, true);
+    expect(on.discoveredPickups).toEqual(["DroneIndex.Drone1"]);
+    expect(on.unlocks).toEqual([]);
+    expect(isLogbookEntryUnlocked(on, gunner)).toBe(true);
+
+    const off = toggleLogbookEntry(
+      { ...on, stats: summoned.stats },
+      gunner,
+      false,
+    );
+    expect(off.discoveredPickups).toEqual([]);
+    expect(off.stats.get("timesSummoned.Drone1Body")).toBe("0");
+    expect(isLogbookEntryUnlocked(off, gunner)).toBe(false);
+  });
+});
+
+describe("logbook save fields", () => {
+  it("never writes ids into viewedViewables", () => {
+    const viewed = ["/Survivors/Commando"];
+    const all = unlockAllLogbook({ ...empty(), viewedViewables: viewed });
+    expect(all.viewedViewables).toEqual(viewed);
+    expect(lockAllLogbook(all).viewedViewables).toEqual(viewed);
+  });
+
+  it("every entry can be unlocked and locked again", () => {
+    const all = unlockAllLogbook(empty());
+    for (const e of logbookEntries) {
+      expect(isLogbookEntryUnlocked(all, e), e.id).toBe(true);
+    }
+    const none = lockAllLogbook(all);
+    for (const e of logbookEntries) {
+      expect(isLogbookEntryUnlocked(none, e), e.id).toBe(false);
+    }
+  });
+});

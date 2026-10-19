@@ -10,8 +10,8 @@ import type { LogbookEntry } from "./types";
  * Risk of Rain 2 Logbook Entries Data
  *
  * Data Sources:
- * - Items, Equipment, Monsters, Environments, Survivors: generated from the
- *   game files (scripts/generate-logbook.py)
+ * - All entries: generated from the game files (scripts/generate-logbook.py),
+ *   mirroring RoR2.UI.LogBook.LogBookController
  * - Icons: extracted from the game files by scripts/generate-logbook.py
  *
  * DLC Content:
@@ -20,12 +20,13 @@ import type { LogbookEntry } from "./types";
  * - Seekers of the Storm (SOTS): https://riskofrain2.wiki.gg/wiki/Seekers_of_the_Storm
  * - Alloyed Collective (AC): https://riskofrain2.wiki.gg/wiki/Alloyed_Collective
  *
- * Internal ID Naming Conventions:
+ * How each category is unlocked in the save file:
  * - Monster/Environment logs: the log unlockable's own name, which does not
  *   follow one pattern (Logs.BeetleBody.0, Logs.VoidInfestorBody, Log.SolusHeart,
  *   Logs.Stages.blackbeach)
  * - Survivors: the character unlock (e.g. Characters.Mage, none for free
  *   survivors) plus at least one win (stat totalWins.{Body})
+ * - Drones: discoveredPickups DroneIndex.{Name}, or stat timesSummoned.{Body}
  * - Items/Equipment: discoveredPickups ItemIndex.{Name} / EquipmentIndex.{Name},
  *   gated by the item's unlockable when it has one (e.g. Items.Medkit)
  */

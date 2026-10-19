@@ -360,6 +360,10 @@ const isLogEntry = (entry: LogbookEntry) =>
 // GetSurvivorStatus: the survivor is unlocked and has at least one win
 const winsStat = (entry: LogbookEntry) => `totalWins.${entry.body}`;
 
+// DroneDef.HasUserDiscovered: the drone pickup was discovered, or the drone
+// has been summoned at least once
+const summonedStat = (entry: LogbookEntry) => `timesSummoned.${entry.body}`;
+
 const statValue = (saveData: SaveData, name: string) =>
   Number(saveData.stats.get(name) ?? 0) || 0;
 
@@ -394,6 +398,13 @@ export function isLogbookEntryUnlocked(
   if (isLogEntry(entry)) {
     return !!entry.unlockId && saveData.unlocks.includes(entry.unlockId);
   }
+  if (entry.category === "drones") {
+    return (
+      (!!entry.pickupId &&
+        saveData.discoveredPickups.includes(entry.pickupId)) ||
+      (!!entry.body && statValue(saveData, summonedStat(entry)) > 0)
+    );
+  }
   if (entry.category === "survivors") {
     return (
       !!entry.body &&
@@ -401,11 +412,7 @@ export function isLogbookEntryUnlocked(
       statValue(saveData, winsStat(entry)) > 0
     );
   }
-  return (
-    !!entry.unlockId &&
-    (saveData.unlocks.includes(entry.unlockId) ||
-      saveData.viewedViewables.includes(entry.unlockId))
-  );
+  return false;
 }
 
 /**
@@ -435,7 +442,6 @@ function setLogbookEntries(
   }
 
   const unlocks = new Set(data.unlocks);
-  const viewedViewables = new Set(data.viewedViewables);
   const discoveredPickups = new Set(data.discoveredPickups);
   const stats = new Map(data.stats);
 
@@ -451,6 +457,16 @@ function setLogbookEntries(
       if (entry.unlockId && challengesForLogbookEntry(entry).length === 0) {
         unlocks.add(entry.unlockId);
       }
+    } else if (entry.category === "drones") {
+      if (!entry.pickupId) continue;
+      if (enabled) {
+        discoveredPickups.add(entry.pickupId);
+      } else {
+        discoveredPickups.delete(entry.pickupId);
+        if (entry.body && statValue(data, summonedStat(entry)) > 0) {
+          stats.set(summonedStat(entry), "0");
+        }
+      }
     } else if (entry.category === "survivors") {
       if (!entry.body) continue;
       if (!enabled) {
@@ -465,21 +481,12 @@ function setLogbookEntries(
       if (!entry.unlockId) continue;
       if (enabled) unlocks.add(entry.unlockId);
       else unlocks.delete(entry.unlockId);
-    } else if (entry.unlockId) {
-      if (enabled) {
-        unlocks.add(entry.unlockId);
-        viewedViewables.add(entry.unlockId);
-      } else {
-        unlocks.delete(entry.unlockId);
-        viewedViewables.delete(entry.unlockId);
-      }
     }
   }
 
   return {
     ...data,
     unlocks: Array.from(unlocks),
-    viewedViewables: Array.from(viewedViewables),
     discoveredPickups: Array.from(discoveredPickups),
     stats,
   };
