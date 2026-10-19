@@ -32,6 +32,7 @@ import {
 import { downloadFile } from "@/lib/utils";
 import { ChallengeCard } from "./ChallengeCard";
 import { CoinsEditor } from "./CoinsEditor";
+import { KarmaEditor } from "./KarmaEditor";
 import { LogbookEditor } from "./LogbookEditor";
 
 interface SaveEditorProps {
@@ -299,6 +300,18 @@ export function SaveEditor({
           transition={{ duration: 0.5, delay: 0.4 }}
         >
           <CoinsEditor coins={saveData.coins} onChange={handleCoinsChange} />
+        </motion.div>
+
+        {/* CARD 3: Starting Karma */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.45 }}
+        >
+          <KarmaEditor
+            saveData={saveData}
+            onSaveDataChange={handleLogbookChange}
+          />
         </motion.div>
       </motion.aside>
 
