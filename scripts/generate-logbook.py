@@ -558,12 +558,13 @@ def slug(s: str) -> str:
 
 def match(existing: list, game_entry: dict, used: set):
     """Find the existing entry for a game entry, so ids/names stay stable."""
-    keys = [game_entry.get("pickupId"), game_entry.get("unlockId")]
+    # A pickup identifies an entry; an unlockable only does when the entry has
+    # no pickup (several items can share one gate, e.g. Items.ElementalRings).
+    pickup, unlock = game_entry.get("pickupId"), game_entry.get("unlockId")
+    key, field = (pickup, "pickupId") if pickup else (unlock, "unlockId")
     internal = game_entry["internal"].lower()
     for e in existing:
-        if e["id"] in used:
-            continue
-        if any(k and k in (e.get("pickupId"), e.get("unlockId")) for k in keys):
+        if key and e["id"] not in used and e.get(field) == key:
             return e
     for e in existing:
         if e["id"] in used:

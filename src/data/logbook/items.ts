@@ -153,7 +153,7 @@ export const itemEntries: LogbookEntry[] = [
   },
   {
     id: "item-warcryonmultikill",
-    name: "Berserker's Pauldron",
+    name: "Berzerker's Pauldron",
     category: "items",
     unlockId: "Items.WarCryOnMultiKill",
     pickupId: "ItemIndex.WarCryOnMultiKill",
@@ -265,7 +265,7 @@ export const itemEntries: LogbookEntry[] = [
   },
   {
     id: "item-scrapwhite",
-    name: "Item Scrap (White)",
+    name: "Item Scrap, White",
     category: "items",
     pickupId: "ItemIndex.ScrapWhite",
     dlc: "base",
@@ -519,7 +519,7 @@ export const itemEntries: LogbookEntry[] = [
   },
   {
     id: "item-scrapgreen",
-    name: "Item Scrap (Green)",
+    name: "Item Scrap, Green",
     category: "items",
     pickupId: "ItemIndex.ScrapGreen",
     dlc: "base",
@@ -706,7 +706,7 @@ export const itemEntries: LogbookEntry[] = [
   },
   {
     id: "item-scrapred",
-    name: "Item Scrap (Red)",
+    name: "Item Scrap, Red",
     category: "items",
     pickupId: "ItemIndex.ScrapRed",
     dlc: "base",
@@ -832,7 +832,7 @@ export const itemEntries: LogbookEntry[] = [
   },
   {
     id: "item-scrapyellow",
-    name: "Item Scrap (Yellow)",
+    name: "Item Scrap, Yellow",
     category: "items",
     pickupId: "ItemIndex.ScrapYellow",
     dlc: "base",
