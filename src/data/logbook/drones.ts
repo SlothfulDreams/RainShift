@@ -1,0 +1,186 @@
+import type { LogbookEntry } from "../types";
+
+export const droneEntries: LogbookEntry[] = [
+  // ============================================
+  // DRONES - Base Game
+  // ============================================
+  {
+    id: "drone-gunner",
+    name: "Gunner Drone",
+    category: "drones",
+    unlockId: "Logs.Drone1Body.0",
+    dlc: "base",
+    image: "/logbook/drone-gunner.webp",
+  },
+  {
+    id: "drone-healing",
+    name: "Healing Drone",
+    category: "drones",
+    unlockId: "Logs.Drone2Body.0",
+    dlc: "base",
+    image: "/logbook/drone-healing.webp",
+  },
+  {
+    id: "drone-turret",
+    name: "Gunner Turret",
+    category: "drones",
+    unlockId: "Logs.Turret1Body.0",
+    dlc: "base",
+    image: "/logbook/drone-turret.webp",
+  },
+  {
+    id: "drone-emergency",
+    name: "Emergency Drone",
+    category: "drones",
+    unlockId: "Logs.EmergencyDroneBody.0",
+    dlc: "base",
+    image: "/logbook/drone-emergency.webp",
+  },
+  {
+    id: "drone-equipment",
+    name: "Equipment Drone",
+    category: "drones",
+    unlockId: "Logs.EquipmentDroneBody.0",
+    dlc: "base",
+    image: "/logbook/drone-equipment.webp",
+  },
+  {
+    id: "drone-incinerator",
+    name: "Incinerator Drone",
+    category: "drones",
+    unlockId: "Logs.FlameDroneBody.0",
+    dlc: "base",
+    image: "/logbook/drone-incinerator.webp",
+  },
+  {
+    id: "drone-missile",
+    name: "Missile Drone",
+    category: "drones",
+    unlockId: "Logs.MissileDroneBody.0",
+    dlc: "base",
+    image: "/logbook/drone-missile.webp",
+  },
+  {
+    id: "drone-tc280",
+    name: "TC-280 Prototype",
+    category: "drones",
+    unlockId: "Logs.MegaDroneBody.0",
+    dlc: "base",
+    image: "/logbook/drone-tc280.webp",
+  },
+
+  // ============================================
+  // DRONES - Survivors of the Void
+  // ============================================
+  {
+    id: "drone-coldroneman",
+    name: "Col. Droneman",
+    category: "drones",
+    unlockId: "Logs.DroneCommanderBody.0",
+    dlc: "sotv",
+    image: "/logbook/drone-coldroneman.webp",
+  },
+
+  // ============================================
+  // DRONES - Alloyed Collective
+  // ============================================
+  {
+    id: "drone-transport",
+    name: "Transport Drone",
+    category: "drones",
+    unlockId: "Logs.HaulerDroneBody.0",
+    dlc: "ac",
+    image: "/logbook/drone-transport.webp",
+  },
+  {
+    id: "drone-junk",
+    name: "Junk Drone",
+    category: "drones",
+    unlockId: "Logs.JunkDroneBody.0",
+    dlc: "ac",
+    image: "/logbook/drone-junk.webp",
+  },
+  {
+    id: "drone-bestbuddy",
+    name: "Best Buddy",
+    description: "Friendly Solus Invalidator from Orphaned Core",
+    category: "drones",
+    unlockId: "Logs.BestBuddyBody.0",
+    dlc: "ac",
+  },
+  {
+    id: "drone-cleanup",
+    name: "Cleanup Drone",
+    category: "drones",
+    unlockId: "Logs.CleanupDroneBody.0",
+    dlc: "ac",
+    image: "/logbook/drone-cleanup.webp",
+  },
+  {
+    id: "drone-ltdroneboy",
+    name: "Lt. Droneboy",
+    category: "drones",
+    unlockId: "Logs.DroneBomberBody.0",
+    dlc: "ac",
+    image: "/logbook/drone-ltdroneboy.webp",
+  },
+  {
+    id: "drone-crosshairs",
+    name: "CROSSHAIRS",
+    description: "Operator's Gunner Drone",
+    category: "drones",
+    unlockId: "Logs.DTGunnerDroneBody.0",
+    dlc: "ac",
+    image: "/logbook/drone-crosshairs.webp",
+  },
+  {
+    id: "drone-chirp",
+    name: "CHIRP",
+    description: "Operator's Transport Drone",
+    category: "drones",
+    unlockId: "Logs.DTHaulerDroneBody.0",
+    dlc: "ac",
+    image: "/logbook/drone-chirp.webp",
+  },
+  {
+    id: "drone-doc",
+    name: "DOC",
+    description: "Operator's Healing Drone",
+    category: "drones",
+    unlockId: "Logs.DTHealingDroneBody.0",
+    dlc: "ac",
+    image: "/logbook/drone-doc.webp",
+  },
+  {
+    id: "drone-jailer",
+    name: "Jailer Drone",
+    category: "drones",
+    unlockId: "Logs.JailerDroneBody.0",
+    dlc: "ac",
+    image: "/logbook/drone-jailer.webp",
+  },
+  {
+    id: "drone-barrier",
+    name: "Barrier Drone",
+    category: "drones",
+    unlockId: "Logs.RechargeDroneBody.0",
+    dlc: "ac",
+    image: "/logbook/drone-barrier.webp",
+  },
+  {
+    id: "drone-bombardment",
+    name: "Bombardment Drone",
+    category: "drones",
+    unlockId: "Logs.BombardmentDroneBody.0",
+    dlc: "ac",
+    image: "/logbook/drone-bombardment.webp",
+  },
+  {
+    id: "drone-freeze",
+    name: "Freeze Drone",
+    category: "drones",
+    unlockId: "Logs.CopycatDroneBody.0",
+    dlc: "ac",
+    image: "/logbook/drone-freeze.webp",
+  },
+];
