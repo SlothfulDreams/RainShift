@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import {
   Book,
   Download,
+  Landmark,
   RotateCcw,
   Search,
   Trophy,
@@ -33,6 +34,7 @@ import { downloadFile } from "@/lib/utils";
 import { ChallengeCard } from "./ChallengeCard";
 import { CoinsEditor } from "./CoinsEditor";
 import { LogbookEditor } from "./LogbookEditor";
+import { NewtAltarEditor } from "./NewtAltarEditor";
 
 interface SaveEditorProps {
   initialSaveData: SaveData;
@@ -74,9 +76,9 @@ export function SaveEditor({
   >("all");
   const [selectedDLC, setSelectedDLC] = useState<DLC | "all">("all");
   const [hasChanges, setHasChanges] = useState(false);
-  const [activeTab, setActiveTab] = useState<"achievements" | "logbook">(
-    "achievements",
-  );
+  const [activeTab, setActiveTab] = useState<
+    "achievements" | "logbook" | "newts"
+  >("achievements");
   const [awardCoins, setAwardCoins] = useState(false);
 
   // Debounce search to prevent animation lag
@@ -341,6 +343,21 @@ export function SaveEditor({
             <Book size={16} />
             Logbook
           </button>
+          <button
+            type="button"
+            onClick={() => setActiveTab("newts")}
+            className={`
+              px-6 py-3 text-sm font-display uppercase tracking-wider transition-all flex items-center gap-2
+              ${
+                activeTab === "newts"
+                  ? "text-ror-text-main border-b-2 border-ror-orange-accent"
+                  : "text-ror-text-dim hover:text-ror-text-main"
+              }
+            `}
+          >
+            <Landmark size={16} />
+            Newt Altars
+          </button>
         </motion.div>
 
         {/* Tab Content */}
@@ -484,8 +501,13 @@ export function SaveEditor({
               )}
             </motion.div>
           </>
-        ) : (
+        ) : activeTab === "logbook" ? (
           <LogbookEditor
+            saveData={saveData}
+            onSaveDataChange={handleLogbookChange}
+          />
+        ) : (
+          <NewtAltarEditor
             saveData={saveData}
             onSaveDataChange={handleLogbookChange}
           />
