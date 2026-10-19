@@ -63,7 +63,7 @@ export interface LogbookEntry {
   pickupId?: string; // ID in discoveredPickups for items/equipment (e.g., "ItemIndex.0")
   dlc: DLC;
   rarity?: ItemRarity; // For items/equipment
-  image?: string; // Image URL from wiki
+  image?: string; // Icon path in public/ (from scripts/extract-logbook-icons.py)
 }
 
 // Challenge/Achievement definition

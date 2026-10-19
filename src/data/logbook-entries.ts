@@ -9,7 +9,7 @@ import type { LogbookEntry } from "./types";
  * - Monsters: https://riskofrain2.wiki.gg/wiki/Monsters
  * - Environments: https://riskofrain2.wiki.gg/wiki/Environments
  * - Survivors: https://riskofrain2.wiki.gg/wiki/Survivors
- * - Achievement Images: https://steamhunters.com/apps/632360/achievements
+ * - Icons: extracted from the game files by scripts/extract-logbook-icons.py
  *
  * DLC Content:
  * - Base Game: https://riskofrain2.wiki.gg/wiki/Risk_of_Rain_2
@@ -34,7 +34,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.BeetleBody.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Beetle.png",
+    image: "/logbook/beetle.webp",
   },
   {
     id: "beetle-guard",
@@ -42,7 +42,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.BeetleGuardBody.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Beetle_Guard.png",
+    image: "/logbook/beetle-guard.webp",
   },
   {
     id: "beetle-queen",
@@ -50,7 +50,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.BeetleQueenBody.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Beetle_Queen.png",
+    image: "/logbook/beetle-queen.webp",
   },
   {
     id: "bell",
@@ -58,7 +58,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.BellBody.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Brass_Contraption.png",
+    image: "/logbook/bell.webp",
   },
   {
     id: "bison",
@@ -66,7 +66,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.BisonBody.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Bison.png",
+    image: "/logbook/bison.webp",
   },
   {
     id: "brother",
@@ -74,7 +74,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.BrotherBody.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Mithrix.png",
+    image: "/logbook/brother.webp",
   },
   {
     id: "clay",
@@ -82,7 +82,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.ClayBody.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Clay_Dunestrider.png",
+    image: "/logbook/clay.webp",
   },
   {
     id: "clay-boss",
@@ -90,7 +90,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.ClayBossBody.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Clay_Dunestrider.png",
+    image: "/logbook/clay-boss.webp",
   },
   {
     id: "clay-bruiser",
@@ -98,7 +98,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.ClayBruiserBody.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Clay_Templar.png",
+    image: "/logbook/clay-bruiser.webp",
   },
   {
     id: "electric-worm",
@@ -106,7 +106,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.ElectricWormBody.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Overloading_Worm.png",
+    image: "/logbook/electric-worm.webp",
   },
   {
     id: "golem",
@@ -114,7 +114,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.GolemBody.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Stone_Golem.png",
+    image: "/logbook/golem.webp",
   },
   {
     id: "gravekeeper",
@@ -122,7 +122,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.GravekeeperBody.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Grovetender.png",
+    image: "/logbook/gravekeeper.webp",
   },
   {
     id: "greater-wisp",
@@ -130,7 +130,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.GreaterWispBody.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Greater_Wisp.png",
+    image: "/logbook/greater-wisp.webp",
   },
   {
     id: "hermit-crab",
@@ -138,7 +138,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.HermitCrabBody.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Hermit_Crab.png",
+    image: "/logbook/hermit-crab.webp",
   },
   {
     id: "imp",
@@ -146,7 +146,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.ImpBody.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Imp.png",
+    image: "/logbook/imp.webp",
   },
   {
     id: "imp-boss",
@@ -154,7 +154,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.ImpBossBody.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Imp_Overlord.png",
+    image: "/logbook/imp-boss.webp",
   },
   {
     id: "jellyfish",
@@ -162,7 +162,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.JellyfishBody.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Jellyfish.png",
+    image: "/logbook/jellyfish.webp",
   },
   {
     id: "lemurian",
@@ -170,7 +170,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.LemurianBody.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Lemurian.png",
+    image: "/logbook/lemurian.webp",
   },
   {
     id: "lemurian-bruiser",
@@ -178,7 +178,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.LemurianBruiserBody.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Elder_Lemurian.png",
+    image: "/logbook/lemurian-bruiser.webp",
   },
   {
     id: "lunar-golem",
@@ -186,7 +186,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.LunarGolem.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Lunar_Chimera_(Golem).png",
+    image: "/logbook/lunar-golem.webp",
   },
   {
     id: "lunar-wisp",
@@ -194,7 +194,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.LunarWisp.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Lunar_Chimera_(Wisp).png",
+    image: "/logbook/lunar-wisp.webp",
   },
   {
     id: "lunar-exploder",
@@ -202,7 +202,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.LunarExploder.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Lunar_Chimera_(Exploder).png",
+    image: "/logbook/lunar-exploder.webp",
   },
   {
     id: "magma-worm",
@@ -210,7 +210,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.MagmaWormBody.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Magma_Worm.png",
+    image: "/logbook/magma-worm.webp",
   },
   {
     id: "mini-mushroom",
@@ -218,7 +218,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.MiniMushroom.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Mini_Mushrum.png",
+    image: "/logbook/mini-mushroom.webp",
   },
   {
     id: "nullifier",
@@ -226,7 +226,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.Nullifier.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Void_Reaver.png",
+    image: "/logbook/nullifier.webp",
   },
   {
     id: "parent",
@@ -234,7 +234,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.Parent.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Parent.png",
+    image: "/logbook/parent.webp",
   },
   {
     id: "scav",
@@ -242,7 +242,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.Scav.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Scavenger.png",
+    image: "/logbook/scav.webp",
   },
   {
     id: "titan",
@@ -250,7 +250,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.TitanBody.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Stone_Titan.png",
+    image: "/logbook/titan.webp",
   },
   {
     id: "titan-gold",
@@ -258,7 +258,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.TitanGoldBody.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Aurelionite.png",
+    image: "/logbook/titan-gold.webp",
   },
   {
     id: "vagrant",
@@ -266,7 +266,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.VagrantBody.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Wandering_Vagrant.png",
+    image: "/logbook/vagrant.webp",
   },
   {
     id: "vulture",
@@ -274,7 +274,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.VultureBody.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Alloy_Vulture.png",
+    image: "/logbook/vulture.webp",
   },
   {
     id: "wisp",
@@ -282,7 +282,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.WispBody.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Lesser_Wisp.png",
+    image: "/logbook/wisp.webp",
   },
   {
     id: "grandparent",
@@ -290,7 +290,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.GrandparentBody.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Grandparent.png",
+    image: "/logbook/grandparent.webp",
   },
   {
     id: "artifact-reliquary",
@@ -298,7 +298,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.ArtifactShellBody.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Artifact_Reliquary.png",
+    image: "/logbook/artifact-reliquary.webp",
   },
 
   // ============================================
@@ -310,7 +310,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.FlyingVerminBody.0",
     dlc: "sotv",
-    image: "https://riskofrain2.wiki.gg/images/Blind_Pest.png",
+    image: "/logbook/flying-vermin.webp",
   },
   {
     id: "vermin",
@@ -318,7 +318,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.VerminBody.0",
     dlc: "sotv",
-    image: "https://riskofrain2.wiki.gg/images/Blind_Vermin.png",
+    image: "/logbook/vermin.webp",
   },
   {
     id: "gup",
@@ -326,7 +326,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.GupBody.0",
     dlc: "sotv",
-    image: "https://riskofrain2.wiki.gg/images/Gup.png",
+    image: "/logbook/gup.webp",
   },
   {
     id: "void-infestor",
@@ -334,7 +334,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.VoidInfestorBody.0",
     dlc: "sotv",
-    image: "https://riskofrain2.wiki.gg/images/Void_Infestor.png",
+    image: "/logbook/void-infestor.webp",
   },
   {
     id: "void-jailer",
@@ -342,7 +342,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.VoidJailerBody.0",
     dlc: "sotv",
-    image: "https://riskofrain2.wiki.gg/images/Void_Jailer.png",
+    image: "/logbook/void-jailer.webp",
   },
   {
     id: "void-barnacle",
@@ -350,7 +350,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.VoidBarnacleBody.0",
     dlc: "sotv",
-    image: "https://riskofrain2.wiki.gg/images/Void_Barnacle.png",
+    image: "/logbook/void-barnacle.webp",
   },
   {
     id: "alpha-construct",
@@ -358,7 +358,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.MinorConstructBody.0",
     dlc: "sotv",
-    image: "https://riskofrain2.wiki.gg/images/Alpha_Construct.png",
+    image: "/logbook/alpha-construct.webp",
   },
   {
     id: "clay-grenadier",
@@ -366,7 +366,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.ClayGrenadierBody.0",
     dlc: "sotv",
-    image: "https://riskofrain2.wiki.gg/images/Clay_Apothecary.png",
+    image: "/logbook/clay-grenadier.webp",
   },
   {
     id: "acid-larva",
@@ -374,7 +374,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.AcidLarva.0",
     dlc: "sotv",
-    image: "https://riskofrain2.wiki.gg/images/Larva.png",
+    image: "/logbook/acid-larva.webp",
   },
   {
     id: "void-mega-crab",
@@ -382,7 +382,6 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.VoidMegaCrab.0",
     dlc: "sotv",
-    image: "https://riskofrain2.wiki.gg/images/Voidling.png",
   },
   {
     id: "mini-void-raid-crab",
@@ -390,7 +389,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.MiniVoidRaidCrab.0",
     dlc: "sotv",
-    image: "https://riskofrain2.wiki.gg/images/Void_Devastator.png",
+    image: "/logbook/mini-void-raid-crab.webp",
   },
   {
     id: "geep",
@@ -398,7 +397,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.GeepBody.0",
     dlc: "sotv",
-    image: "https://riskofrain2.wiki.gg/images/Geep.png",
+    image: "/logbook/geep.webp",
   },
   {
     id: "gip",
@@ -406,7 +405,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.GipBody.0",
     dlc: "sotv",
-    image: "https://riskofrain2.wiki.gg/images/Gip.png",
+    image: "/logbook/gip.webp",
   },
   {
     id: "xi-construct",
@@ -414,7 +413,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.XiConstructBody.0",
     dlc: "sotv",
-    image: "https://riskofrain2.wiki.gg/images/Xi_Construct.png",
+    image: "/logbook/xi-construct.webp",
   },
 
   // ============================================
@@ -426,7 +425,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.ChildBody.0",
     dlc: "sots",
-    image: "https://riskofrain2.wiki.gg/images/Child.png",
+    image: "/logbook/child.webp",
   },
   {
     id: "scorchling",
@@ -434,7 +433,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.ScorchlingBody.0",
     dlc: "sots",
-    image: "https://riskofrain2.wiki.gg/images/Scorch_Worm.png",
+    image: "/logbook/scorchling.webp",
   },
   {
     id: "halcyonite",
@@ -442,7 +441,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.HalcyoniteBody.0",
     dlc: "sots",
-    image: "https://riskofrain2.wiki.gg/images/Halcyonite.png",
+    image: "/logbook/halcyonite.webp",
   },
   {
     id: "false-son-boss",
@@ -450,7 +449,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.FalseSonBossBody.0",
     dlc: "sots",
-    image: "https://riskofrain2.wiki.gg/images/False_Son.png",
+    image: "/logbook/false-son-boss.webp",
   },
 
   // ============================================
@@ -463,7 +462,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.RoboBallMini.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Solus_Probe.png",
+    image: "/logbook/solus-probe.webp",
   },
   {
     id: "solus-prospector",
@@ -471,7 +470,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.WorkerUnitBody.0",
     dlc: "ac",
-    image: "https://riskofrain2.wiki.gg/images/Solus_Prospector.png",
+    image: "/logbook/solus-prospector.webp",
   },
   {
     id: "solus-extractor",
@@ -479,7 +478,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.ExtractorUnitBody.0",
     dlc: "ac",
-    image: "https://riskofrain2.wiki.gg/images/Solus_Extractor.png",
+    image: "/logbook/solus-extractor.webp",
   },
   {
     id: "solus-distributor",
@@ -487,7 +486,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.MinePodBody.0",
     dlc: "ac",
-    image: "https://riskofrain2.wiki.gg/images/Solus_Distributor.png",
+    image: "/logbook/solus-distributor.webp",
   },
   {
     id: "solus-invalidator",
@@ -495,7 +494,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.DefectiveUnitBody.0",
     dlc: "ac",
-    image: "https://riskofrain2.wiki.gg/images/Solus_Invalidator.png",
+    image: "/logbook/solus-invalidator.webp",
   },
   {
     id: "solus-scorcher",
@@ -503,7 +502,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.TankerBody.0",
     dlc: "ac",
-    image: "https://riskofrain2.wiki.gg/images/Solus_Scorcher.png",
+    image: "/logbook/solus-scorcher.webp",
   },
   {
     id: "solus-transporter",
@@ -511,7 +510,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.IronHaulerBody.0",
     dlc: "ac",
-    image: "https://riskofrain2.wiki.gg/images/Solus_Transporter.png",
+    image: "/logbook/solus-transporter.webp",
   },
   {
     id: "solus-amalgamator",
@@ -519,7 +518,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.SolusAmalgamatorBody.0",
     dlc: "ac",
-    image: "https://riskofrain2.wiki.gg/images/Solus_Amalgamator.png",
+    image: "/logbook/solus-amalgamator.webp",
   },
   {
     id: "solus-control-unit",
@@ -527,7 +526,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.RoboBallBoss.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Solus_Control_Unit.png",
+    image: "/logbook/solus-control-unit.webp",
   },
   {
     id: "solus-heart",
@@ -535,7 +534,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.SolusHeartBody.0",
     dlc: "ac",
-    image: "https://riskofrain2.wiki.gg/images/Solus_Heart.png",
+    image: "/logbook/solus-heart.webp",
   },
   {
     id: "solus-wing",
@@ -543,7 +542,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.SolusWingBody.0",
     dlc: "ac",
-    image: "https://riskofrain2.wiki.gg/images/Solus_Wing.png",
+    image: "/logbook/solus-wing.webp",
   },
   {
     id: "alloy-hunter",
@@ -551,7 +550,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.VultureHunterBody.0",
     dlc: "ac",
-    image: "https://riskofrain2.wiki.gg/images/Alloy_Hunter.png",
+    image: "/logbook/alloy-hunter.webp",
   },
   {
     id: "alloy-worship-unit",
@@ -559,7 +558,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.SuperRoboBallBoss.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Alloy_Worship_Unit.png",
+    image: "/logbook/alloy-worship-unit.webp",
   },
   {
     id: "solus-mine",
@@ -567,7 +566,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.SolusMineBody.0",
     dlc: "ac",
-    image: "https://riskofrain2.wiki.gg/images/Solus_Mine.png",
+    image: "/logbook/solus-mine.webp",
   },
   {
     id: "spex",
@@ -575,7 +574,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.SolusVendorBody.0",
     dlc: "ac",
-    image: "https://riskofrain2.wiki.gg/images/SPEX.png",
+    image: "/logbook/spex.webp",
   },
   {
     id: "severed-breaker",
@@ -583,7 +582,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.SolusAmalgamatorMissilePodBody.0",
     dlc: "ac",
-    image: "https://riskofrain2.wiki.gg/images/Severed_Breaker.png",
+    image: "/logbook/severed-breaker.webp",
   },
   {
     id: "severed-probe",
@@ -591,7 +590,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.SolusAmalgamatorThrusterBody.0",
     dlc: "ac",
-    image: "https://riskofrain2.wiki.gg/images/Severed_Probe.png",
+    image: "/logbook/severed-probe.webp",
   },
   {
     id: "severed-scorcher",
@@ -599,7 +598,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "monsters",
     unlockId: "Logs.SolusAmalgamatorFlamethrowerCannonBody.0",
     dlc: "ac",
-    image: "https://riskofrain2.wiki.gg/images/Severed_Scorcher.png",
+    image: "/logbook/severed-scorcher.webp",
   },
 
   // ============================================
@@ -611,7 +610,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "environments",
     unlockId: "Logs.Stages.blackbeach",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Distant_Roost.png",
+    image: "/logbook/env-blackbeach.webp",
   },
   {
     id: "env-golemplains",
@@ -619,7 +618,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "environments",
     unlockId: "Logs.Stages.golemplains",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Titanic_Plains.png",
+    image: "/logbook/env-golemplains.webp",
   },
   {
     id: "env-foggyswamp",
@@ -627,7 +626,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "environments",
     unlockId: "Logs.Stages.foggyswamp",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Wetland_Aspect.png",
+    image: "/logbook/env-foggyswamp.webp",
   },
   {
     id: "env-goolake",
@@ -635,7 +634,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "environments",
     unlockId: "Logs.Stages.goolake",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Abandoned_Aqueduct.png",
+    image: "/logbook/env-goolake.webp",
   },
   {
     id: "env-frozenwall",
@@ -643,7 +642,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "environments",
     unlockId: "Logs.Stages.frozenwall",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Rallypoint_Delta.png",
+    image: "/logbook/env-frozenwall.webp",
   },
   {
     id: "env-wispgraveyard",
@@ -651,7 +650,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "environments",
     unlockId: "Logs.Stages.wispgraveyard",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Scorched_Acres.png",
+    image: "/logbook/env-wispgraveyard.webp",
   },
   {
     id: "env-dampcavesimple",
@@ -659,7 +658,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "environments",
     unlockId: "Logs.Stages.dampcavesimple",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Abyssal_Depths.png",
+    image: "/logbook/env-dampcavesimple.webp",
   },
   {
     id: "env-shipgraveyard",
@@ -667,7 +666,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "environments",
     unlockId: "Logs.Stages.shipgraveyard",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Siren%27s_Call.png",
+    image: "/logbook/env-shipgraveyard.webp",
   },
   {
     id: "env-skymeadow",
@@ -675,7 +674,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "environments",
     unlockId: "Logs.Stages.skymeadow",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Sky_Meadow.png",
+    image: "/logbook/env-skymeadow.webp",
   },
   {
     id: "env-arena",
@@ -683,7 +682,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "environments",
     unlockId: "Logs.Stages.arena",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Void_Fields.png",
+    image: "/logbook/env-arena.webp",
   },
   {
     id: "env-artifactworld",
@@ -691,7 +690,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "environments",
     unlockId: "Logs.Stages.artifactworld",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Bulwark%27s_Ambry.png",
+    image: "/logbook/env-artifactworld.webp",
   },
   {
     id: "env-bazaar",
@@ -699,7 +698,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "environments",
     unlockId: "Logs.Stages.bazaar",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Bazaar_Between_Time.png",
+    image: "/logbook/env-bazaar.webp",
   },
   {
     id: "env-goldshores",
@@ -707,7 +706,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "environments",
     unlockId: "Logs.Stages.goldshores",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Gilded_Coast.png",
+    image: "/logbook/env-goldshores.webp",
   },
   {
     id: "env-limbo",
@@ -715,7 +714,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "environments",
     unlockId: "Logs.Stages.limbo",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/A_Moment%2C_Fractured.png",
+    image: "/logbook/env-limbo.webp",
   },
   {
     id: "env-mysteryspace",
@@ -723,7 +722,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "environments",
     unlockId: "Logs.Stages.mysteryspace",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/A_Moment%2C_Whole.png",
+    image: "/logbook/env-mysteryspace.webp",
   },
   {
     id: "env-rootjungle",
@@ -731,7 +730,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "environments",
     unlockId: "Logs.Stages.rootjungle",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Sundered_Grove.png",
+    image: "/logbook/env-rootjungle.webp",
   },
   {
     id: "env-lakes",
@@ -739,7 +738,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "environments",
     unlockId: "Logs.Stages.lakes",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Verdant_Falls.png",
+    image: "/logbook/env-lakes.webp",
   },
 
   // ============================================
@@ -751,7 +750,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "environments",
     unlockId: "Logs.Stages.moon2",
     dlc: "sotv",
-    image: "https://riskofrain2.wiki.gg/images/Commencement.png",
+    image: "/logbook/env-moon2.webp",
   },
   {
     id: "env-ancientloft",
@@ -759,7 +758,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "environments",
     unlockId: "Logs.Stages.ancientloft",
     dlc: "sotv",
-    image: "https://riskofrain2.wiki.gg/images/Aphelian_Sanctuary.png",
+    image: "/logbook/env-ancientloft.webp",
   },
   {
     id: "env-snowyforest",
@@ -767,7 +766,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "environments",
     unlockId: "Logs.Stages.snowyforest",
     dlc: "sotv",
-    image: "https://riskofrain2.wiki.gg/images/Siphoned_Forest.png",
+    image: "/logbook/env-snowyforest.webp",
   },
   {
     id: "env-sulfurpools",
@@ -775,7 +774,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "environments",
     unlockId: "Logs.Stages.sulfurpools",
     dlc: "sotv",
-    image: "https://riskofrain2.wiki.gg/images/Sulfur_Pools.png",
+    image: "/logbook/env-sulfurpools.webp",
   },
   {
     id: "env-voidstage",
@@ -783,7 +782,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "environments",
     unlockId: "Logs.Stages.voidstage",
     dlc: "sotv",
-    image: "https://riskofrain2.wiki.gg/images/Void_Locus.png",
+    image: "/logbook/env-voidstage.webp",
   },
   {
     id: "env-voidraid",
@@ -791,7 +790,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "environments",
     unlockId: "Logs.Stages.voidraid",
     dlc: "sotv",
-    image: "https://riskofrain2.wiki.gg/images/The_Planetarium.png",
+    image: "/logbook/env-voidraid.webp",
   },
 
   // ============================================
@@ -803,7 +802,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "environments",
     unlockId: "Logs.Stages.village",
     dlc: "sots",
-    image: "https://riskofrain2.wiki.gg/images/Shattered_Abodes.png",
+    image: "/logbook/env-village.webp",
   },
   {
     id: "env-villagenight",
@@ -811,7 +810,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "environments",
     unlockId: "Logs.Stages.villagenight",
     dlc: "sots",
-    image: "https://riskofrain2.wiki.gg/images/Disturbed_Impact.png",
+    image: "/logbook/env-villagenight.webp",
   },
   {
     id: "env-lemuriantemple",
@@ -819,7 +818,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "environments",
     unlockId: "Logs.Stages.lemuriantemple",
     dlc: "sots",
-    image: "https://riskofrain2.wiki.gg/images/Reformed_Altar.png",
+    image: "/logbook/env-lemuriantemple.webp",
   },
   {
     id: "env-habitat",
@@ -827,7 +826,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "environments",
     unlockId: "Logs.Stages.habitat",
     dlc: "sots",
-    image: "https://riskofrain2.wiki.gg/images/Treeborn_Colony.png",
+    image: "/logbook/env-habitat.webp",
   },
   {
     id: "env-habitatfall",
@@ -835,7 +834,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "environments",
     unlockId: "Logs.Stages.habitatfall",
     dlc: "sots",
-    image: "https://riskofrain2.wiki.gg/images/Golden_Dieback.png",
+    image: "/logbook/env-habitatfall.webp",
   },
   {
     id: "env-meridian",
@@ -843,7 +842,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "environments",
     unlockId: "Logs.Stages.meridian",
     dlc: "sots",
-    image: "https://riskofrain2.wiki.gg/images/Prime_Meridian.png",
+    image: "/logbook/env-meridian.webp",
   },
   {
     id: "env-helminthroost",
@@ -851,7 +850,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "environments",
     unlockId: "Logs.Stages.helminthroost",
     dlc: "sots",
-    image: "https://riskofrain2.wiki.gg/images/Helminth_Hatchery.png",
+    image: "/logbook/env-helminthroost.webp",
   },
   {
     id: "env-lakesnight",
@@ -859,7 +858,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "environments",
     unlockId: "Logs.Stages.lakesnight",
     dlc: "sots",
-    image: "https://riskofrain2.wiki.gg/images/Viscous_Falls.png",
+    image: "/logbook/env-lakesnight.webp",
   },
 
   // ============================================
@@ -872,7 +871,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "environments",
     unlockId: "Logs.Stages.nest",
     dlc: "ac",
-    image: "https://riskofrain2.wiki.gg/images/Pretender's_Precipice.png",
+    image: "/logbook/env-nest.webp",
   },
   {
     id: "env-ironalluvium",
@@ -880,7 +879,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "environments",
     unlockId: "Logs.Stages.ironalluvium",
     dlc: "ac",
-    image: "https://riskofrain2.wiki.gg/images/Iron_Alluvium.png",
+    image: "/logbook/env-ironalluvium.webp",
   },
   {
     id: "env-ironauroras",
@@ -888,7 +887,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "environments",
     unlockId: "Logs.Stages.ironalluvium2",
     dlc: "ac",
-    image: "https://riskofrain2.wiki.gg/images/Iron_Auroras.png",
+    image: "/logbook/env-ironauroras.webp",
   },
   {
     id: "env-conduitcanyon",
@@ -896,7 +895,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "environments",
     unlockId: "Logs.Stages.conduitcanyon",
     dlc: "ac",
-    image: "https://riskofrain2.wiki.gg/images/Conduit_Canyon.png",
+    image: "/logbook/env-conduitcanyon.webp",
   },
   {
     id: "env-repurposedcrater",
@@ -904,7 +903,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "environments",
     unlockId: "Logs.Stages.repurposedcrater",
     dlc: "ac",
-    image: "https://riskofrain2.wiki.gg/images/Repurposed_Crater.png",
+    image: "/logbook/env-repurposedcrater.webp",
   },
   {
     id: "env-solutionalhaunt",
@@ -912,7 +911,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "environments",
     unlockId: "Logs.Stages.solutionalhaunt",
     dlc: "ac",
-    image: "https://riskofrain2.wiki.gg/images/Solutional_Haunt.png",
+    image: "/logbook/env-solutionalhaunt.webp",
   },
   {
     id: "env-computationalexchange",
@@ -920,7 +919,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "environments",
     unlockId: "Logs.Stages.computationalexchange",
     dlc: "ac",
-    image: "https://riskofrain2.wiki.gg/images/Computational_Exchange.png",
+    image: "/logbook/env-computationalexchange.webp",
   },
   {
     id: "env-solusweb",
@@ -928,7 +927,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "environments",
     unlockId: "Logs.Stages.solusweb",
     dlc: "ac",
-    image: "https://riskofrain2.wiki.gg/images/Neural_Sanctum.png",
+    image: "/logbook/env-solusweb.webp",
   },
 
   // ============================================
@@ -940,7 +939,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "survivors",
     unlockId: "Logs.CommandoBody.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Commando.png",
+    image: "/logbook/survivor-commando.webp",
   },
   {
     id: "survivor-huntress",
@@ -948,7 +947,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "survivors",
     unlockId: "Logs.HuntressBody.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Huntress.png",
+    image: "/logbook/survivor-huntress.webp",
   },
   {
     id: "survivor-bandit",
@@ -956,7 +955,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "survivors",
     unlockId: "Logs.Bandit2Body.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Bandit.png",
+    image: "/logbook/survivor-bandit.webp",
   },
   {
     id: "survivor-mult",
@@ -964,7 +963,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "survivors",
     unlockId: "Logs.ToolbotBody.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/MUL-T.png",
+    image: "/logbook/survivor-mult.webp",
   },
   {
     id: "survivor-engineer",
@@ -972,7 +971,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "survivors",
     unlockId: "Logs.EngiBody.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Engineer.png",
+    image: "/logbook/survivor-engineer.webp",
   },
   {
     id: "survivor-artificer",
@@ -980,7 +979,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "survivors",
     unlockId: "Logs.MageBody.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Artificer.png",
+    image: "/logbook/survivor-artificer.webp",
   },
   {
     id: "survivor-mercenary",
@@ -988,7 +987,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "survivors",
     unlockId: "Logs.MercBody.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Mercenary.png",
+    image: "/logbook/survivor-mercenary.webp",
   },
   {
     id: "survivor-rex",
@@ -996,7 +995,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "survivors",
     unlockId: "Logs.TreebotBody.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/REX.png",
+    image: "/logbook/survivor-rex.webp",
   },
   {
     id: "survivor-loader",
@@ -1004,7 +1003,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "survivors",
     unlockId: "Logs.LoaderBody.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Loader.png",
+    image: "/logbook/survivor-loader.webp",
   },
   {
     id: "survivor-acrid",
@@ -1012,7 +1011,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "survivors",
     unlockId: "Logs.CrocoBody.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Acrid.png",
+    image: "/logbook/survivor-acrid.webp",
   },
   {
     id: "survivor-captain",
@@ -1020,7 +1019,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "survivors",
     unlockId: "Logs.CaptainBody.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Captain.png",
+    image: "/logbook/survivor-captain.webp",
   },
   {
     id: "survivor-heretic",
@@ -1028,7 +1027,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "survivors",
     unlockId: "Logs.HereticBody.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Heretic.png",
+    image: "/logbook/survivor-heretic.webp",
   },
   {
     id: "survivor-railgunner",
@@ -1036,7 +1035,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "survivors",
     unlockId: "Logs.RailgunnerBody.0",
     dlc: "sotv",
-    image: "https://riskofrain2.wiki.gg/images/Railgunner.png",
+    image: "/logbook/survivor-railgunner.webp",
   },
   {
     id: "survivor-voidfiend",
@@ -1044,7 +1043,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "survivors",
     unlockId: "Logs.VoidSurvivorBody.0",
     dlc: "sotv",
-    image: "https://riskofrain2.wiki.gg/images/Void_Fiend.png",
+    image: "/logbook/survivor-voidfiend.webp",
   },
   {
     id: "survivor-seeker",
@@ -1052,7 +1051,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "survivors",
     unlockId: "Logs.SeekerBody.0",
     dlc: "sots",
-    image: "https://riskofrain2.wiki.gg/images/Seeker.png",
+    image: "/logbook/survivor-seeker.webp",
   },
   {
     id: "survivor-falseson",
@@ -1060,7 +1059,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "survivors",
     unlockId: "Logs.FalseSonBody.0",
     dlc: "sots",
-    image: "https://riskofrain2.wiki.gg/images/False_Son.png",
+    image: "/logbook/survivor-falseson.webp",
   },
   {
     id: "survivor-chef",
@@ -1068,7 +1067,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "survivors",
     unlockId: "Logs.ChefBody.0",
     dlc: "sots",
-    image: "https://riskofrain2.wiki.gg/images/Chef.png",
+    image: "/logbook/survivor-chef.webp",
   },
   // Alloyed Collective Survivors
   {
@@ -1077,7 +1076,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "survivors",
     unlockId: "Logs.OperatorBody.0",
     dlc: "ac",
-    image: "https://riskofrain2.wiki.gg/images/Operator.png",
+    image: "/logbook/survivor-operator.webp",
   },
   {
     id: "survivor-drifter",
@@ -1085,7 +1084,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "survivors",
     unlockId: "Logs.DrifterBody.0",
     dlc: "ac",
-    image: "https://riskofrain2.wiki.gg/images/Drifter.png",
+    image: "/logbook/survivor-drifter.webp",
   },
 
   // ============================================
@@ -1099,7 +1098,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.Syringe",
     dlc: "base",
     rarity: "common",
-    image: "https://riskofrain2.wiki.gg/images/Soldier%27s_Syringe.png",
+    image: "/logbook/item-syringe.webp",
   },
   {
     id: "item-hoof",
@@ -1109,7 +1108,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.Hoof",
     dlc: "base",
     rarity: "common",
-    image: "https://riskofrain2.wiki.gg/images/Paul%27s_Goat_Hoof.png",
+    image: "/logbook/item-hoof.webp",
   },
   {
     id: "item-critglasses",
@@ -1119,7 +1118,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.CritGlasses",
     dlc: "base",
     rarity: "common",
-    image: "https://riskofrain2.wiki.gg/images/Lens-Maker%27s_Glasses.png",
+    image: "/logbook/item-critglasses.webp",
   },
   {
     id: "item-bear",
@@ -1129,7 +1128,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.Bear",
     dlc: "base",
     rarity: "common",
-    image: "https://riskofrain2.wiki.gg/images/Tougher_Times.png",
+    image: "/logbook/item-bear.webp",
   },
   {
     id: "item-crowbar",
@@ -1139,7 +1138,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.Crowbar",
     dlc: "base",
     rarity: "common",
-    image: "https://riskofrain2.wiki.gg/images/Crowbar.png",
+    image: "/logbook/item-crowbar.webp",
   },
   {
     id: "item-stickybomb",
@@ -1149,7 +1148,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.StickyBomb",
     dlc: "base",
     rarity: "common",
-    image: "https://riskofrain2.wiki.gg/images/Sticky_Bomb.png",
+    image: "/logbook/item-stickybomb.webp",
   },
   {
     id: "item-bleedonhit",
@@ -1159,7 +1158,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.BleedOnHit",
     dlc: "base",
     rarity: "common",
-    image: "https://riskofrain2.wiki.gg/images/Tri-Tip_Dagger.png",
+    image: "/logbook/item-bleedonhit.webp",
   },
   {
     id: "item-armorplate",
@@ -1169,7 +1168,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.ArmorPlate",
     dlc: "base",
     rarity: "common",
-    image: "https://riskofrain2.wiki.gg/images/Repulsion_Armor_Plate.png",
+    image: "/logbook/item-armorplate.webp",
   },
   {
     id: "item-medkit",
@@ -1179,7 +1178,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.Medkit",
     dlc: "base",
     rarity: "common",
-    image: "https://riskofrain2.wiki.gg/images/Medkit.png",
+    image: "/logbook/item-medkit.webp",
   },
   {
     id: "item-mushroom",
@@ -1189,7 +1188,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.Mushroom",
     dlc: "base",
     rarity: "common",
-    image: "https://riskofrain2.wiki.gg/images/Bustling_Fungus.png",
+    image: "/logbook/item-mushroom.webp",
   },
   {
     id: "item-firework",
@@ -1199,7 +1198,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.Firework",
     dlc: "base",
     rarity: "common",
-    image: "https://riskofrain2.wiki.gg/images/Bundle_of_Fireworks.png",
+    image: "/logbook/item-firework.webp",
   },
   {
     id: "item-personalshield",
@@ -1209,7 +1208,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.PersonalShield",
     dlc: "base",
     rarity: "common",
-    image: "https://riskofrain2.wiki.gg/images/Personal_Shield_Generator.png",
+    image: "/logbook/item-personalshield.webp",
   },
   {
     id: "item-feather",
@@ -1219,7 +1218,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.Feather",
     dlc: "base",
     rarity: "common",
-    image: "https://riskofrain2.wiki.gg/images/Hopoo_Feather.png",
+    image: "/logbook/item-feather.webp",
   },
   {
     id: "item-tooth",
@@ -1229,7 +1228,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.Tooth",
     dlc: "base",
     rarity: "common",
-    image: "https://riskofrain2.wiki.gg/images/Monster_Tooth.png",
+    image: "/logbook/item-tooth.webp",
   },
   {
     id: "item-nearbydamagebonus",
@@ -1239,7 +1238,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.NearbyDamageBonus",
     dlc: "base",
     rarity: "common",
-    image: "https://riskofrain2.wiki.gg/images/Focus_Crystal.png",
+    image: "/logbook/item-nearbydamagebonus.webp",
   },
   {
     id: "item-stunoncrit",
@@ -1249,7 +1248,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.StunChanceOnHit",
     dlc: "base",
     rarity: "common",
-    image: "https://riskofrain2.wiki.gg/images/Stun_Grenade.png",
+    image: "/logbook/item-stunoncrit.webp",
   },
   {
     id: "item-warcryonmultikill",
@@ -1259,7 +1258,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.WarCryOnMultiKill",
     dlc: "base",
     rarity: "common",
-    image: "https://riskofrain2.wiki.gg/images/Berserker's_Pauldron.png",
+    image: "/logbook/item-warcryonmultikill.webp",
   },
   {
     id: "item-gasoline",
@@ -1269,7 +1268,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.IgniteOnKill",
     dlc: "base",
     rarity: "common",
-    image: "https://riskofrain2.wiki.gg/images/Gasoline.png",
+    image: "/logbook/item-gasoline.webp",
   },
   {
     id: "item-bandolier",
@@ -1279,7 +1278,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.Bandolier",
     dlc: "base",
     rarity: "common",
-    image: "https://riskofrain2.wiki.gg/images/Bandolier.png",
+    image: "/logbook/item-bandolier.webp",
   },
   {
     id: "item-slowonhit",
@@ -1289,7 +1288,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.SlowOnHit",
     dlc: "base",
     rarity: "common",
-    image: "https://riskofrain2.wiki.gg/images/Chronobauble.png",
+    image: "/logbook/item-slowonhit.webp",
   },
   {
     id: "item-flathealth",
@@ -1299,7 +1298,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.FlatHealth",
     dlc: "base",
     rarity: "common",
-    image: "https://riskofrain2.wiki.gg/images/Bison_Steak.png",
+    image: "/logbook/item-flathealth.webp",
   },
   {
     id: "item-healingpotion",
@@ -1309,7 +1308,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.HealingPotion",
     dlc: "base",
     rarity: "common",
-    image: "https://riskofrain2.wiki.gg/images/Power_Elixir.png",
+    image: "/logbook/item-healingpotion.webp",
   },
   {
     id: "item-outofcombatarmor",
@@ -1319,7 +1318,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.OutOfCombatArmor",
     dlc: "base",
     rarity: "common",
-    image: "https://riskofrain2.wiki.gg/images/Oddly-shaped_Opal.png",
+    image: "/logbook/item-outofcombatarmor.webp",
   },
   {
     id: "item-sprintbonus",
@@ -1329,7 +1328,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.SprintBonus",
     dlc: "base",
     rarity: "common",
-    image: "https://riskofrain2.wiki.gg/images/Energy_Drink.png",
+    image: "/logbook/item-sprintbonus.webp",
   },
   {
     id: "item-secondaryskillmag",
@@ -1339,7 +1338,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.SecondarySkillMagazine",
     dlc: "base",
     rarity: "common",
-    image: "https://riskofrain2.wiki.gg/images/Backup_Magazine.png",
+    image: "/logbook/item-secondaryskillmag.webp",
   },
   {
     id: "item-rustedkey",
@@ -1349,7 +1348,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.TreasureCache",
     dlc: "base",
     rarity: "common",
-    image: "https://riskofrain2.wiki.gg/images/Rusted_Key.png",
+    image: "/logbook/item-rustedkey.webp",
   },
   {
     id: "item-armorpiercingammo",
@@ -1359,7 +1358,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.BossDamageBonus",
     dlc: "base",
     rarity: "common",
-    image: "https://riskofrain2.wiki.gg/images/Armor-Piercing_Rounds.png",
+    image: "/logbook/item-armorpiercingammo.webp",
   },
   {
     id: "item-slug",
@@ -1369,7 +1368,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.HealWhileSafe",
     dlc: "base",
     rarity: "common",
-    image: "https://riskofrain2.wiki.gg/images/Cautious_Slug.png",
+    image: "/logbook/item-slug.webp",
   },
   {
     id: "item-scrapwhite",
@@ -1379,7 +1378,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.ScrapWhite",
     dlc: "base",
     rarity: "common",
-    image: "https://riskofrain2.wiki.gg/images/Item_Scrap%2C_White.png",
+    image: "/logbook/item-scrapwhite.webp",
   },
 
   // ============================================
@@ -1393,7 +1392,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.AttackSpeedOnCrit",
     dlc: "base",
     rarity: "uncommon",
-    image: "https://riskofrain2.wiki.gg/images/Predatory_Instincts.png",
+    image: "/logbook/item-attackspeedoncrit.webp",
   },
   {
     id: "item-seed",
@@ -1403,7 +1402,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.Seed",
     dlc: "base",
     rarity: "uncommon",
-    image: "https://riskofrain2.wiki.gg/images/Leeching_Seed.png",
+    image: "/logbook/item-seed.webp",
   },
   {
     id: "item-thorns",
@@ -1413,7 +1412,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.Thorns",
     dlc: "base",
     rarity: "uncommon",
-    image: "https://riskofrain2.wiki.gg/images/Razorwire.png",
+    image: "/logbook/item-thorns.webp",
   },
   {
     id: "item-dagger",
@@ -1423,7 +1422,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.Dagger",
     dlc: "base",
     rarity: "legendary",
-    image: "https://riskofrain2.wiki.gg/images/Ceremonial_Dagger.png",
+    image: "/logbook/item-dagger.webp",
   },
   {
     id: "item-missile",
@@ -1433,7 +1432,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.Missile",
     dlc: "base",
     rarity: "uncommon",
-    image: "https://riskofrain2.wiki.gg/images/AtG_Missile_Mk._1.png",
+    image: "/logbook/item-missile.webp",
   },
   {
     id: "item-chainlightning",
@@ -1443,7 +1442,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.ChainLightning",
     dlc: "base",
     rarity: "uncommon",
-    image: "https://riskofrain2.wiki.gg/images/Ukulele.png",
+    image: "/logbook/item-chainlightning.webp",
   },
   {
     id: "item-infusion",
@@ -1453,7 +1452,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.Infusion",
     dlc: "base",
     rarity: "uncommon",
-    image: "https://riskofrain2.wiki.gg/images/Infusion.png",
+    image: "/logbook/item-infusion.webp",
   },
   {
     id: "item-equipmentmag",
@@ -1463,7 +1462,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.EquipmentMagazine",
     dlc: "base",
     rarity: "uncommon",
-    image: "https://riskofrain2.wiki.gg/images/Fuel_Cell.png",
+    image: "/logbook/item-equipmentmag.webp",
   },
   {
     id: "item-icering",
@@ -1473,7 +1472,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.IceRing",
     dlc: "base",
     rarity: "uncommon",
-    image: "https://riskofrain2.wiki.gg/images/Runald%27s_Band.png",
+    image: "/logbook/item-icering.webp",
   },
   {
     id: "item-firering",
@@ -1483,7 +1482,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.FireRing",
     dlc: "base",
     rarity: "uncommon",
-    image: "https://riskofrain2.wiki.gg/images/Kjaro%27s_Band.png",
+    image: "/logbook/item-firering.webp",
   },
   {
     id: "item-squid",
@@ -1493,7 +1492,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.Squid",
     dlc: "base",
     rarity: "uncommon",
-    image: "https://riskofrain2.wiki.gg/images/Squid_Polyp.png",
+    image: "/logbook/item-squid.webp",
   },
   {
     id: "item-deathmark",
@@ -1503,7 +1502,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.DeathMark",
     dlc: "base",
     rarity: "uncommon",
-    image: "https://riskofrain2.wiki.gg/images/Death_Mark.png",
+    image: "/logbook/item-deathmark.webp",
   },
   {
     id: "item-phasing",
@@ -1513,7 +1512,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.Phasing",
     dlc: "base",
     rarity: "uncommon",
-    image: "https://riskofrain2.wiki.gg/images/Old_War_Stealthkit.png",
+    image: "/logbook/item-phasing.webp",
   },
   {
     id: "item-behemoth",
@@ -1523,7 +1522,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.Behemoth",
     dlc: "base",
     rarity: "legendary",
-    image: "https://riskofrain2.wiki.gg/images/Brilliant_Behemoth.png",
+    image: "/logbook/item-behemoth.webp",
   },
   {
     id: "item-healoncrit",
@@ -1533,7 +1532,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.HealOnCrit",
     dlc: "base",
     rarity: "uncommon",
-    image: "https://riskofrain2.wiki.gg/images/Harvester%27s_Scythe.png",
+    image: "/logbook/item-healoncrit.webp",
   },
   {
     id: "item-jumpboost",
@@ -1543,7 +1542,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.JumpBoost",
     dlc: "base",
     rarity: "uncommon",
-    image: "https://riskofrain2.wiki.gg/images/Wax_Quail.png",
+    image: "/logbook/item-jumpboost.webp",
   },
   {
     id: "item-explodeondeath",
@@ -1553,7 +1552,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.ExplodeOnDeath",
     dlc: "base",
     rarity: "uncommon",
-    image: "https://riskofrain2.wiki.gg/images/Will-o%27-the-wisp.png",
+    image: "/logbook/item-explodeondeath.webp",
   },
   {
     id: "item-barrieronkill",
@@ -1563,7 +1562,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.BarrierOnKill",
     dlc: "base",
     rarity: "uncommon",
-    image: "https://riskofrain2.wiki.gg/images/Topaz_Brooch.png",
+    image: "/logbook/item-barrieronkill.webp",
   },
   {
     id: "item-bonusgoldonkill",
@@ -1573,7 +1572,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.BonusGoldPackOnKill",
     dlc: "base",
     rarity: "uncommon",
-    image: "https://riskofrain2.wiki.gg/images/Ghor%27s_Tome.png",
+    image: "/logbook/item-bonusgoldonkill.webp",
   },
   {
     id: "item-warbanner",
@@ -1583,7 +1582,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.WardOnLevel",
     dlc: "base",
     rarity: "uncommon",
-    image: "https://riskofrain2.wiki.gg/images/Warbanner.png",
+    image: "/logbook/item-warbanner.webp",
   },
   {
     id: "item-regenonkill",
@@ -1593,7 +1592,6 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.RegenOnKill",
     dlc: "base",
     rarity: "uncommon",
-    image: "https://riskofrain2.wiki.gg/images/Fresh_Meat.png",
   },
   {
     id: "item-increasehealing",
@@ -1603,7 +1601,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.IncreaseHealing",
     dlc: "base",
     rarity: "legendary",
-    image: "https://riskofrain2.wiki.gg/images/Rejuvenation_Rack.png",
+    image: "/logbook/item-increasehealing.webp",
   },
   {
     id: "item-redwhip",
@@ -1613,7 +1611,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.SprintOutOfCombat",
     dlc: "base",
     rarity: "uncommon",
-    image: "https://riskofrain2.wiki.gg/images/Red_Whip.png",
+    image: "/logbook/item-redwhip.webp",
   },
   {
     id: "item-rosebuckler",
@@ -1623,7 +1621,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.SprintArmor",
     dlc: "base",
     rarity: "uncommon",
-    image: "https://riskofrain2.wiki.gg/images/Rose_Buckler.png",
+    image: "/logbook/item-rosebuckler.webp",
   },
   {
     id: "item-guillotine",
@@ -1633,7 +1631,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.ExecuteLowHealthElite",
     dlc: "base",
     rarity: "uncommon",
-    image: "https://riskofrain2.wiki.gg/images/Old_Guillotine.png",
+    image: "/logbook/item-guillotine.webp",
   },
   {
     id: "item-warhorn",
@@ -1643,7 +1641,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.EnergizedOnEquipmentUse",
     dlc: "base",
     rarity: "uncommon",
-    image: "https://riskofrain2.wiki.gg/images/War_Horn.png",
+    image: "/logbook/item-warhorn.webp",
   },
   {
     id: "item-leptondaisy",
@@ -1653,7 +1651,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.TPHealingNova",
     dlc: "base",
     rarity: "uncommon",
-    image: "https://riskofrain2.wiki.gg/images/Lepton_Daisy.png",
+    image: "/logbook/item-leptondaisy.webp",
   },
   {
     id: "item-scrapgreen",
@@ -1663,7 +1661,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.ScrapGreen",
     dlc: "base",
     rarity: "uncommon",
-    image: "https://riskofrain2.wiki.gg/images/Item_Scrap%2C_Green.png",
+    image: "/logbook/item-scrapgreen.webp",
   },
 
   // ============================================
@@ -1677,7 +1675,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.Clover",
     dlc: "base",
     rarity: "legendary",
-    image: "https://riskofrain2.wiki.gg/images/57_Leaf_Clover.png",
+    image: "/logbook/item-clover.webp",
   },
   {
     id: "item-extralife",
@@ -1687,7 +1685,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.ExtraLife",
     dlc: "base",
     rarity: "legendary",
-    image: "https://riskofrain2.wiki.gg/images/Dio%27s_Best_Friend.png",
+    image: "/logbook/item-extralife.webp",
   },
   {
     id: "item-headhunter",
@@ -1697,7 +1695,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.HeadHunter",
     dlc: "base",
     rarity: "legendary",
-    image: "https://riskofrain2.wiki.gg/images/Wake_of_Vultures.png",
+    image: "/logbook/item-headhunter.webp",
   },
   {
     id: "item-novaonheal",
@@ -1707,7 +1705,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.NovaOnHeal",
     dlc: "base",
     rarity: "legendary",
-    image: "https://riskofrain2.wiki.gg/images/N%27kuhana%27s_Opinion.png",
+    image: "/logbook/item-novaonheal.webp",
   },
   {
     id: "item-alienhear",
@@ -1717,7 +1715,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.AlienHead",
     dlc: "base",
     rarity: "legendary",
-    image: "https://riskofrain2.wiki.gg/images/Alien_Head.png",
+    image: "/logbook/item-alienhear.webp",
   },
   {
     id: "item-icicle",
@@ -1727,7 +1725,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.Icicle",
     dlc: "base",
     rarity: "legendary",
-    image: "https://riskofrain2.wiki.gg/images/Frost_Relic.png",
+    image: "/logbook/item-icicle.webp",
   },
   {
     id: "item-laserturbine",
@@ -1737,7 +1735,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.LaserTurbine",
     dlc: "base",
     rarity: "legendary",
-    image: "https://riskofrain2.wiki.gg/images/Resonance_Disc.png",
+    image: "/logbook/item-laserturbine.webp",
   },
   {
     id: "item-ghostonkill",
@@ -1747,7 +1745,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.GhostOnKill",
     dlc: "base",
     rarity: "legendary",
-    image: "https://riskofrain2.wiki.gg/images/Happiest_Mask.png",
+    image: "/logbook/item-ghostonkill.webp",
   },
   {
     id: "item-plant",
@@ -1757,7 +1755,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.Plant",
     dlc: "base",
     rarity: "legendary",
-    image: "https://riskofrain2.wiki.gg/images/Interstellar_Desk_Plant.png",
+    image: "/logbook/item-plant.webp",
   },
   {
     id: "item-fallboots",
@@ -1767,7 +1765,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.FallBoots",
     dlc: "base",
     rarity: "legendary",
-    image: "https://riskofrain2.wiki.gg/images/H3AD-5T_v2.png",
+    image: "/logbook/item-fallboots.webp",
   },
   {
     id: "item-talisman",
@@ -1777,7 +1775,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.Talisman",
     dlc: "base",
     rarity: "legendary",
-    image: "https://riskofrain2.wiki.gg/images/Soulbound_Catalyst.png",
+    image: "/logbook/item-talisman.webp",
   },
   {
     id: "item-aegis",
@@ -1787,7 +1785,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.BarrierOnOverHeal",
     dlc: "base",
     rarity: "legendary",
-    image: "https://riskofrain2.wiki.gg/images/Aegis.png",
+    image: "/logbook/item-aegis.webp",
   },
   {
     id: "item-brainstalks",
@@ -1797,7 +1795,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.KillEliteFrenzy",
     dlc: "base",
     rarity: "legendary",
-    image: "https://riskofrain2.wiki.gg/images/Brainstalks.png",
+    image: "/logbook/item-brainstalks.webp",
   },
   {
     id: "item-afterburner",
@@ -1807,7 +1805,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.UtilitySkillMagazine",
     dlc: "base",
     rarity: "legendary",
-    image: "https://riskofrain2.wiki.gg/images/Hardlight_Afterburner.png",
+    image: "/logbook/item-afterburner.webp",
   },
   {
     id: "item-icbm",
@@ -1817,7 +1815,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.MoreMissile",
     dlc: "base",
     rarity: "legendary",
-    image: "https://riskofrain2.wiki.gg/images/Pocket_I.C.B.M..png",
+    image: "/logbook/item-icbm.webp",
   },
   {
     id: "item-meathook",
@@ -1827,7 +1825,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.BounceNearby",
     dlc: "base",
     rarity: "legendary",
-    image: "https://riskofrain2.wiki.gg/images/Sentient_Meat_Hook.png",
+    image: "/logbook/item-meathook.webp",
   },
   {
     id: "item-shatteringjustice",
@@ -1837,7 +1835,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.ArmorReductionOnHit",
     dlc: "base",
     rarity: "legendary",
-    image: "https://riskofrain2.wiki.gg/images/Shattering_Justice.png",
+    image: "/logbook/item-shatteringjustice.webp",
   },
   {
     id: "item-teslacoil",
@@ -1847,7 +1845,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.ShockNearby",
     dlc: "base",
     rarity: "legendary",
-    image: "https://riskofrain2.wiki.gg/images/Unstable_Tesla_Coil.png",
+    image: "/logbook/item-teslacoil.webp",
   },
   {
     id: "item-microbots",
@@ -1857,7 +1855,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.CaptainDefenseMatrix",
     dlc: "base",
     rarity: "legendary",
-    image: "https://riskofrain2.wiki.gg/images/Defensive_Microbots.png",
+    image: "/logbook/item-microbots.webp",
   },
   {
     id: "item-scrapred",
@@ -1867,7 +1865,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.ScrapRed",
     dlc: "base",
     rarity: "legendary",
-    image: "https://riskofrain2.wiki.gg/images/Item_Scrap%2C_Red.png",
+    image: "/logbook/item-scrapred.webp",
   },
 
   // ============================================
@@ -1881,7 +1879,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.Knurl",
     dlc: "base",
     rarity: "boss",
-    image: "https://riskofrain2.wiki.gg/images/Titanic_Knurl.png",
+    image: "/logbook/item-knurl.webp",
   },
   {
     id: "item-beetlegland",
@@ -1891,7 +1889,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.BeetleGland",
     dlc: "base",
     rarity: "boss",
-    image: "https://riskofrain2.wiki.gg/images/Queen%27s_Gland.png",
+    image: "/logbook/item-beetlegland.webp",
   },
   {
     id: "item-shinyPearl",
@@ -1901,7 +1899,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.ShinyPearl",
     dlc: "base",
     rarity: "boss",
-    image: "https://riskofrain2.wiki.gg/images/Irradiant_Pearl.png",
+    image: "/logbook/item-shinyPearl.webp",
   },
   {
     id: "item-pearl",
@@ -1911,7 +1909,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.Pearl",
     dlc: "base",
     rarity: "boss",
-    image: "https://riskofrain2.wiki.gg/images/Pearl.png",
+    image: "/logbook/item-pearl.webp",
   },
   {
     id: "item-halcyonseed",
@@ -1921,7 +1919,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.TitanGoldDuringTP",
     dlc: "base",
     rarity: "boss",
-    image: "https://riskofrain2.wiki.gg/images/Halcyon_Seed.png",
+    image: "/logbook/item-halcyonseed.webp",
   },
   {
     id: "item-littledisciple",
@@ -1931,7 +1929,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.SprintWisp",
     dlc: "base",
     rarity: "boss",
-    image: "https://riskofrain2.wiki.gg/images/Little_Disciple.png",
+    image: "/logbook/item-littledisciple.webp",
   },
   {
     id: "item-genesisloop",
@@ -1941,7 +1939,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.NovaOnLowHealth",
     dlc: "base",
     rarity: "boss",
-    image: "https://riskofrain2.wiki.gg/images/Genesis_Loop.png",
+    image: "/logbook/item-genesisloop.webp",
   },
   {
     id: "item-shatterspleen",
@@ -1951,7 +1949,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.BleedOnHitAndExplode",
     dlc: "base",
     rarity: "boss",
-    image: "https://riskofrain2.wiki.gg/images/Shatterspleen.png",
+    image: "/logbook/item-shatterspleen.webp",
   },
   {
     id: "item-miredurn",
@@ -1961,7 +1959,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.SiphonOnLowHealth",
     dlc: "base",
     rarity: "boss",
-    image: "https://riskofrain2.wiki.gg/images/Mired_Urn.png",
+    image: "/logbook/item-miredurn.webp",
   },
   {
     id: "item-chargedperforator",
@@ -1971,7 +1969,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.LightningStrikeOnHit",
     dlc: "base",
     rarity: "boss",
-    image: "https://riskofrain2.wiki.gg/images/Charged_Perforator.png",
+    image: "/logbook/item-chargedperforator.webp",
   },
   {
     id: "item-moltenperforator",
@@ -1981,7 +1979,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.FireballsOnHit",
     dlc: "base",
     rarity: "boss",
-    image: "https://riskofrain2.wiki.gg/images/Molten_Perforator.png",
+    image: "/logbook/item-moltenperforator.webp",
   },
   {
     id: "item-empathycores",
@@ -1991,7 +1989,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.RoboBallBuddy",
     dlc: "base",
     rarity: "boss",
-    image: "https://riskofrain2.wiki.gg/images/Empathy_Cores.png",
+    image: "/logbook/item-empathycores.webp",
   },
   {
     id: "item-planula",
@@ -2001,7 +1999,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.ParentEgg",
     dlc: "base",
     rarity: "boss",
-    image: "https://riskofrain2.wiki.gg/images/Planula.png",
+    image: "/logbook/item-planula.webp",
   },
   {
     id: "item-scrapyellow",
@@ -2011,7 +2009,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.ScrapYellow",
     dlc: "base",
     rarity: "boss",
-    image: "https://riskofrain2.wiki.gg/images/Item_Scrap%2C_Yellow.png",
+    image: "/logbook/item-scrapyellow.webp",
   },
   {
     id: "item-artifactkey",
@@ -2021,7 +2019,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.ArtifactKey",
     dlc: "base",
     rarity: "boss",
-    image: "https://riskofrain2.wiki.gg/images/Artifact_Key.png",
+    image: "/logbook/item-artifactkey.webp",
   },
 
   // ============================================
@@ -2035,7 +2033,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.LunarDagger",
     dlc: "base",
     rarity: "lunar",
-    image: "https://riskofrain2.wiki.gg/images/Shaped_Glass.png",
+    image: "/logbook/item-lunardagger.webp",
   },
   {
     id: "item-shieldonly",
@@ -2045,7 +2043,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.ShieldOnly",
     dlc: "base",
     rarity: "lunar",
-    image: "https://riskofrain2.wiki.gg/images/Transcendence.png",
+    image: "/logbook/item-shieldonly.webp",
   },
   {
     id: "item-focusconvergence",
@@ -2055,7 +2053,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.FocusConvergence",
     dlc: "base",
     rarity: "lunar",
-    image: "https://riskofrain2.wiki.gg/images/Focused_Convergence.png",
+    image: "/logbook/item-focusconvergence.webp",
   },
   {
     id: "item-autocastequipment",
@@ -2065,7 +2063,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.AutoCastEquipment",
     dlc: "base",
     rarity: "lunar",
-    image: "https://riskofrain2.wiki.gg/images/Gesture_of_the_Drowned.png",
+    image: "/logbook/item-autocastequipment.webp",
   },
   {
     id: "item-repeatHeal",
@@ -2075,7 +2073,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.RepeatHeal",
     dlc: "base",
     rarity: "lunar",
-    image: "https://riskofrain2.wiki.gg/images/Corpsebloom.png",
+    image: "/logbook/item-repeatHeal.webp",
   },
   {
     id: "item-brittlecrown",
@@ -2085,7 +2083,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.GoldOnHit",
     dlc: "base",
     rarity: "lunar",
-    image: "https://riskofrain2.wiki.gg/images/Brittle_Crown.png",
+    image: "/logbook/item-brittlecrown.webp",
   },
   {
     id: "item-beads",
@@ -2095,7 +2093,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.LunarTrinket",
     dlc: "base",
     rarity: "lunar",
-    image: "https://riskofrain2.wiki.gg/images/Beads_of_Fealty.png",
+    image: "/logbook/item-beads.webp",
   },
   {
     id: "item-defiantgouge",
@@ -2105,7 +2103,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.MonstersOnShrineUse",
     dlc: "base",
     rarity: "lunar",
-    image: "https://riskofrain2.wiki.gg/images/Defiant_Gouge.png",
+    image: "/logbook/item-defiantgouge.webp",
   },
   {
     id: "item-rachis",
@@ -2115,7 +2113,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.RandomDamageZone",
     dlc: "base",
     rarity: "lunar",
-    image: "https://riskofrain2.wiki.gg/images/Mercurial_Rachis.png",
+    image: "/logbook/item-rachis.webp",
   },
   {
     id: "item-purity",
@@ -2125,7 +2123,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.LunarBadLuck",
     dlc: "base",
     rarity: "lunar",
-    image: "https://riskofrain2.wiki.gg/images/Purity.png",
+    image: "/logbook/item-purity.webp",
   },
   {
     id: "item-visionsofheresy",
@@ -2135,7 +2133,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.LunarPrimaryReplacement",
     dlc: "base",
     rarity: "lunar",
-    image: "https://riskofrain2.wiki.gg/images/Visions_of_Heresy.png",
+    image: "/logbook/item-visionsofheresy.webp",
   },
   {
     id: "item-hooksofheresy",
@@ -2145,7 +2143,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.LunarSecondaryReplacement",
     dlc: "base",
     rarity: "lunar",
-    image: "https://riskofrain2.wiki.gg/images/Hooks_of_Heresy.png",
+    image: "/logbook/item-hooksofheresy.webp",
   },
   {
     id: "item-stridesofheresy",
@@ -2155,7 +2153,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.LunarUtilityReplacement",
     dlc: "base",
     rarity: "lunar",
-    image: "https://riskofrain2.wiki.gg/images/Strides_of_Heresy.png",
+    image: "/logbook/item-stridesofheresy.webp",
   },
   {
     id: "item-essenceofheresy",
@@ -2165,7 +2163,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.LunarSpecialReplacement",
     dlc: "base",
     rarity: "lunar",
-    image: "https://riskofrain2.wiki.gg/images/Essence_of_Heresy.png",
+    image: "/logbook/item-essenceofheresy.webp",
   },
 
   // ============================================
@@ -2179,7 +2177,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.CritGlassesVoid",
     dlc: "sotv",
     rarity: "void",
-    image: "https://riskofrain2.wiki.gg/images/Lost_Seer%27s_Lenses.png",
+    image: "/logbook/item-critglasses-void.webp",
   },
   {
     id: "item-bear-void",
@@ -2189,7 +2187,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.BearVoid",
     dlc: "sotv",
     rarity: "void",
-    image: "https://riskofrain2.wiki.gg/images/Safer_Spaces.png",
+    image: "/logbook/item-bear-void.webp",
   },
   {
     id: "item-clover-void",
@@ -2199,7 +2197,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.CloverVoid",
     dlc: "sotv",
     rarity: "void",
-    image: "https://riskofrain2.wiki.gg/images/Benthic_Bloom.png",
+    image: "/logbook/item-clover-void.webp",
   },
   {
     id: "item-extralife-void",
@@ -2209,7 +2207,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.ExtraLifeVoid",
     dlc: "sotv",
     rarity: "void",
-    image: "https://riskofrain2.wiki.gg/images/Pluripotent_Larva.png",
+    image: "/logbook/item-extralife-void.webp",
   },
   {
     id: "item-mushroom-void",
@@ -2219,7 +2217,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.MushroomVoid",
     dlc: "sotv",
     rarity: "void",
-    image: "https://riskofrain2.wiki.gg/images/Weeping_Fungus.png",
+    image: "/logbook/item-mushroom-void.webp",
   },
   {
     id: "item-bleedonhit-void",
@@ -2229,7 +2227,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.BleedOnHitVoid",
     dlc: "sotv",
     rarity: "void",
-    image: "https://riskofrain2.wiki.gg/images/Needletick.png",
+    image: "/logbook/item-bleedonhit-void.webp",
   },
   {
     id: "item-missile-void",
@@ -2239,7 +2237,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.MissileVoid",
     dlc: "sotv",
     rarity: "void",
-    image: "https://riskofrain2.wiki.gg/images/Plasma_Shrimp.png",
+    image: "/logbook/item-missile-void.webp",
   },
   {
     id: "item-encrustedkey",
@@ -2249,7 +2247,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.TreasureCacheVoid",
     dlc: "sotv",
     rarity: "void",
-    image: "https://riskofrain2.wiki.gg/images/Encrusted_Key.png",
+    image: "/logbook/item-encrustedkey.webp",
   },
   {
     id: "item-lysatecell",
@@ -2259,7 +2257,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.EquipmentMagazineVoid",
     dlc: "sotv",
     rarity: "void",
-    image: "https://riskofrain2.wiki.gg/images/Lysate_Cell.png",
+    image: "/logbook/item-lysatecell.webp",
   },
   {
     id: "item-polylute",
@@ -2269,7 +2267,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.ChainLightningVoid",
     dlc: "sotv",
     rarity: "void",
-    image: "https://riskofrain2.wiki.gg/images/Polylute.png",
+    image: "/logbook/item-polylute.webp",
   },
   {
     id: "item-singularityband",
@@ -2279,7 +2277,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.ElementalRingVoid",
     dlc: "sotv",
     rarity: "void",
-    image: "https://riskofrain2.wiki.gg/images/Singularity_Band.png",
+    image: "/logbook/item-singularityband.webp",
   },
   {
     id: "item-tentabauble",
@@ -2289,7 +2287,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.SlowOnHitVoid",
     dlc: "sotv",
     rarity: "void",
-    image: "https://riskofrain2.wiki.gg/images/Tentabauble.png",
+    image: "/logbook/item-tentabauble.webp",
   },
   {
     id: "item-voidsentflame",
@@ -2299,7 +2297,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.ExplodeOnDeathVoid",
     dlc: "sotv",
     rarity: "void",
-    image: "https://riskofrain2.wiki.gg/images/Voidsent_Flame.png",
+    image: "/logbook/item-voidsentflame.webp",
   },
   {
     id: "item-newlyhatched",
@@ -2309,7 +2307,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.VoidMegaCrabItem",
     dlc: "sotv",
     rarity: "void",
-    image: "https://riskofrain2.wiki.gg/images/Newly_Hatched_Zoea.png",
+    image: "/logbook/item-newlyhatched.webp",
   },
 
   // ============================================
@@ -2323,7 +2321,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.AttackSpeedAndMoveSpeed",
     dlc: "sotv",
     rarity: "common",
-    image: "https://riskofrain2.wiki.gg/images/Mocha.png",
+    image: "/logbook/item-mocha.webp",
   },
   {
     id: "item-delicatewatch",
@@ -2333,7 +2331,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.FragileDamageBonus",
     dlc: "sotv",
     rarity: "common",
-    image: "https://riskofrain2.wiki.gg/images/Delicate_Watch.png",
+    image: "/logbook/item-delicatewatch.webp",
   },
   {
     id: "item-rollofpennies",
@@ -2343,7 +2341,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.GoldOnHurt",
     dlc: "sotv",
     rarity: "common",
-    image: "https://riskofrain2.wiki.gg/images/Roll_of_Pennies.png",
+    image: "/logbook/item-rollofpennies.webp",
   },
   {
     id: "item-huntersharpoon",
@@ -2353,7 +2351,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.MoveSpeedOnKill",
     dlc: "sotv",
     rarity: "uncommon",
-    image: "https://riskofrain2.wiki.gg/images/Hunter%27s_Harpoon.png",
+    image: "/logbook/item-huntersharpoon.webp",
   },
   {
     id: "item-ignitiontank",
@@ -2363,7 +2361,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.StrengthenBurn",
     dlc: "sotv",
     rarity: "uncommon",
-    image: "https://riskofrain2.wiki.gg/images/Ignition_Tank.png",
+    image: "/logbook/item-ignitiontank.webp",
   },
   {
     id: "item-shuriken",
@@ -2373,7 +2371,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.PrimarySkillShuriken",
     dlc: "sotv",
     rarity: "uncommon",
-    image: "https://riskofrain2.wiki.gg/images/Shuriken.png",
+    image: "/logbook/item-shuriken.webp",
   },
   {
     id: "item-regenscrap",
@@ -2383,7 +2381,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.RegeneratingScrap",
     dlc: "sotv",
     rarity: "uncommon",
-    image: "https://riskofrain2.wiki.gg/images/Regenerating_Scrap.png",
+    image: "/logbook/item-regenscrap.webp",
   },
   {
     id: "item-shippingrequest",
@@ -2393,7 +2391,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.FreeChest",
     dlc: "sotv",
     rarity: "uncommon",
-    image: "https://riskofrain2.wiki.gg/images/Shipping_Request_Form.png",
+    image: "/logbook/item-shippingrequest.webp",
   },
   {
     id: "item-bensraincoat",
@@ -2403,7 +2401,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.ImmuneToDebuff",
     dlc: "sotv",
     rarity: "legendary",
-    image: "https://riskofrain2.wiki.gg/images/Ben%27s_Raincoat.png",
+    image: "/logbook/item-bensraincoat.webp",
   },
   {
     id: "item-bottledchaos",
@@ -2413,7 +2411,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.RandomEquipmentTrigger",
     dlc: "sotv",
     rarity: "legendary",
-    image: "https://riskofrain2.wiki.gg/images/Bottled_Chaos.png",
+    image: "/logbook/item-bottledchaos.webp",
   },
   {
     id: "item-laserscope",
@@ -2423,7 +2421,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.CritDamage",
     dlc: "sotv",
     rarity: "legendary",
-    image: "https://riskofrain2.wiki.gg/images/Laser_Scope.png",
+    image: "/logbook/item-laserscope.webp",
   },
   {
     id: "item-sparedroneparts",
@@ -2433,7 +2431,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.DroneWeapons",
     dlc: "sotv",
     rarity: "legendary",
-    image: "https://riskofrain2.wiki.gg/images/Spare_Drone_Parts.png",
+    image: "/logbook/item-sparedroneparts.webp",
   },
   {
     id: "item-symbioticscorpion",
@@ -2443,7 +2441,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.PermanentDebuffOnHit",
     dlc: "sotv",
     rarity: "legendary",
-    image: "https://riskofrain2.wiki.gg/images/Symbiotic_Scorpion.png",
+    image: "/logbook/item-symbioticscorpion.webp",
   },
   {
     id: "item-defensenucleus",
@@ -2453,7 +2451,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.MinorConstructOnKill",
     dlc: "sotv",
     rarity: "boss",
-    image: "https://riskofrain2.wiki.gg/images/Defense_Nucleus.png",
+    image: "/logbook/item-defensenucleus.webp",
   },
   {
     id: "item-egocentrism",
@@ -2463,7 +2461,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.LunarSun",
     dlc: "sotv",
     rarity: "lunar",
-    image: "https://riskofrain2.wiki.gg/images/Egocentrism.png",
+    image: "/logbook/item-egocentrism.webp",
   },
   {
     id: "item-eulogyzero",
@@ -2473,7 +2471,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.RandomlyLunar",
     dlc: "sotv",
     rarity: "lunar",
-    image: "https://riskofrain2.wiki.gg/images/Eulogy_Zero.png",
+    image: "/logbook/item-eulogyzero.webp",
   },
   {
     id: "item-lightflux",
@@ -2483,7 +2481,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.HalfAttackSpeedHalfCooldowns",
     dlc: "sotv",
     rarity: "lunar",
-    image: "https://riskofrain2.wiki.gg/images/Light_Flux_Pauldron.png",
+    image: "/logbook/item-lightflux.webp",
   },
   {
     id: "item-stoneflux",
@@ -2493,7 +2491,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.HalfSpeedDoubleHealth",
     dlc: "sotv",
     rarity: "lunar",
-    image: "https://riskofrain2.wiki.gg/images/Stone_Flux_Pauldron.png",
+    image: "/logbook/item-stoneflux.webp",
   },
 
   // ============================================
@@ -2507,7 +2505,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.SpeedBoostPickup",
     dlc: "sots",
     rarity: "common",
-    image: "https://riskofrain2.wiki.gg/images/Elusive_Antlers.png",
+    image: "/logbook/item-elusiveantlers.webp",
   },
   {
     id: "item-bolsteringlantern",
@@ -2517,7 +2515,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.AttackSpeedPerNearbyAllyOrEnemy",
     dlc: "sots",
     rarity: "common",
-    image: "https://riskofrain2.wiki.gg/images/Bolstering_Lantern.png",
+    image: "/logbook/item-bolsteringlantern.webp",
   },
   {
     id: "item-chronicexpansion",
@@ -2527,7 +2525,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.IncreaseDamageOnMultiKill",
     dlc: "sots",
     rarity: "common",
-    image: "https://riskofrain2.wiki.gg/images/Chronic_Expansion.png",
+    image: "/logbook/item-chronicexpansion.webp",
   },
   {
     id: "item-warpedecho",
@@ -2537,7 +2535,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.DelayedDamage",
     dlc: "sots",
     rarity: "common",
-    image: "https://riskofrain2.wiki.gg/images/Warped_Echo.png",
+    image: "/logbook/item-warpedecho.webp",
   },
 
   // ============================================
@@ -2551,7 +2549,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.KnockBackHitEnemies",
     dlc: "sots",
     rarity: "uncommon",
-    image: "https://riskofrain2.wiki.gg/images/Breaching_Fin.png",
+    image: "/logbook/item-breachingfin.webp",
   },
   {
     id: "item-chancedoll",
@@ -2561,7 +2559,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.ExtraShrineItem",
     dlc: "sots",
     rarity: "uncommon",
-    image: "https://riskofrain2.wiki.gg/images/Chance_Doll.png",
+    image: "/logbook/item-chancedoll.webp",
   },
   {
     id: "item-luminousshot",
@@ -2571,7 +2569,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.IncreasePrimaryDamage",
     dlc: "sots",
     rarity: "uncommon",
-    image: "https://riskofrain2.wiki.gg/images/Luminous_Shot.png",
+    image: "/logbook/item-luminousshot.webp",
   },
   {
     id: "item-noxiousthorn",
@@ -2581,7 +2579,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.TriggerEnemyDebuffs",
     dlc: "sots",
     rarity: "uncommon",
-    image: "https://riskofrain2.wiki.gg/images/Noxious_Thorn.png",
+    image: "/logbook/item-noxiousthorn.webp",
   },
   {
     id: "item-prayerbeads",
@@ -2591,7 +2589,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.ExtraStatsOnLevelUp",
     dlc: "sots",
     rarity: "uncommon",
-    image: "https://riskofrain2.wiki.gg/images/Prayer_Beads.png",
+    image: "/logbook/item-prayerbeads.webp",
   },
   {
     id: "item-salestar",
@@ -2601,7 +2599,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.LowerPricedChests",
     dlc: "sots",
     rarity: "uncommon",
-    image: "https://riskofrain2.wiki.gg/images/Sale_Star.png",
+    image: "/logbook/item-salestar.webp",
   },
   {
     id: "item-unstabletransmitter",
@@ -2611,7 +2609,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.TeleportOnLowHealth",
     dlc: "sots",
     rarity: "uncommon",
-    image: "https://riskofrain2.wiki.gg/images/Unstable_Transmitter.png",
+    image: "/logbook/item-unstabletransmitter.webp",
   },
 
   // ============================================
@@ -2625,7 +2623,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.StunAndPierce",
     dlc: "sots",
     rarity: "legendary",
-    image: "https://riskofrain2.wiki.gg/images/Electric_Boomerang.png",
+    image: "/logbook/item-electricboomerang.webp",
   },
   {
     id: "item-growthnectar",
@@ -2635,7 +2633,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.BoostAllStats",
     dlc: "sots",
     rarity: "legendary",
-    image: "https://riskofrain2.wiki.gg/images/Growth_Nectar.png",
+    image: "/logbook/item-growthnectar.webp",
   },
   {
     id: "item-runiclens",
@@ -2645,7 +2643,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.MeteorAttackOnHighDamage",
     dlc: "sots",
     rarity: "legendary",
-    image: "https://riskofrain2.wiki.gg/images/Runic_Lens.png",
+    image: "/logbook/item-runiclens.webp",
   },
   {
     id: "item-sonorouswhispers",
@@ -2655,7 +2653,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.ItemDropChanceOnKill",
     dlc: "sots",
     rarity: "legendary",
-    image: "https://riskofrain2.wiki.gg/images/Sonorous_Whispers.png",
+    image: "/logbook/item-sonorouswhispers.webp",
   },
   {
     id: "item-warbonds",
@@ -2665,7 +2663,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.BarrageOnBoss",
     dlc: "sots",
     rarity: "legendary",
-    image: "https://riskofrain2.wiki.gg/images/War_Bonds.png",
+    image: "/logbook/item-warbonds.webp",
   },
 
   // ============================================
@@ -2679,7 +2677,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.OnLevelUpFreeUnlock",
     dlc: "sots",
     rarity: "lunar",
-    image: "https://riskofrain2.wiki.gg/images/Longstanding_Solitude.png",
+    image: "/logbook/item-longstandingsolitude.webp",
   },
 
   // ============================================
@@ -2693,7 +2691,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "EquipmentIndex.DroneBackup",
     dlc: "base",
     rarity: "equipment",
-    image: "https://riskofrain2.wiki.gg/images/The_Back-up.png",
+    image: "/logbook/equip-dronebackup.webp",
   },
   {
     id: "equip-fuelarray",
@@ -2704,7 +2702,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "EquipmentIndex.QuestVolatileBattery",
     dlc: "base",
     rarity: "equipment",
-    image: "https://riskofrain2.wiki.gg/images/Fuel_Array.png",
+    image: "/logbook/equip-fuelarray.webp",
   },
   {
     id: "equip-bfg",
@@ -2714,7 +2712,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "EquipmentIndex.BFG",
     dlc: "base",
     rarity: "equipment",
-    image: "https://riskofrain2.wiki.gg/images/Preon_Accumulator.png",
+    image: "/logbook/equip-bfg.webp",
   },
   {
     id: "equip-blackhole",
@@ -2724,7 +2722,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "EquipmentIndex.Blackhole",
     dlc: "base",
     rarity: "equipment",
-    image: "https://riskofrain2.wiki.gg/images/Primordial_Cube.png",
+    image: "/logbook/equip-blackhole.webp",
   },
   {
     id: "equip-cleanse",
@@ -2734,7 +2732,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "EquipmentIndex.Cleanse",
     dlc: "base",
     rarity: "equipment",
-    image: "https://riskofrain2.wiki.gg/images/Blast_Shower.png",
+    image: "/logbook/equip-cleanse.webp",
   },
   {
     id: "equip-commandmissile",
@@ -2744,7 +2742,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "EquipmentIndex.CommandMissile",
     dlc: "base",
     rarity: "equipment",
-    image: "https://riskofrain2.wiki.gg/images/Disposable_Missile_Launcher.png",
+    image: "/logbook/equip-commandmissile.webp",
   },
   {
     id: "equip-critonuse",
@@ -2754,7 +2752,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "EquipmentIndex.CritOnUse",
     dlc: "base",
     rarity: "equipment",
-    image: "https://riskofrain2.wiki.gg/images/Ocular_HUD.png",
+    image: "/logbook/equip-critonuse.webp",
   },
   {
     id: "equip-fruit",
@@ -2764,7 +2762,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "EquipmentIndex.Fruit",
     dlc: "base",
     rarity: "equipment",
-    image: "https://riskofrain2.wiki.gg/images/Foreign_Fruit.png",
+    image: "/logbook/equip-fruit.webp",
   },
   {
     id: "equip-gainarmor",
@@ -2774,7 +2772,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "EquipmentIndex.GainArmor",
     dlc: "base",
     rarity: "equipment",
-    image: "https://riskofrain2.wiki.gg/images/Jade_Elephant.png",
+    image: "/logbook/equip-gainarmor.webp",
   },
   {
     id: "equip-gateway",
@@ -2784,7 +2782,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "EquipmentIndex.Gateway",
     dlc: "base",
     rarity: "equipment",
-    image: "https://riskofrain2.wiki.gg/images/Eccentric_Vase.png",
+    image: "/logbook/equip-gateway.webp",
   },
   {
     id: "equip-goldgat",
@@ -2794,7 +2792,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "EquipmentIndex.GoldGat",
     dlc: "base",
     rarity: "equipment",
-    image: "https://riskofrain2.wiki.gg/images/The_Crowdfunder.png",
+    image: "/logbook/equip-goldgat.webp",
   },
   {
     id: "equip-jetpack",
@@ -2804,7 +2802,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "EquipmentIndex.Jetpack",
     dlc: "base",
     rarity: "equipment",
-    image: "https://riskofrain2.wiki.gg/images/Milky_Chrysalis.png",
+    image: "/logbook/equip-jetpack.webp",
   },
   {
     id: "equip-lifesteal",
@@ -2814,7 +2812,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "EquipmentIndex.LifestealOnHit",
     dlc: "base",
     rarity: "equipment",
-    image: "https://riskofrain2.wiki.gg/images/Super_Massive_Leech.png",
+    image: "/logbook/equip-lifesteal.webp",
   },
   {
     id: "equip-lightning",
@@ -2824,7 +2822,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "EquipmentIndex.Lightning",
     dlc: "base",
     rarity: "equipment",
-    image: "https://riskofrain2.wiki.gg/images/Royal_Capacitor.png",
+    image: "/logbook/equip-lightning.webp",
   },
   {
     id: "equip-meteor",
@@ -2834,7 +2832,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "EquipmentIndex.Meteor",
     dlc: "base",
     rarity: "equipment",
-    image: "https://riskofrain2.wiki.gg/images/Glowing_Meteorite.png",
+    image: "/logbook/equip-meteor.webp",
   },
   {
     id: "equip-passivehealing",
@@ -2844,7 +2842,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "EquipmentIndex.PassiveHealing",
     dlc: "base",
     rarity: "equipment",
-    image: "https://riskofrain2.wiki.gg/images/Gnarled_Woodsprite.png",
+    image: "/logbook/equip-passivehealing.webp",
   },
   {
     id: "equip-recycle",
@@ -2854,7 +2852,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "EquipmentIndex.Recycle",
     dlc: "base",
     rarity: "equipment",
-    image: "https://riskofrain2.wiki.gg/images/Recycler.png",
+    image: "/logbook/equip-recycle.webp",
   },
   {
     id: "equip-saw",
@@ -2864,7 +2862,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "EquipmentIndex.Saw",
     dlc: "base",
     rarity: "equipment",
-    image: "https://riskofrain2.wiki.gg/images/Sawmerang.png",
+    image: "/logbook/equip-saw.webp",
   },
   {
     id: "equip-scanner",
@@ -2874,7 +2872,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "EquipmentIndex.Scanner",
     dlc: "base",
     rarity: "equipment",
-    image: "https://riskofrain2.wiki.gg/images/Radar_Scanner.png",
+    image: "/logbook/equip-scanner.webp",
   },
   {
     id: "equip-teamwarcry",
@@ -2884,7 +2882,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "EquipmentIndex.TeamWarCry",
     dlc: "base",
     rarity: "equipment",
-    image: "https://riskofrain2.wiki.gg/images/Gorag%27s_Opus.png",
+    image: "/logbook/equip-teamwarcry.webp",
   },
   {
     id: "equip-tonic",
@@ -2894,7 +2892,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "EquipmentIndex.Tonic",
     dlc: "base",
     rarity: "equipment",
-    image: "https://riskofrain2.wiki.gg/images/Spinel_Tonic.png",
+    image: "/logbook/equip-tonic.webp",
   },
   // ============================================
   // ELITE ASPECTS - Base Game
@@ -2908,7 +2906,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "EquipmentIndex.AffixRed",
     dlc: "base",
     rarity: "equipment",
-    image: "https://riskofrain2.wiki.gg/images/Ifrit%27s_Distinction.png",
+    image: "/logbook/equip-affixred.webp",
   },
   {
     id: "equip-affixblue",
@@ -2919,7 +2917,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "EquipmentIndex.AffixBlue",
     dlc: "base",
     rarity: "equipment",
-    image: "https://riskofrain2.wiki.gg/images/Silence_Between_Two_Strikes.png",
+    image: "/logbook/equip-affixblue.webp",
   },
   {
     id: "equip-affixwhite",
@@ -2930,7 +2928,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "EquipmentIndex.AffixWhite",
     dlc: "base",
     rarity: "equipment",
-    image: "https://riskofrain2.wiki.gg/images/Her_Biting_Embrace.png",
+    image: "/logbook/equip-affixwhite.webp",
   },
   {
     id: "equip-affixpoison",
@@ -2941,7 +2939,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "EquipmentIndex.AffixPoison",
     dlc: "base",
     rarity: "equipment",
-    image: "https://riskofrain2.wiki.gg/images/N%27kuhana%27s_Retort.png",
+    image: "/logbook/equip-affixpoison.webp",
   },
   {
     id: "equip-affixhaunted",
@@ -2952,7 +2950,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "EquipmentIndex.AffixHaunted",
     dlc: "base",
     rarity: "equipment",
-    image: "https://riskofrain2.wiki.gg/images/Spectral_Circlet.png",
+    image: "/logbook/equip-affixhaunted.webp",
   },
   // ============================================
   // ELITE ASPECTS - Survivors of the Void
@@ -2966,7 +2964,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "EquipmentIndex.AffixLunar",
     dlc: "sotv",
     rarity: "equipment",
-    image: "https://riskofrain2.wiki.gg/images/Shared_Design.png",
+    image: "/logbook/equip-affixlunar.webp",
   },
   {
     id: "equip-affixearth",
@@ -2977,7 +2975,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "EquipmentIndex.AffixEarth",
     dlc: "sotv",
     rarity: "equipment",
-    image: "https://riskofrain2.wiki.gg/images/His_Reassurance.png",
+    image: "/logbook/equip-affixearth.webp",
   },
   // ============================================
   // ELITE ASPECTS - Seekers of the Storm
@@ -2991,7 +2989,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "EquipmentIndex.AffixBead",
     dlc: "sots",
     rarity: "equipment",
-    image: "https://riskofrain2.wiki.gg/images/His_Spiteful_Boon.png",
+    image: "/logbook/equip-affixbead.webp",
   },
   {
     id: "equip-affixaurelionite",
@@ -3002,7 +3000,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "EquipmentIndex.AffixAurelionite",
     dlc: "sots",
     rarity: "equipment",
-    image: "https://riskofrain2.wiki.gg/images/Aurelionite%27s_Blessing.png",
+    image: "/logbook/equip-affixaurelionite.webp",
   },
   // ============================================
   // EQUIPMENT - Survivors of the Void
@@ -3015,7 +3013,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "EquipmentIndex.BossHunter",
     dlc: "sotv",
     rarity: "equipment",
-    image: "https://riskofrain2.wiki.gg/images/Trophy_Hunter%27s_Tricorn.png",
+    image: "/logbook/equip-bosshunter.webp",
   },
   {
     id: "equip-gummyclone",
@@ -3025,7 +3023,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "EquipmentIndex.GummyClone",
     dlc: "sotv",
     rarity: "equipment",
-    image: "https://riskofrain2.wiki.gg/images/Goobo_Jr..png",
+    image: "/logbook/equip-gummyclone.webp",
   },
   {
     id: "equip-molotov",
@@ -3035,7 +3033,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "EquipmentIndex.Molotov",
     dlc: "sotv",
     rarity: "equipment",
-    image: "https://riskofrain2.wiki.gg/images/Molotov_%286-Pack%29.png",
+    image: "/logbook/equip-molotov.webp",
   },
   {
     id: "equip-multishopcard",
@@ -3045,7 +3043,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "EquipmentIndex.MultiShopCard",
     dlc: "sotv",
     rarity: "equipment",
-    image: "https://riskofrain2.wiki.gg/images/Executive_Card.png",
+    image: "/logbook/equip-multishopcard.webp",
   },
   {
     id: "equip-vendingmachine",
@@ -3055,7 +3053,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "EquipmentIndex.VendingMachine",
     dlc: "sotv",
     rarity: "equipment",
-    image: "https://riskofrain2.wiki.gg/images/Remote_Caffeinator.png",
+    image: "/logbook/equip-vendingmachine.webp",
   },
   // Missing equipment - https://riskofrain2.fandom.com/wiki/Module:Equipment/Data
   {
@@ -3066,7 +3064,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "EquipmentIndex.BurnNearby",
     dlc: "base",
     rarity: "equipment",
-    image: "https://riskofrain2.wiki.gg/images/Helfire_Tincture.png",
+    image: "/logbook/equip-burnnearby.webp",
   },
   {
     id: "equip-deathprojectile",
@@ -3076,7 +3074,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "EquipmentIndex.DeathProjectile",
     dlc: "base",
     rarity: "equipment",
-    image: "https://riskofrain2.wiki.gg/images/Forgive_Me_Please.png",
+    image: "/logbook/equip-deathprojectile.webp",
   },
   {
     id: "equip-volcanicegg",
@@ -3086,7 +3084,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "EquipmentIndex.FireBallDash",
     dlc: "base",
     rarity: "equipment",
-    image: "https://riskofrain2.wiki.gg/images/Volcanic_Egg.png",
+    image: "/logbook/equip-volcanicegg.webp",
   },
   {
     id: "equip-effigyofgrief",
@@ -3096,7 +3094,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "EquipmentIndex.CrippleWard",
     dlc: "base",
     rarity: "equipment",
-    image: "https://riskofrain2.wiki.gg/images/Effigy_of_Grief.png",
+    image: "/logbook/equip-effigyofgrief.webp",
   },
   {
     id: "equip-healandrevive",
@@ -3106,7 +3104,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "EquipmentIndex.HealAndRevive",
     dlc: "sots",
     rarity: "equipment",
-    image: "https://riskofrain2.wiki.gg/images/Seed_of_Life.png",
+    image: "/logbook/equip-healandrevive.webp",
   },
   {
     id: "equip-parry",
@@ -3116,7 +3114,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "EquipmentIndex.Parry",
     dlc: "ac",
     rarity: "equipment",
-    image: "https://riskofrain2.wiki.gg/images/Deus_Ex_Machina.png",
+    image: "/logbook/equip-parry.webp",
   },
   {
     id: "equip-elitecollective",
@@ -3127,7 +3125,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "EquipmentIndex.EliteCollectiveEquipment",
     dlc: "ac",
     rarity: "equipment",
-    image: "https://riskofrain2.wiki.gg/images/Of_One_Mind.png",
+    image: "/logbook/equip-elitecollective.webp",
   },
   // ============================================
   // AC ITEMS - Alloyed Collective
@@ -3142,7 +3140,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.BarrierOnCooldown",
     dlc: "ac",
     rarity: "common",
-    image: "https://riskofrain2.wiki.gg/images/Eclipse_Lite.png",
+    image: "/logbook/item-barrieroncooldown.webp",
   },
   {
     id: "item-critatlowerelevation",
@@ -3152,7 +3150,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.CritAtLowerElevation",
     dlc: "ac",
     rarity: "common",
-    image: "https://riskofrain2.wiki.gg/images/Hiker's_Boots.png",
+    image: "/logbook/item-critatlowerelevation.webp",
   },
   // Uncommon
   {
@@ -3163,7 +3161,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.DroneDropsDynamite",
     dlc: "ac",
     rarity: "uncommon",
-    image: "https://riskofrain2.wiki.gg/images/Box_of_Dynamite.png",
+    image: "/logbook/item-dronedropsdynamite.webp",
   },
   {
     id: "item-speedonpickup",
@@ -3173,7 +3171,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.SpeedOnPickup",
     dlc: "ac",
     rarity: "uncommon",
-    image: "https://riskofrain2.wiki.gg/images/Collector's_Compulsion.png",
+    image: "/logbook/item-speedonpickup.webp",
   },
   {
     id: "item-jumpdamagestrike",
@@ -3183,7 +3181,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.JumpDamageStrike",
     dlc: "ac",
     rarity: "uncommon",
-    image: "https://riskofrain2.wiki.gg/images/Faraday_Spur.png",
+    image: "/logbook/item-jumpdamagestrike.webp",
   },
   {
     id: "item-shieldbooster",
@@ -3193,7 +3191,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.ShieldBooster",
     dlc: "ac",
     rarity: "uncommon",
-    image: "https://riskofrain2.wiki.gg/images/Kinetic_Dampener.png",
+    image: "/logbook/item-shieldbooster.webp",
   },
   // Legendary
   {
@@ -3204,7 +3202,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.SharedSuffering",
     dlc: "ac",
     rarity: "legendary",
-    image: "https://riskofrain2.wiki.gg/images/Networked_Suffering.png",
+    image: "/logbook/item-sharedsuffering.webp",
   },
   {
     id: "item-physicsprojectile",
@@ -3214,7 +3212,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.PhysicsProjectile",
     dlc: "ac",
     rarity: "legendary",
-    image: "https://riskofrain2.wiki.gg/images/Orphaned_Core.png",
+    image: "/logbook/item-physicsprojectile.webp",
   },
   {
     id: "item-duplicator",
@@ -3224,7 +3222,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.Duplicator",
     dlc: "ac",
     rarity: "legendary",
-    image: "https://riskofrain2.wiki.gg/images/Substandard_Duplicator.png",
+    image: "/logbook/item-duplicator.webp",
   },
   // Boss
   {
@@ -3235,7 +3233,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.MasterBattery",
     dlc: "ac",
     rarity: "boss",
-    image: "https://riskofrain2.wiki.gg/images/Encrypted_Cerebellum.png",
+    image: "/logbook/item-masterbattery.webp",
   },
   {
     id: "item-mastercore",
@@ -3245,7 +3243,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.MasterCore",
     dlc: "ac",
     rarity: "boss",
-    image: "https://riskofrain2.wiki.gg/images/Exposed_Cerebellum.png",
+    image: "/logbook/item-mastercore.webp",
   },
   {
     id: "item-shockdamageaura",
@@ -3255,7 +3253,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.ShockDamageAura",
     dlc: "ac",
     rarity: "boss",
-    image: "https://riskofrain2.wiki.gg/images/Faulty_Conductor.png",
+    image: "/logbook/item-shockdamageaura.webp",
   },
   {
     id: "item-extraequipment",
@@ -3265,7 +3263,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.ExtraEquipment",
     dlc: "ac",
     rarity: "boss",
-    image: "https://riskofrain2.wiki.gg/images/Functional_Coupler.png",
+    image: "/logbook/item-extraequipment.webp",
   },
   {
     id: "item-powercube",
@@ -3275,7 +3273,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.PowerCube",
     dlc: "ac",
     rarity: "boss",
-    image: "https://riskofrain2.wiki.gg/images/Prison_Matrix.png",
+    image: "/logbook/item-powercube.webp",
   },
   {
     id: "item-powerpyramid",
@@ -3285,7 +3283,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.PowerPyramid",
     dlc: "ac",
     rarity: "boss",
-    image: "https://riskofrain2.wiki.gg/images/Sentry_Key.png",
+    image: "/logbook/item-powerpyramid.webp",
   },
   // Lunar
   {
@@ -3296,7 +3294,7 @@ export const logbookEntries: LogbookEntry[] = [
     pickupId: "ItemIndex.TransferDebuffOnHit",
     dlc: "ac",
     rarity: "lunar",
-    image: "https://riskofrain2.wiki.gg/images/Neutronium_Weight.png",
+    image: "/logbook/item-transferdebuffonhit.webp",
   },
 
   // ============================================
@@ -3308,7 +3306,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "drones",
     unlockId: "Logs.Drone1Body.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Gunner_Drone.png",
+    image: "/logbook/drone-gunner.webp",
   },
   {
     id: "drone-healing",
@@ -3316,7 +3314,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "drones",
     unlockId: "Logs.Drone2Body.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Healing_Drone.png",
+    image: "/logbook/drone-healing.webp",
   },
   {
     id: "drone-turret",
@@ -3324,7 +3322,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "drones",
     unlockId: "Logs.Turret1Body.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Gunner_Turret.png",
+    image: "/logbook/drone-turret.webp",
   },
   {
     id: "drone-emergency",
@@ -3332,7 +3330,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "drones",
     unlockId: "Logs.EmergencyDroneBody.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Emergency_Drone.png",
+    image: "/logbook/drone-emergency.webp",
   },
   {
     id: "drone-equipment",
@@ -3340,7 +3338,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "drones",
     unlockId: "Logs.EquipmentDroneBody.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Equipment_Drone.png",
+    image: "/logbook/drone-equipment.webp",
   },
   {
     id: "drone-incinerator",
@@ -3348,7 +3346,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "drones",
     unlockId: "Logs.FlameDroneBody.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Incinerator_Drone.png",
+    image: "/logbook/drone-incinerator.webp",
   },
   {
     id: "drone-missile",
@@ -3356,7 +3354,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "drones",
     unlockId: "Logs.MissileDroneBody.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/Missile_Drone.png",
+    image: "/logbook/drone-missile.webp",
   },
   {
     id: "drone-tc280",
@@ -3364,7 +3362,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "drones",
     unlockId: "Logs.MegaDroneBody.0",
     dlc: "base",
-    image: "https://riskofrain2.wiki.gg/images/TC-280_Prototype.png",
+    image: "/logbook/drone-tc280.webp",
   },
 
   // ============================================
@@ -3376,7 +3374,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "drones",
     unlockId: "Logs.DroneCommanderBody.0",
     dlc: "sotv",
-    image: "https://riskofrain2.wiki.gg/images/Col._Droneman.png",
+    image: "/logbook/drone-coldroneman.webp",
   },
 
   // ============================================
@@ -3388,7 +3386,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "drones",
     unlockId: "Logs.HaulerDroneBody.0",
     dlc: "ac",
-    image: "https://riskofrain2.wiki.gg/images/Transport_Drone.png",
+    image: "/logbook/drone-transport.webp",
   },
   {
     id: "drone-junk",
@@ -3396,7 +3394,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "drones",
     unlockId: "Logs.JunkDroneBody.0",
     dlc: "ac",
-    image: "https://riskofrain2.wiki.gg/images/Junk_Drone.png",
+    image: "/logbook/drone-junk.webp",
   },
   {
     id: "drone-bestbuddy",
@@ -3405,7 +3403,6 @@ export const logbookEntries: LogbookEntry[] = [
     category: "drones",
     unlockId: "Logs.BestBuddyBody.0",
     dlc: "ac",
-    image: "https://riskofrain2.wiki.gg/images/Orphaned_Core.png",
   },
   {
     id: "drone-cleanup",
@@ -3413,7 +3410,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "drones",
     unlockId: "Logs.CleanupDroneBody.0",
     dlc: "ac",
-    image: "https://riskofrain2.wiki.gg/images/Cleanup_Drone.png",
+    image: "/logbook/drone-cleanup.webp",
   },
   {
     id: "drone-ltdroneboy",
@@ -3421,7 +3418,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "drones",
     unlockId: "Logs.DroneBomberBody.0",
     dlc: "ac",
-    image: "https://riskofrain2.wiki.gg/images/Lt._Droneboy.png",
+    image: "/logbook/drone-ltdroneboy.webp",
   },
   {
     id: "drone-crosshairs",
@@ -3430,7 +3427,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "drones",
     unlockId: "Logs.DTGunnerDroneBody.0",
     dlc: "ac",
-    image: "https://riskofrain2.wiki.gg/images/CROSSHAIRS.png",
+    image: "/logbook/drone-crosshairs.webp",
   },
   {
     id: "drone-chirp",
@@ -3439,7 +3436,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "drones",
     unlockId: "Logs.DTHaulerDroneBody.0",
     dlc: "ac",
-    image: "https://riskofrain2.wiki.gg/images/CHIRP.png",
+    image: "/logbook/drone-chirp.webp",
   },
   {
     id: "drone-doc",
@@ -3448,7 +3445,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "drones",
     unlockId: "Logs.DTHealingDroneBody.0",
     dlc: "ac",
-    image: "https://riskofrain2.wiki.gg/images/DOC.png",
+    image: "/logbook/drone-doc.webp",
   },
   {
     id: "drone-jailer",
@@ -3456,7 +3453,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "drones",
     unlockId: "Logs.JailerDroneBody.0",
     dlc: "ac",
-    image: "https://riskofrain2.wiki.gg/images/Jailer_Drone.png",
+    image: "/logbook/drone-jailer.webp",
   },
   {
     id: "drone-barrier",
@@ -3464,7 +3461,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "drones",
     unlockId: "Logs.RechargeDroneBody.0",
     dlc: "ac",
-    image: "https://riskofrain2.wiki.gg/images/Barrier_Drone.png",
+    image: "/logbook/drone-barrier.webp",
   },
   {
     id: "drone-bombardment",
@@ -3472,7 +3469,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "drones",
     unlockId: "Logs.BombardmentDroneBody.0",
     dlc: "ac",
-    image: "https://riskofrain2.wiki.gg/images/Bombardment_Drone.png",
+    image: "/logbook/drone-bombardment.webp",
   },
   {
     id: "drone-freeze",
@@ -3480,7 +3477,7 @@ export const logbookEntries: LogbookEntry[] = [
     category: "drones",
     unlockId: "Logs.CopycatDroneBody.0",
     dlc: "ac",
-    image: "https://riskofrain2.wiki.gg/images/Freeze_Drone.png",
+    image: "/logbook/drone-freeze.webp",
   },
 ];
 
