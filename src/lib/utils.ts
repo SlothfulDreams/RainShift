@@ -1,34 +1,3 @@
-import { type ClassValue, clsx } from "clsx";
-
-/**
- * Utility for merging class names (like clsx)
- */
-export function cn(...inputs: ClassValue[]): string {
-  return clsx(inputs);
-}
-
-/**
- * Format a number with commas for display
- */
-export function formatNumber(num: number): string {
-  return num.toLocaleString();
-}
-
-/**
- * Debounce function for search inputs
- */
-export function debounce<T extends (...args: Parameters<T>) => void>(
-  func: T,
-  wait: number,
-): (...args: Parameters<T>) => void {
-  let timeout: NodeJS.Timeout | null = null;
-
-  return (...args: Parameters<T>) => {
-    if (timeout) clearTimeout(timeout);
-    timeout = setTimeout(() => func(...args), wait);
-  };
-}
-
 /**
  * Download a string as a file
  */
@@ -67,44 +36,4 @@ export function isValidSaveFile(file: File): boolean {
   const validExtensions = [".xml"];
   const fileName = file.name.toLowerCase();
   return validExtensions.some((ext) => fileName.endsWith(ext));
-}
-
-/**
- * Get DLC display badge color
- */
-export function getDLCColor(
-  dlc: string,
-): "default" | "primary" | "secondary" | "lunar" | "void" {
-  switch (dlc) {
-    case "base":
-      return "default";
-    case "sotv":
-      return "void";
-    case "sots":
-      return "secondary";
-    case "ac":
-      return "primary";
-    default:
-      return "default";
-  }
-}
-
-/**
- * Get category icon name (for lucide-react)
- */
-export function getCategoryIcon(category: string): string {
-  switch (category) {
-    case "survivors":
-      return "Users";
-    case "skills":
-      return "Zap";
-    case "skins":
-      return "Palette";
-    case "items":
-      return "Package";
-    case "artifacts":
-      return "Gem";
-    default:
-      return "Circle";
-  }
 }

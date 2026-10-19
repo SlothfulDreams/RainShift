@@ -254,20 +254,6 @@ export function lockAll(saveData: SaveData): SaveData {
 }
 
 /**
- * Get count of unlocked achievements
- */
-export function getUnlockedCount(saveData: SaveData): number {
-  return saveData.achievements.length;
-}
-
-/**
- * Get count of total achievements
- */
-export function getTotalCount(): number {
-  return challenges.length;
-}
-
-/**
  * Generate the modified XML string for download
  */
 export function generateModifiedXml(

@@ -173,19 +173,3 @@ export const survivors: Survivor[] = [
       "The Acolyte is a close-range whirlwind of death, conducting sacrifices to unleash the Anima Harvester that is bound to her. Balance shall be restored to Petrichor V.",
   },
 ];
-
-// Helper to get survivor by ID
-export function getSurvivorById(id: string): Survivor | undefined {
-  return survivors.find((s) => s.id === id);
-}
-
-// Helper to get survivors by DLC
-export function getSurvivorsByDLC(dlc: string): Survivor[] {
-  if (dlc === "all") return survivors;
-  return survivors.filter((s) => s.dlc === dlc);
-}
-
-// Helper to get unlockable survivors (those with unlock achievements)
-export function getUnlockableSurvivors(): Survivor[] {
-  return survivors.filter((s) => s.unlockAchievement !== undefined);
-}
