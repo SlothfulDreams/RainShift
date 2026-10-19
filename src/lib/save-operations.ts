@@ -432,13 +432,10 @@ function setLogbookEntries(
   const discoveredPickups = new Set(data.discoveredPickups);
   const stats = new Map(data.stats);
 
-  // A gate that no achievement grants is written directly
-  const unlockUngrantedGate = (entry: LogbookEntry) => {
-    if (
-      enabled &&
-      entry.unlockId &&
-      challengesForLogbookEntry(entry).length === 0
-    ) {
+  // Always write the entry's own gate: an achievement may be owned while its
+  // unlockable is missing, or no achievement may grant it at all
+  const unlockGate = (entry: LogbookEntry) => {
+    if (enabled && entry.unlockId) {
       unlocks.add(entry.unlockId);
     }
   };
@@ -449,7 +446,7 @@ function setLogbookEntries(
       case "equipment":
         if (!entry.pickupId) break;
         setMember(discoveredPickups, entry.pickupId, enabled);
-        unlockUngrantedGate(entry);
+        unlockGate(entry);
         break;
       case "monsters":
       case "environments":
@@ -462,7 +459,7 @@ function setLogbookEntries(
         } else if (statValue(data, winsStat(entry)) < 1) {
           stats.set(winsStat(entry), "1");
         }
-        unlockUngrantedGate(entry);
+        unlockGate(entry);
         break;
       case "drones":
         if (!entry.pickupId) break;

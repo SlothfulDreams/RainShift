@@ -231,3 +231,21 @@ describe("logbook save fields", () => {
     }
   });
 });
+
+describe("logbook gates already granted by an owned achievement", () => {
+  it("writes a missing survivor unlock when its achievement is owned", () => {
+    const bandit = entry("Bandit");
+    const owned = { ...empty(), achievements: ["CompleteThreeStages"] };
+    const on = toggleLogbookEntry(owned, bandit, true);
+    expect(on.unlocks).toContain("Characters.Bandit2");
+    expect(isLogbookEntryUnlocked(on, bandit)).toBe(true);
+  });
+
+  it("writes a missing item gate when its achievement is owned", () => {
+    const medkit = entry("Medkit");
+    const owned = { ...empty(), achievements: ["KillEliteMonster"] };
+    const on = toggleLogbookEntry(owned, medkit, true);
+    expect(on.unlocks).toContain("Items.Medkit");
+    expect(isLogbookEntryUnlocked(on, medkit)).toBe(true);
+  });
+});
