@@ -157,17 +157,21 @@ function StageCard({
             <button
               type="button"
               onClick={() => onSet(altars, !allFound)}
+              aria-label={`${allFound ? "Lock" : "Unlock"} all ${stage.name} altars`}
               className="ror-button text-[9px] py-1 px-2 flex-shrink-0"
             >
               {allFound ? "LOCK" : "UNLOCK"} ALL
             </button>
           </div>
 
-          {scenes.map((scene) => (
+          {scenes.map((scene, i) => (
             <div key={scene} className="flex items-center gap-1.5 flex-wrap">
               {scenes.length > 1 && (
-                <span className="text-[9px] font-mono text-ror-text-dim w-full">
-                  {scene}
+                <span
+                  title={scene}
+                  className="text-[9px] uppercase tracking-wider text-ror-text-dim w-full"
+                >
+                  Layout {i + 1}
                 </span>
               )}
               {altars
@@ -176,6 +180,7 @@ function StageCard({
                   <AltarToggle
                     key={altar.unlockId}
                     altar={altar}
+                    stageName={stage.name}
                     isUnlocked={isNewtAltarUnlocked(saveData, altar)}
                     onToggle={(enabled) => onSet([altar], enabled)}
                   />
@@ -190,10 +195,12 @@ function StageCard({
 
 function AltarToggle({
   altar,
+  stageName,
   isUnlocked,
   onToggle,
 }: {
   altar: NewtAltar;
+  stageName: string;
   isUnlocked: boolean;
   onToggle: (enabled: boolean) => void;
 }) {
@@ -203,10 +210,11 @@ function AltarToggle({
       type="button"
       onClick={() => onToggle(!isUnlocked)}
       aria-pressed={isUnlocked}
-      aria-label={`Altar ${number} (${altar.unlockId})`}
+      aria-label={`${stageName} altar ${number}`}
       title={altar.unlockId}
       className={`
-        flex items-center gap-1 px-2 py-1 text-[10px] uppercase tracking-wider border transition-all
+        flex items-center gap-1 px-2 py-1.5 text-[10px] uppercase tracking-wider border
+        transition-[color,background-color,border-color,transform] duration-150 active:scale-95
         focus-visible:outline-2 focus-visible:outline-ror-orange-accent
         ${
           isUnlocked
