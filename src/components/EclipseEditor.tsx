@@ -103,7 +103,7 @@ export function EclipseEditor({
 
       {/* Grid */}
       <div
-        className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-3 overflow-y-auto pr-2 pb-4 custom-scrollbar"
+        className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 overflow-y-auto pr-2 pb-4 custom-scrollbar"
         style={{ maxHeight: "calc(100vh - 280px)" }}
       >
         {eclipseSurvivors.map((survivor, i) => {
