@@ -54,7 +54,7 @@ export function KarmaEditor({ saveData, onSaveDataChange }: KarmaEditorProps) {
             Unlocked up to {current}
           </p>
           <p className="text-[10px] text-ror-text-dim leading-snug">
-            Winning a run at karma N unlocks levels 1–N.
+            Winning a run unlocks the karma level you ended on.
           </p>
         </div>
       </div>
