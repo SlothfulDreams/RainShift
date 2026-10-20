@@ -110,30 +110,27 @@ export function KarmaEditor({
         })}
       </fieldset>
 
-      {!hasLevelZero && (
+      {!hasLevelZero && captainChallenge && (
         <div className="flex items-center justify-between gap-3">
           <p className="text-[10px] text-ror-text-dim leading-snug">
-            &ldquo;No Karma&rdquo; needs the Captain.
+            {`Picking a level also unlocks the Captain (${captainChallenge.name}).`}
           </p>
-          {captainChallenge && (
-            <button
-              type="button"
-              onClick={() =>
-                onSaveDataChange(
-                  toggleAchievement(
-                    saveData,
-                    captainChallenge.achievement,
-                    true,
-                    { awardCoins },
-                  ),
-                )
-              }
-              title={`Unlocks the "${captainChallenge.name}" achievement`}
-              className="flex-shrink-0 px-2 py-1 text-[10px] uppercase tracking-wider font-display text-ror-lunar border border-ror-lunar/40 hover:bg-ror-lunar/10 hover:border-ror-lunar/60 transition-colors cursor-pointer focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-ror-lunar"
-            >
-              Unlock Captain
-            </button>
-          )}
+          <button
+            type="button"
+            onClick={() =>
+              onSaveDataChange(
+                toggleAchievement(
+                  saveData,
+                  captainChallenge.achievement,
+                  true,
+                  { awardCoins },
+                ),
+              )
+            }
+            className="flex-shrink-0 min-h-11 px-3 text-[10px] uppercase tracking-wider font-display text-ror-lunar border border-ror-lunar/40 hover:bg-ror-lunar/10 hover:border-ror-lunar/60 transition-colors cursor-pointer focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-ror-lunar"
+          >
+            Unlock Captain
+          </button>
         </div>
       )}
     </div>
