@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import { challenges } from "@/data/challenges";
+import { newtAltars } from "@/data/newt-altars";
 import type {
   ChallengeCategory,
   DLC,
@@ -21,6 +22,7 @@ import type {
 } from "@/data/types";
 import { CATEGORY_NAMES, DLC_NAMES } from "@/data/types";
 import { getLogbookCountForChallenge } from "@/lib/challenge-logbook-mapping";
+import { countUnlockedNewtAltars } from "@/lib/newt-altars";
 import {
   calculateLogbookStats,
   calculateSaveStats,
@@ -226,6 +228,12 @@ export function SaveEditor({
                 value={logbookStats.unlockedEntries}
                 max={logbookStats.totalEntries}
                 color="var(--ror-equipment)"
+              />
+              <StatBar
+                label="NEWT ALTARS"
+                value={countUnlockedNewtAltars(saveData)}
+                max={newtAltars.length}
+                color="var(--ror-lunar)"
               />
             </div>
           </div>
