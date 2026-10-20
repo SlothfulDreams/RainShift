@@ -319,13 +319,13 @@ export function SaveEditor({
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.25 }}
-          className="flex border-b border-ror-border"
+          className="flex border-b border-ror-border overflow-x-auto"
         >
           <button
             type="button"
             onClick={() => setActiveTab("achievements")}
             className={`
-              px-6 py-3 text-sm font-display uppercase tracking-wider transition-all flex items-center gap-2
+              shrink-0 whitespace-nowrap px-4 sm:px-6 py-3 text-sm font-display uppercase tracking-wider transition-all flex items-center gap-2
               ${
                 activeTab === "achievements"
                   ? "text-ror-text-main border-b-2 border-ror-orange-accent"
@@ -340,7 +340,7 @@ export function SaveEditor({
             type="button"
             onClick={() => setActiveTab("logbook")}
             className={`
-              px-6 py-3 text-sm font-display uppercase tracking-wider transition-all flex items-center gap-2
+              shrink-0 whitespace-nowrap px-4 sm:px-6 py-3 text-sm font-display uppercase tracking-wider transition-all flex items-center gap-2
               ${
                 activeTab === "logbook"
                   ? "text-ror-text-main border-b-2 border-ror-orange-accent"
@@ -355,7 +355,7 @@ export function SaveEditor({
             type="button"
             onClick={() => setActiveTab("newts")}
             className={`
-              px-6 py-3 text-sm font-display uppercase tracking-wider transition-all flex items-center gap-2
+              shrink-0 whitespace-nowrap px-4 sm:px-6 py-3 text-sm font-display uppercase tracking-wider transition-all flex items-center gap-2
               ${
                 activeTab === "newts"
                   ? "text-ror-text-main border-b-2 border-ror-orange-accent"
