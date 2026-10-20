@@ -75,6 +75,9 @@ export function KarmaEditor({
         {startingKarmaLevels.map((level) => {
           const unlocked = isStartingKarmaUnlocked(saveData, level.level);
           const selected = level.level === current;
+          // Clicking the current level again deselects just that level
+          const target =
+            selected && level.level > 0 ? level.level - 1 : level.level;
           return (
             <motion.button
               key={level.level}
@@ -83,11 +86,15 @@ export function KarmaEditor({
               whileTap={{ scale: 0.95 }}
               onClick={() =>
                 onSaveDataChange(
-                  setStartingKarma(saveData, level.level, { awardCoins }),
+                  setStartingKarma(saveData, target, { awardCoins }),
                 )
               }
               aria-pressed={selected}
-              aria-label={`Unlock starting karma up to ${level.level}`}
+              aria-label={
+                target === level.level
+                  ? `Unlock starting karma up to ${level.level}`
+                  : `Lock starting karma level ${level.level}`
+              }
               title={`${level.name}${unlocked ? "" : " (locked)"}: ${level.description}`}
               className="aspect-square p-0.5 cursor-pointer focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-ror-lunar"
             >
