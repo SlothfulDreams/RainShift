@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { Check, Landmark, Lock, MapPin } from "lucide-react";
-import Image from "next/image";
 import type { NewtAltar } from "@/data/newt-altars";
 import { newtAltars } from "@/data/newt-altars";
 import type { DLC, SaveData } from "@/data/types";
@@ -17,6 +16,7 @@ import {
   setNewtAltars,
   unlockAllNewtAltars,
 } from "@/lib/newt-altars";
+import { LogbookIcon } from "./LogbookIcon";
 
 const DLC_SHORT_NAMES: Record<DLC, string> = {
   base: "Base",
@@ -137,18 +137,10 @@ function StageCard({
       />
       <div className="p-3 flex gap-3 flex-1">
         <div className="relative w-12 h-12 flex-shrink-0 bg-black border border-ror-border flex items-center justify-center overflow-hidden">
-          {stage.image ? (
-            <Image
-              src={stage.image}
-              alt={stage.name}
-              width={48}
-              height={48}
-              className="object-cover w-full h-full"
-              unoptimized
-            />
-          ) : (
-            <MapPin size={20} className="text-ror-text-dim" />
-          )}
+          <LogbookIcon
+            entry={stage}
+            fallback={<MapPin size={20} className="text-ror-text-dim" />}
+          />
         </div>
 
         <div className="flex-1 min-w-0 flex flex-col gap-2">
