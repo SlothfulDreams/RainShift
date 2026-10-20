@@ -77,14 +77,7 @@ export function KarmaEditor({ saveData, onSaveDataChange }: KarmaEditorProps) {
               aria-pressed={selected}
               aria-label={`Unlock starting karma up to ${level.level}`}
               title={`${level.name}${unlocked ? "" : " (locked)"}: ${level.description}`}
-              className={`
-                relative aspect-square p-0.5 border transition-all
-                ${
-                  selected
-                    ? "border-ror-lunar bg-ror-lunar/15"
-                    : "border-transparent hover:border-ror-lunar/40"
-                }
-              `}
+              className="aspect-square p-0.5 cursor-pointer focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-ror-lunar"
             >
               {level.image ? (
                 <Image
