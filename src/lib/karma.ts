@@ -1,6 +1,7 @@
 import { challenges } from "@/data/challenges";
 import { startingKarmaLevels } from "@/data/karma-levels";
 import type { SaveData } from "@/data/types";
+import { toggleAchievement, type UnlockOptions } from "./save-operations";
 
 /**
  * Starting karma (Karma.InitialLevel run rule).
@@ -8,7 +9,7 @@ import type { SaveData } from "@/data/types";
  * (KarmaManager.GetRequiredUnlockableForKarmaLevel), stored as an <unlock> in
  * <stats>. Winning a run at karma N grants the unlockables of levels 1..N
  * (KarmaManager.OnClientGameOver); level 0 is gated by the Captain unlock
- * instead, so the editor leaves it alone.
+ * instead.
  */
 
 export const MAX_STARTING_KARMA = Math.max(
@@ -54,8 +55,17 @@ export const levelZeroChallenge = levelZeroGate
 /**
  * Unlock starting karma up to `level`: writes levels 1..level and removes the
  * ones above it. Other unlocks keep their order.
+ *
+ * Karma is off by default and every choice that turns it on is locked, level
+ * 0 behind the Captain. Solo, earning any level therefore means the profile
+ * already beat the game, so level 1 and up also unlocks Washed Away. Going
+ * back to 0 keeps it: the game never revokes it.
  */
-export function setStartingKarma(saveData: SaveData, level: number): SaveData {
+export function setStartingKarma(
+  saveData: SaveData,
+  level: number,
+  options: UnlockOptions = {},
+): SaveData {
   const max = Math.min(Math.max(Math.trunc(level) || 0, 0), MAX_STARTING_KARMA);
   const wanted = grantedLevels
     .filter((l) => l.level <= max)
@@ -67,5 +77,14 @@ export function setStartingKarma(saveData: SaveData, level: number): SaveData {
   for (const id of wanted) {
     if (!unlocks.includes(id)) unlocks.push(id);
   }
-  return { ...saveData, unlocks };
+  const result = { ...saveData, unlocks };
+  if (max > 0 && levelZeroChallenge && !isStartingKarmaUnlocked(result, 0)) {
+    return toggleAchievement(
+      result,
+      levelZeroChallenge.achievement,
+      true,
+      options,
+    );
+  }
+  return result;
 }

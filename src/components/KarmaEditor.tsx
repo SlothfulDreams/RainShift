@@ -15,7 +15,7 @@ import { toggleAchievement } from "@/lib/save-operations";
 interface KarmaEditorProps {
   saveData: SaveData;
   onSaveDataChange: (saveData: SaveData) => void;
-  /** Award lunar coins when unlocking the Captain's achievement */
+  /** Award lunar coins when unlocking the Captain's achievement (Washed Away) */
   awardCoins?: boolean;
 }
 
@@ -82,7 +82,9 @@ export function KarmaEditor({
               whileHover={{ scale: 1.08 }}
               whileTap={{ scale: 0.95 }}
               onClick={() =>
-                onSaveDataChange(setStartingKarma(saveData, level.level))
+                onSaveDataChange(
+                  setStartingKarma(saveData, level.level, { awardCoins }),
+                )
               }
               aria-pressed={selected}
               aria-label={`Unlock starting karma up to ${level.level}`}

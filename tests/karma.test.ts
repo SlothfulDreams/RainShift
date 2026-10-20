@@ -84,6 +84,7 @@ describe("setStartingKarma", () => {
 
   it("keeps other unlocks in order and does not duplicate", () => {
     const original = createSaveData([
+      "Characters.Captain",
       "Logs.BeetleBody.0",
       karmaKey(2),
       "Characters.Huntress",
@@ -91,6 +92,7 @@ describe("setStartingKarma", () => {
     ]);
     const data = setStartingKarma(original, 3);
     expect(data.unlocks).toEqual([
+      "Characters.Captain",
       "Logs.BeetleBody.0",
       karmaKey(2),
       "Characters.Huntress",
@@ -99,7 +101,31 @@ describe("setStartingKarma", () => {
     ]);
     expect(setStartingKarma(data, 3).unlocks).toEqual(data.unlocks);
     // Immutable
-    expect(original.unlocks).toHaveLength(4);
+    expect(original.unlocks).toHaveLength(5);
+  });
+
+  it("level 1 and up also unlocks Washed Away (the Captain)", () => {
+    const data = setStartingKarma(createSaveData(), 5, { awardCoins: true });
+    expect(data.achievements).toEqual(["CompleteMainEnding"]);
+    expect(isStartingKarmaUnlocked(data, 0)).toBe(true);
+    expect(data.coins).toBe(levelZeroChallenge?.lunarCoins);
+    expect(setStartingKarma(createSaveData(), 5).coins).toBe(0);
+  });
+
+  it("0 does not unlock the Captain, and going back to 0 keeps it", () => {
+    expect(setStartingKarma(createSaveData(), 0).unlocks).toEqual([]);
+    const five = setStartingKarma(createSaveData(), 5);
+    const zero = setStartingKarma(five, 0);
+    expect(zero.achievements).toContain("CompleteMainEnding");
+    expect(isStartingKarmaUnlocked(zero, 0)).toBe(true);
+    expect(karmaUnlocks(zero)).toEqual([]);
+  });
+
+  it("does not re-grant the Captain when it is already unlocked", () => {
+    const owned = createSaveData(["Characters.Captain"]);
+    const data = setStartingKarma(owned, 4, { awardCoins: true });
+    expect(data.achievements).toEqual([]);
+    expect(data.coins).toBe(0);
   });
 
   it("clamps the level to 0-8", () => {
