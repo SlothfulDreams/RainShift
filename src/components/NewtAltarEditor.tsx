@@ -180,7 +180,11 @@ function StageCard({
                   <AltarToggle
                     key={altar.unlockId}
                     altar={altar}
-                    stageName={stage.name}
+                    label={
+                      scenes.length > 1
+                        ? `${stage.name} layout ${i + 1}`
+                        : stage.name
+                    }
                     isUnlocked={isNewtAltarUnlocked(saveData, altar)}
                     onToggle={(enabled) => onSet([altar], enabled)}
                   />
@@ -195,12 +199,13 @@ function StageCard({
 
 function AltarToggle({
   altar,
-  stageName,
+  label,
   isUnlocked,
   onToggle,
 }: {
   altar: NewtAltar;
-  stageName: string;
+  /** Stage (and layout) the altar is in, for screen readers */
+  label: string;
   isUnlocked: boolean;
   onToggle: (enabled: boolean) => void;
 }) {
@@ -210,7 +215,7 @@ function AltarToggle({
       type="button"
       onClick={() => onToggle(!isUnlocked)}
       aria-pressed={isUnlocked}
-      aria-label={`${stageName} altar ${number}`}
+      aria-label={`${label} altar ${number}`}
       title={altar.unlockId}
       className={`
         flex items-center gap-1 px-2 py-1.5 text-[10px] uppercase tracking-wider border
