@@ -96,7 +96,7 @@ export function EclipseEditor({
         </div>
       </motion.div>
 
-      <p className="px-2 max-w-prose text-pretty text-ror-text-dim text-xs">
+      <p className="px-2 text-pretty text-ror-text-dim text-xs">
         Choose the highest Eclipse each survivor has beaten. For example, pick 3
         and Eclipse 4 will be unlocked for that survivor.
       </p>
