@@ -77,8 +77,8 @@ export function EclipseEditor({
       </motion.div>
 
       <p className="px-2 text-ror-text-dim text-xs">
-        Pick the highest Eclipse level each survivor has beaten. Beating Eclipse
-        N unlocks Eclipse N + 1 on character select.
+        Choose the highest Eclipse each survivor has beaten. For example, pick 3
+        and Eclipse 4 will be unlocked for that survivor.
       </p>
 
       {/* Grid */}
