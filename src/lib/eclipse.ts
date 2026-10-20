@@ -10,9 +10,11 @@ import type { LogbookEntry, SaveData } from "@/data/types";
 export const MAX_ECLIPSE_LEVEL = 8;
 const MIN_UNLOCKABLE_LEVEL = 2;
 
+type EclipseSurvivor = LogbookEntry & { survivorDef: string };
+
 /** Survivors that have Eclipse progress (every SurvivorDef) */
-export const eclipseSurvivors: LogbookEntry[] = survivorEntries.filter(
-  (s) => s.survivorDef,
+export const eclipseSurvivors: EclipseSurvivor[] = survivorEntries.filter(
+  (s): s is EclipseSurvivor => Boolean(s.survivorDef),
 );
 
 export function eclipseUnlockId(survivorDef: string, level: number): string {
@@ -69,8 +71,7 @@ export function setAllEclipseLevels(
   level: number,
 ): SaveData {
   return eclipseSurvivors.reduce(
-    (data, s) =>
-      s.survivorDef ? setEclipseLevel(data, s.survivorDef, level) : data,
+    (data, s) => setEclipseLevel(data, s.survivorDef, level),
     saveData,
   );
 }

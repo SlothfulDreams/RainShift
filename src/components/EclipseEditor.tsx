@@ -25,8 +25,9 @@ const LEVELS = Array.from({ length: MAX_ECLIPSE_LEVEL + 1 }, (_, i) => i);
  * (EclipseDifficultyMedalDisplay): gold once every survivor has beaten it.
  */
 export function eclipseMedal(level: number, beaten: boolean, gold: boolean) {
-  const variant = gold ? "-gold" : beaten ? "" : "-unearned";
-  return `/eclipse/eclipse-${level}${variant}.webp`;
+  if (gold) return `/eclipse/eclipse-${level}-gold.webp`;
+  if (beaten) return `/eclipse/eclipse-${level}.webp`;
+  return `/eclipse/eclipse-${level}-unearned.webp`;
 }
 
 export function EclipseEditor({
@@ -34,7 +35,7 @@ export function EclipseEditor({
   onSaveDataChange,
 }: EclipseEditorProps) {
   const levels = eclipseSurvivors.map((s) =>
-    s.survivorDef ? getEclipseLevel(saveData, s.survivorDef) : 0,
+    getEclipseLevel(saveData, s.survivorDef),
   );
   const maxed = levels.filter((l) => l === MAX_ECLIPSE_LEVEL).length;
   // Levels every survivor has beaten show the gold medal, as in the game
@@ -106,8 +107,6 @@ export function EclipseEditor({
         style={{ maxHeight: "calc(100vh - 280px)" }}
       >
         {eclipseSurvivors.map((survivor, i) => {
-          const { survivorDef } = survivor;
-          if (!survivorDef) return null;
           const level = levels[i];
           return (
             <div
@@ -168,7 +167,7 @@ export function EclipseEditor({
                       checked={l === level}
                       onChange={() =>
                         onSaveDataChange(
-                          setEclipseLevel(saveData, survivorDef, l),
+                          setEclipseLevel(saveData, survivor.survivorDef, l),
                         )
                       }
                     />
