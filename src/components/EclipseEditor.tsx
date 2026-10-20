@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Moon, User } from "lucide-react";
+import { User } from "lucide-react";
 import Image from "next/image";
 import type { SaveData } from "@/data/types";
 import { DLC_NAMES } from "@/data/types";
@@ -20,6 +20,15 @@ interface EclipseEditorProps {
 
 const LEVELS = Array.from({ length: MAX_ECLIPSE_LEVEL + 1 }, (_, i) => i);
 
+/**
+ * The game's character-select medal for an Eclipse level
+ * (EclipseDifficultyMedalDisplay): gold once every survivor has beaten it.
+ */
+export function eclipseMedal(level: number, beaten: boolean, gold: boolean) {
+  const variant = gold ? "-gold" : beaten ? "" : "-unearned";
+  return `/eclipse/eclipse-${level}${variant}.webp`;
+}
+
 export function EclipseEditor({
   saveData,
   onSaveDataChange,
@@ -28,6 +37,8 @@ export function EclipseEditor({
     s.survivorDef ? getEclipseLevel(saveData, s.survivorDef) : 0,
   );
   const maxed = levels.filter((l) => l === MAX_ECLIPSE_LEVEL).length;
+  // Levels every survivor has beaten show the gold medal, as in the game
+  const goldUpTo = Math.min(...levels);
 
   return (
     <div className="flex flex-col gap-4 relative">
@@ -39,7 +50,17 @@ export function EclipseEditor({
       >
         <div className="flex items-center gap-4">
           <div className="w-10 h-10 bg-ror-bg-main border border-ror-border flex items-center justify-center">
-            <Moon size={18} className="text-ror-void" />
+            <Image
+              src={eclipseMedal(
+                MAX_ECLIPSE_LEVEL,
+                true,
+                goldUpTo === MAX_ECLIPSE_LEVEL,
+              )}
+              alt=""
+              width={32}
+              height={32}
+              unoptimized
+            />
           </div>
           <div>
             <p className="text-ror-text-main font-display text-sm uppercase tracking-wider">
@@ -127,7 +148,7 @@ export function EclipseEditor({
                     )}
                   </span>
                 </div>
-                <fieldset className="flex gap-0.5">
+                <fieldset className="flex gap-0.5 items-center">
                   <legend className="sr-only">
                     {survivor.name}: highest Eclipse level beaten
                   </legend>
@@ -136,14 +157,13 @@ export function EclipseEditor({
                       key={l}
                       title={l === 0 ? "None beaten" : `Eclipse ${l} beaten`}
                       className={`
-                        flex-1 py-1 text-center text-[10px] font-mono border transition-colors cursor-pointer
+                        flex-1 aspect-square max-w-9 flex items-center justify-center
+                        border cursor-pointer transition-colors
                         has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-ror-orange-accent
                         ${
                           l === level
-                            ? "bg-ror-void text-ror-bg-main border-ror-void font-bold"
-                            : l !== 0 && l < level
-                              ? "bg-ror-void/20 text-ror-void border-ror-void/40 hover:bg-ror-void/30"
-                              : "bg-transparent text-ror-text-dim border-ror-border hover:text-ror-text-main hover:border-ror-text-dim"
+                            ? "border-ror-text-main bg-ror-bg-header"
+                            : "border-transparent hover:border-ror-border-highlight"
                         }
                       `}
                     >
@@ -159,7 +179,20 @@ export function EclipseEditor({
                           )
                         }
                       />
-                      {l === 0 ? "–" : l}
+                      {l === 0 ? (
+                        <span className="text-xs font-mono text-ror-text-dim">
+                          –
+                        </span>
+                      ) : (
+                        <Image
+                          src={eclipseMedal(l, l <= level, l <= goldUpTo)}
+                          alt=""
+                          width={32}
+                          height={32}
+                          className="w-full h-full object-contain"
+                          unoptimized
+                        />
+                      )}
                     </label>
                   ))}
                 </fieldset>

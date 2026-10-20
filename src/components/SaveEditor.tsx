@@ -4,13 +4,13 @@ import { AnimatePresence, motion } from "framer-motion";
 import {
   Book,
   Download,
-  Moon,
   RotateCcw,
   Search,
   Trophy,
   User,
   X,
 } from "lucide-react";
+import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 import { challenges } from "@/data/challenges";
 import type {
@@ -33,7 +33,7 @@ import {
 import { downloadFile } from "@/lib/utils";
 import { ChallengeCard } from "./ChallengeCard";
 import { CoinsEditor } from "./CoinsEditor";
-import { EclipseEditor } from "./EclipseEditor";
+import { EclipseEditor, eclipseMedal } from "./EclipseEditor";
 import { LogbookEditor } from "./LogbookEditor";
 
 interface SaveEditorProps {
@@ -355,7 +355,13 @@ export function SaveEditor({
               }
             `}
           >
-            <Moon size={16} />
+            <Image
+              src={eclipseMedal(1, true, false)}
+              alt=""
+              width={18}
+              height={18}
+              unoptimized
+            />
             Eclipse
           </button>
         </motion.div>
