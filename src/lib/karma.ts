@@ -1,3 +1,4 @@
+import { challenges } from "@/data/challenges";
 import { startingKarmaLevels } from "@/data/karma-levels";
 import type { SaveData } from "@/data/types";
 
@@ -42,6 +43,13 @@ export function getStartingKarma(saveData: SaveData): number {
   }
   return level;
 }
+
+const levelZeroGate = startingKarmaLevels.find((l) => l.level === 0)?.unlockId;
+
+/** Achievement that grants level 0's gate (Washed Away, for the Captain) */
+export const levelZeroChallenge = levelZeroGate
+  ? challenges.find((c) => c.unlocks.includes(levelZeroGate))
+  : undefined;
 
 /**
  * Unlock starting karma up to `level`: writes levels 1..level and removes the

@@ -13,10 +13,15 @@ import type { SaveData } from "@/data/types";
 import {
   getStartingKarma,
   isStartingKarmaUnlocked,
+  levelZeroChallenge,
   MAX_STARTING_KARMA,
   setStartingKarma,
 } from "@/lib/karma";
-import { generateModifiedXml, loadSaveFile } from "@/lib/save-operations";
+import {
+  generateModifiedXml,
+  loadSaveFile,
+  toggleAchievement,
+} from "@/lib/save-operations";
 
 const karmaKey = (n: number) => `Karma.StartingKarma.${n}`;
 const karmaUnlocks = (data: SaveData) =>
@@ -119,6 +124,19 @@ describe("getStartingKarma", () => {
     expect(
       isStartingKarmaUnlocked(createSaveData(["Characters.Captain"]), 0),
     ).toBe(true);
+  });
+
+  it("unlocking Washed Away makes level 0 selectable", () => {
+    expect(levelZeroChallenge?.achievement).toBe("CompleteMainEnding");
+    const data = toggleAchievement(
+      createSaveData(),
+      "CompleteMainEnding",
+      true,
+      { awardCoins: true },
+    );
+    expect(isStartingKarmaUnlocked(data, 0)).toBe(true);
+    expect(data.achievements).toContain("CompleteMainEnding");
+    expect(data.coins).toBe(levelZeroChallenge?.lunarCoins);
   });
 });
 

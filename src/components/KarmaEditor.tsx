@@ -7,22 +7,32 @@ import type { SaveData } from "@/data/types";
 import {
   getStartingKarma,
   isStartingKarmaUnlocked,
+  levelZeroChallenge,
   setStartingKarma,
 } from "@/lib/karma";
+import { toggleAchievement } from "@/lib/save-operations";
 
 interface KarmaEditorProps {
   saveData: SaveData;
   onSaveDataChange: (saveData: SaveData) => void;
+  /** Award lunar coins when unlocking the Captain's achievement */
+  awardCoins?: boolean;
 }
 
 /**
  * Starting karma levels the run setup lets you pick (Hallowed Concepts
  * update). Picking level N unlocks levels 1..N and locks the ones above.
  */
-export function KarmaEditor({ saveData, onSaveDataChange }: KarmaEditorProps) {
+export function KarmaEditor({
+  saveData,
+  onSaveDataChange,
+  awardCoins = false,
+}: KarmaEditorProps) {
   const current = getStartingKarma(saveData);
   const currentLevel = startingKarmaLevels.find((l) => l.level === current);
   const hasLevelZero = isStartingKarmaUnlocked(saveData, 0);
+  // Local copy so the null check still applies inside onClick
+  const captainChallenge = levelZeroChallenge;
 
   return (
     <div className="ror-card p-4 space-y-3">
@@ -99,9 +109,30 @@ export function KarmaEditor({ saveData, onSaveDataChange }: KarmaEditorProps) {
       </fieldset>
 
       {!hasLevelZero && (
-        <p className="text-[10px] text-ror-text-dim leading-snug">
-          &ldquo;No Karma&rdquo; also needs the Captain unlocked.
-        </p>
+        <div className="flex items-center justify-between gap-3">
+          <p className="text-[10px] text-ror-text-dim leading-snug">
+            &ldquo;No Karma&rdquo; needs the Captain.
+          </p>
+          {captainChallenge && (
+            <button
+              type="button"
+              onClick={() =>
+                onSaveDataChange(
+                  toggleAchievement(
+                    saveData,
+                    captainChallenge.achievement,
+                    true,
+                    { awardCoins },
+                  ),
+                )
+              }
+              title={`Unlocks the "${captainChallenge.name}" achievement`}
+              className="flex-shrink-0 px-2 py-1 text-[10px] uppercase tracking-wider font-display text-ror-lunar border border-ror-lunar/40 hover:bg-ror-lunar/10 hover:border-ror-lunar/60 transition-colors cursor-pointer focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-ror-lunar"
+            >
+              Unlock Captain
+            </button>
+          )}
+        </div>
       )}
     </div>
   );

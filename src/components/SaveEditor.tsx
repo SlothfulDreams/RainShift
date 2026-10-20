@@ -311,6 +311,7 @@ export function SaveEditor({
           <KarmaEditor
             saveData={saveData}
             onSaveDataChange={handleLogbookChange}
+            awardCoins={awardCoins}
           />
         </motion.div>
       </motion.aside>
