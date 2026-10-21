@@ -56,14 +56,13 @@ export function matchChallenge(
   query: string,
 ): ChallengeMatch | null {
   const q = normalize(query);
-  if (
-    !q ||
-    [challenge.name, challenge.description, challenge.survivor ?? ""].some(
-      (text) => normalize(text).includes(q),
-    )
-  ) {
+  if (!q) return {};
+
+  const ownText = [challenge.name, challenge.description, challenge.survivor];
+  if (ownText.some((text) => text && normalize(text).includes(q))) {
     return {};
   }
+
   const alias = getUnlockAliases(challenge.id).find((name) =>
     [name, ...(searchNicknames[name] ?? [])].some((term) =>
       normalize(term).includes(q),
