@@ -13,7 +13,7 @@ Your save never leaves your machine.
 ![Bun](https://img.shields.io/badge/Bun-000?logo=bun&logoColor=white)
 ![Vitest](https://img.shields.io/badge/tested_with-Vitest-6E9F18?logo=vitest&logoColor=white)
 
-<img src="docs/demo.gif" alt="RainShift demo: searching achievements, filling in the logbook, marking newt altars and setting Eclipse progress" width="900">
+<img src="docs/demo.gif" alt="RainShift demo: searching achievements, filling in the logbook, marking newt altars, setting Eclipse progress, lunar coins and starting karma" width="900">
 
 </div>
 
