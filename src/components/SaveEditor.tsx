@@ -23,6 +23,7 @@ import type {
 } from "@/data/types";
 import { CATEGORY_NAMES, DLC_NAMES } from "@/data/types";
 import { getLogbookCountForChallenge } from "@/lib/challenge-logbook-mapping";
+import { matchChallenge } from "@/lib/challenge-search";
 import { countUnlockedNewtAltars } from "@/lib/newt-altars";
 import {
   calculateLogbookStats,
@@ -95,19 +96,15 @@ export function SaveEditor({
   const stats = calculateSaveStats(saveData);
   const logbookStats = calculateLogbookStats(saveData);
 
-  // Filter challenges
+  // Filter challenges, remembering which unlock each search result matched on
+  const matchedAliases = new Map<string, string | undefined>();
   const filteredChallenges = challenges.filter((c) => {
     if (selectedCategory !== "all" && c.category !== selectedCategory)
       return false;
     if (selectedDLC !== "all" && c.dlc !== selectedDLC) return false;
-    if (debouncedSearch) {
-      const q = debouncedSearch.toLowerCase();
-      return (
-        c.name.toLowerCase().includes(q) ||
-        c.description.toLowerCase().includes(q) ||
-        c.survivor?.toLowerCase().includes(q)
-      );
-    }
+    const match = matchChallenge(c, debouncedSearch);
+    if (!match) return false;
+    matchedAliases.set(c.id, match.alias);
     return true;
   });
 
@@ -530,6 +527,7 @@ export function SaveEditor({
                       linkedLogbookCount={getLogbookCountForChallenge(
                         challenge.id,
                       )}
+                      matchedAlias={matchedAliases.get(challenge.id)}
                     />
                   </motion.div>
                 ))}
