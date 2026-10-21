@@ -7,12 +7,8 @@ import {
   DEFAULT_ACHIEVEMENT_IMAGE,
   getAchievementImage,
 } from "@/data/achievement-images";
-import { challenges } from "@/data/challenges";
 import type { Challenge } from "@/data/types";
-
-const nameByAchievement = new Map(
-  challenges.map((c) => [c.achievement, c.name]),
-);
+import { getChallengeByAchievement } from "@/lib/lookups";
 
 interface ChallengeCardProps {
   challenge: Challenge;
@@ -138,7 +134,7 @@ export function ChallengeCard({
           {challenge.prerequisite && (
             <p className="text-ror-text-dim text-[9px] uppercase tracking-wider mb-2">
               Requires:{" "}
-              {nameByAchievement.get(challenge.prerequisite) ??
+              {getChallengeByAchievement(challenge.prerequisite)?.name ??
                 challenge.prerequisite}
             </p>
           )}
