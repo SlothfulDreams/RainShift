@@ -3,6 +3,7 @@ import { challenges } from "@/data/challenges";
 import { survivorEntries } from "@/data/logbook/survivors";
 import { searchNicknames } from "@/data/search-nicknames";
 import type { Challenge } from "@/data/types";
+import { unlockableNames } from "@/data/unlockable-names";
 import { getUnlockAliases, matchChallenge } from "@/lib/challenge-search";
 
 const byName = (name: string): Challenge => {
@@ -58,6 +59,8 @@ describe("matchChallenge", () => {
     expect(matchChallenge(byName("Blockade Breaker"), "heresy")?.alias).toMatch(
       /Heresy/,
     );
+    // Items.ElementalRings gates both bands
+    expect(search("bands")).toContain("Death Do Us Part");
     // Characters.Mercenary also gates Beads of Fealty
     expect(getUnlockAliases(byName("True Respite").id)).toEqual(
       expect.arrayContaining(["Mercenary", "Beads of Fealty"]),
@@ -75,6 +78,41 @@ describe("matchChallenge", () => {
     expect(matchChallenge(byName("Verified"), "toolbot")).toBeNull();
   });
 
+  it("matches skills, skins and artifacts by their in-game names", () => {
+    expect(
+      matchChallenge(byName("Artificer: Orbital Bombardment"), "ion surge"),
+    ).toEqual({ alias: "Ion Surge" });
+    expect(matchChallenge(byName("Commando: Mastery"), "hornet")).toEqual({
+      alias: "Hornet",
+    });
+  });
+
+  it("has an in-game name for every skill, skin and artifact unlock", () => {
+    const unnamed = challenges
+      .flatMap((c) => c.unlocks)
+      .filter((u) => /^(Skills|Skins|Artifacts)\./.test(u))
+      .filter((u) => !unlockableNames[u]);
+    expect(unnamed).toEqual([]);
+  });
+
+  it("finds a survivor's achievements by the survivor's nickname", () => {
+    const loader = challenges.filter((c) => c.survivor === "loader");
+    expect(loader.length).toBeGreaterThan(0);
+    for (const challenge of loader) {
+      expect(matchChallenge(challenge, "lodr"), challenge.name).toEqual({});
+    }
+  });
+
+  it("ignores spaces in names and queries", () => {
+    const voidFiend = challenges.filter((c) => c.survivor === "voidfiend");
+    expect(voidFiend.length).toBeGreaterThan(0);
+    const results = search("void fiend");
+    for (const challenge of voidFiend) {
+      expect(results).toContain(challenge.name);
+    }
+    expect(search("goathoof")).toContain('"Is This Bugged?"');
+  });
+
   it("ignores punctuation in names and queries", () => {
     expect(matchChallenge(byName("Verified"), "mult")).toEqual({
       alias: "MUL-T",
@@ -90,6 +128,9 @@ describe("matchChallenge", () => {
     ["meathook", "Sentient Meat Hook"],
     ["ice band", "Runald's Band"],
     ["crunder", "The Crowdfunder"],
+    ["vf", "Void Fiend"],
+    ["hellfire", "Helfire Tincture"],
+    ["sw", "Slicing Winds"],
   ])("finds the unlock of nickname %s (%s)", (query, alias) => {
     const matches = challenges.filter(
       (c) => matchChallenge(c, query)?.alias === alias,

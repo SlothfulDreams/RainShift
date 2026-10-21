@@ -11,6 +11,7 @@ import {
   getLogbookEntriesForChallenge,
   isLogbookEntryProvidedByOtherChallenge,
 } from "./challenge-logbook-mapping";
+import { getChallengeByAchievement } from "./lookups";
 import {
   applySaveData,
   extractSaveData,
@@ -57,10 +58,6 @@ export interface UnlockOptions {
   awardCoins?: boolean;
 }
 
-const challengeByAchievement = new Map(
-  challenges.map((c) => [c.achievement, c]),
-);
-
 /**
  * Achievement plus every prerequisite it (transitively) requires in-game.
  */
@@ -69,7 +66,7 @@ export function withPrerequisites(achievementId: string): string[] {
   let current: string | undefined = achievementId;
   while (current && !chain.includes(current)) {
     chain.push(current);
-    current = challengeByAchievement.get(current)?.prerequisite;
+    current = getChallengeByAchievement(current)?.prerequisite;
   }
   return chain;
 }
@@ -102,7 +99,7 @@ export function withDependents(achievementId: string): string[] {
 export function lunarCoinsFor(achievementIds: Iterable<string>): number {
   let total = 0;
   for (const id of achievementIds) {
-    total += challengeByAchievement.get(id)?.lunarCoins ?? 0;
+    total += getChallengeByAchievement(id)?.lunarCoins ?? 0;
   }
   return total;
 }
@@ -124,7 +121,7 @@ function grant(
     if (!achievements.has(id)) added.push(id);
     achievements.add(id);
     if (markUnviewed) unviewedAchievements.add(id);
-    const challenge = challengeByAchievement.get(id);
+    const challenge = getChallengeByAchievement(id);
     if (!challenge) continue;
     for (const unlock of challenge.unlocks) {
       viewedUnlockables.add(unlock);
@@ -169,7 +166,7 @@ export function toggleAchievement(
   const removed = new Set(withDependents(achievementId));
   const removedUnlocks = new Set(
     Array.from(removed).flatMap(
-      (id) => challengeByAchievement.get(id)?.unlocks ?? [],
+      (id) => getChallengeByAchievement(id)?.unlocks ?? [],
     ),
   );
   const achievements = saveData.achievements.filter((a) => !removed.has(a));
@@ -178,7 +175,7 @@ export function toggleAchievement(
   const remaining = new Set(achievements);
   const removedPickups = new Set<string>();
   for (const id of removed) {
-    const challenge = challengeByAchievement.get(id);
+    const challenge = getChallengeByAchievement(id);
     if (!challenge) continue;
     for (const entry of getLogbookEntriesForChallenge(challenge.id)) {
       if (

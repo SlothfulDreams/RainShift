@@ -96,16 +96,12 @@ export function SaveEditor({
   const stats = calculateSaveStats(saveData);
   const logbookStats = calculateLogbookStats(saveData);
 
-  // Filter challenges, remembering which unlock each search result matched on
-  const matchedAliases = new Map<string, string | undefined>();
+  // Filter challenges
   const filteredChallenges = challenges.filter((c) => {
     if (selectedCategory !== "all" && c.category !== selectedCategory)
       return false;
     if (selectedDLC !== "all" && c.dlc !== selectedDLC) return false;
-    const match = matchChallenge(c, debouncedSearch);
-    if (!match) return false;
-    matchedAliases.set(c.id, match.alias);
-    return true;
+    return matchChallenge(c, debouncedSearch) !== null;
   });
 
   const unlockedInView = filteredChallenges.filter((c) =>
@@ -527,7 +523,9 @@ export function SaveEditor({
                       linkedLogbookCount={getLogbookCountForChallenge(
                         challenge.id,
                       )}
-                      matchedAlias={matchedAliases.get(challenge.id)}
+                      matchedAlias={
+                        matchChallenge(challenge, debouncedSearch)?.alias
+                      }
                     />
                   </motion.div>
                 ))}
