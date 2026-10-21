@@ -9,6 +9,7 @@ import {
 } from "@/data/achievement-images";
 import type { Challenge } from "@/data/types";
 import { getChallengeByAchievement } from "@/lib/lookups";
+import { DLCTag } from "./DLCTag";
 
 interface ChallengeCardProps {
   challenge: Challenge;
@@ -146,13 +147,7 @@ export function ChallengeCard({
             >
               {challenge.category}
             </span>
-            {challenge.dlc !== "base" && (
-              <span
-                className={`px-1.5 py-0.5 text-[9px] uppercase tracking-wider border ${getDLCStyle(challenge.dlc)}`}
-              >
-                {getDLCShortName(challenge.dlc)}
-              </span>
-            )}
+            <DLCTag dlc={challenge.dlc} />
           </div>
         </div>
       </div>
@@ -184,29 +179,4 @@ function getRarityColorClass(rarity?: string): string {
 function getCategoryStyle(_category: string): string {
   // Using generic styles for categories to keep it clean, or specific colors if desired
   return "border-ror-border text-ror-text-dim bg-ror-bg-main";
-}
-
-function getDLCStyle(dlc: string): string {
-  switch (dlc) {
-    case "sotv":
-      return "border-ror-void text-ror-void bg-ror-void/10";
-    case "sots":
-      return "border-ror-boss text-ror-boss bg-ror-boss/10"; // Using boss yellow/gold for SOTS
-    case "ac":
-      return "border-ror-lunar text-ror-lunar bg-ror-lunar/10";
-    case "hc":
-      return "border-ror-legendary text-ror-legendary bg-ror-legendary/10";
-    default:
-      return "border-ror-border text-ror-text-dim";
-  }
-}
-
-function getDLCShortName(dlc: string): string {
-  const names: Record<string, string> = {
-    sotv: "VOID",
-    sots: "STORM",
-    ac: "ALLOYED",
-    hc: "HALLOWED",
-  };
-  return names[dlc] || dlc.toUpperCase();
 }

@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Book, Check, Lock, Trophy } from "lucide-react";
 import type { LogbookEntry } from "@/data/types";
+import { DLCTag } from "./DLCTag";
 import { LogbookIcon } from "./LogbookIcon";
 
 interface LogbookCardProps {
@@ -134,14 +135,7 @@ export function LogbookCard({
             >
               {getCategoryLabel(entry.category)}
             </span>
-            {/* DLC Tag */}
-            {entry.dlc !== "base" && (
-              <span
-                className={`px-1.5 py-0.5 text-[9px] uppercase tracking-wider border ${getDLCStyle(entry.dlc)}`}
-              >
-                {getDLCShortName(entry.dlc)}
-              </span>
-            )}
+            <DLCTag dlc={entry.dlc} />
           </div>
         </div>
       </div>
@@ -225,26 +219,4 @@ function getCategoryLabel(category: string): string {
     default:
       return category;
   }
-}
-
-function getDLCStyle(dlc: string): string {
-  switch (dlc) {
-    case "sotv":
-      return "border-ror-void text-ror-void bg-ror-void/10";
-    case "sots":
-      return "border-ror-boss text-ror-boss bg-ror-boss/10";
-    case "ac":
-      return "border-ror-lunar text-ror-lunar bg-ror-lunar/10";
-    default:
-      return "border-ror-border text-ror-text-dim";
-  }
-}
-
-function getDLCShortName(dlc: string): string {
-  const names: Record<string, string> = {
-    sotv: "VOID",
-    sots: "STORM",
-    ac: "ALLOYED",
-  };
-  return names[dlc] || dlc.toUpperCase();
 }
