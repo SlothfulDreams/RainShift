@@ -19,6 +19,7 @@ interface ChallengeCardProps {
   isUnlocked: boolean;
   onToggle: (achievementId: string, enabled: boolean) => void;
   linkedLogbookCount?: number;
+  matchedAlias?: string; // Unlock the search matched, e.g. "Captain"
 }
 
 export function ChallengeCard({
@@ -26,6 +27,7 @@ export function ChallengeCard({
   isUnlocked,
   onToggle,
   linkedLogbookCount = 0,
+  matchedAlias,
 }: ChallengeCardProps) {
   const handleToggle = () => {
     onToggle(challenge.achievement, !isUnlocked);
@@ -126,6 +128,12 @@ export function ChallengeCard({
           <p className="text-ror-text-muted text-[10px] leading-relaxed line-clamp-3 mb-2">
             {challenge.description}
           </p>
+
+          {matchedAlias && (
+            <p className="text-ror-uncommon text-[9px] uppercase tracking-wider mb-2">
+              Unlocks {matchedAlias}
+            </p>
+          )}
 
           {challenge.prerequisite && (
             <p className="text-ror-text-dim text-[9px] uppercase tracking-wider mb-2">
