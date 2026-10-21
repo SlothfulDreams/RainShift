@@ -40,8 +40,9 @@ describe("matchChallenge", () => {
     expect(survivorUnlocks.length).toBeGreaterThanOrEqual(14);
     for (const challenge of survivorUnlocks) {
       for (const unlock of challenge.unlocks) {
+        if (!unlock.startsWith("Characters.")) continue;
         const survivor = survivorEntries.find((e) => e.unlockId === unlock);
-        if (!survivor) continue;
+        if (!survivor) throw new Error(`no survivor for unlock ${unlock}`);
         expect(
           search(survivor.name),
           `${survivor.name} -> ${challenge.name}`,
