@@ -366,6 +366,21 @@ export function SaveEditor({
           </button>
           <button
             type="button"
+            onClick={() => setActiveTab("newts")}
+            className={`
+              shrink-0 whitespace-nowrap px-4 sm:px-6 py-3 text-sm font-display uppercase tracking-wider transition-all flex items-center gap-2
+              ${
+                activeTab === "newts"
+                  ? "text-ror-text-main border-b-2 border-ror-orange-accent"
+                  : "text-ror-text-dim hover:text-ror-text-main"
+              }
+            `}
+          >
+            <Landmark size={16} />
+            Newt Altars
+          </button>
+          <button
+            type="button"
             onClick={() => setActiveTab("eclipse")}
             className={`
               shrink-0 whitespace-nowrap px-4 sm:px-6 py-3 text-sm font-display uppercase tracking-wider transition-all flex items-center gap-2
@@ -384,21 +399,6 @@ export function SaveEditor({
               unoptimized
             />
             Eclipse
-          </button>
-          <button
-            type="button"
-            onClick={() => setActiveTab("newts")}
-            className={`
-              shrink-0 whitespace-nowrap px-4 sm:px-6 py-3 text-sm font-display uppercase tracking-wider transition-all flex items-center gap-2
-              ${
-                activeTab === "newts"
-                  ? "text-ror-text-main border-b-2 border-ror-orange-accent"
-                  : "text-ror-text-dim hover:text-ror-text-main"
-              }
-            `}
-          >
-            <Landmark size={16} />
-            Newt Altars
           </button>
         </motion.div>
 
