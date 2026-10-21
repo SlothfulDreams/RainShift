@@ -222,3 +222,98 @@ body {
   background: rgba(255, 150, 0, 0.1);
   border-color: var(--ror-equipment);
 }
+
+/* RainShift mark (src/lib/icon-mark.ts). Hovering any .rs-trigger lifts the
+   dove and brightens its rim (interruptible transitions) and sends one pass of
+   rain through (one-shot keyframes). Dashes use pathLength 100:
+   - .rs-rain is visible at rest; its 160 period (100 dash + 60 gap) ends where
+     it started.
+   - .rs-rain-pass is hidden at rest with its dash parked before the line, and
+     slides through to past the end.
+   .rs-play loops everything for previews. */
+.rs-rain {
+  stroke-dasharray: 100 60;
+}
+
+.rs-rain-pass {
+  stroke-dasharray: 100 100;
+  stroke-dashoffset: 100;
+}
+
+.rs-rim {
+  opacity: var(--rim);
+}
+
+@keyframes rs-rain-fall {
+  to {
+    stroke-dashoffset: -160;
+  }
+}
+
+@keyframes rs-rain-pass {
+  to {
+    stroke-dashoffset: -100;
+  }
+}
+
+@keyframes rs-lift {
+  40% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes rs-rim-pulse {
+  40% {
+    opacity: min(1, calc(var(--rim) + 0.35));
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .rs-dove {
+    transition: transform 350ms cubic-bezier(0.32, 0.72, 0, 1);
+  }
+
+  .rs-rim {
+    transition: opacity 350ms cubic-bezier(0.32, 0.72, 0, 1);
+  }
+
+  .rs-play .rs-dove {
+    animation: rs-lift 1.6s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  }
+
+  .rs-play .rs-rim {
+    animation: rs-rim-pulse 1.6s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  }
+
+  .rs-play .rs-rain {
+    animation: rs-rain-fall 1.6s cubic-bezier(0.65, 0, 0.35, 1)
+      calc(var(--i) * 90ms) infinite;
+  }
+
+  .rs-play .rs-rain-pass {
+    animation: rs-rain-pass 1.6s cubic-bezier(0.45, 0, 0.55, 1)
+      calc(var(--i) * 120ms) infinite;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) and (hover: hover) and (
+    pointer: fine
+  ) {
+  .rs-trigger:hover .rs-dove {
+    transform: translateY(-4px);
+  }
+
+  .rs-trigger:hover .rs-rim {
+    opacity: min(1, calc(var(--rim) + 0.35));
+  }
+
+  .rs-trigger:hover .rs-rain {
+    animation: rs-rain-fall 700ms cubic-bezier(0.65, 0, 0.35, 1)
+      calc(var(--i) * 90ms) both;
+  }
+
+  .rs-trigger:hover .rs-rain-pass {
+    animation: rs-rain-pass 900ms cubic-bezier(0.45, 0, 0.55, 1)
+      calc(var(--i) * 120ms) both;
+  }
+}

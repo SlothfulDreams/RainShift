@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { FileText } from "lucide-react";
 import { useCallback, useState } from "react";
 import { FileUpload } from "@/components/FileUpload";
+import { RainShiftMark } from "@/components/RainShiftMark";
 import { SaveEditor } from "@/components/SaveEditor";
 import { SAMPLE_PROFILE_XML } from "@/data/sample-profile";
 import type { RawUserProfile, SaveData } from "@/data/types";
@@ -58,17 +59,10 @@ export default function Home() {
         <button
           type="button"
           onClick={handleReset}
-          className="flex items-center gap-4 group/logo focus:outline-none"
+          className="rs-trigger flex items-center gap-4 group/logo focus:outline-none"
           aria-label="Return to Home"
         >
-          <motion.div
-            whileHover={{ rotate: 180 }}
-            transition={{ duration: 0.5 }}
-            className="w-10 h-10 bg-ror-bg-main border border-ror-border flex items-center justify-center relative overflow-hidden group-hover/logo:border-ror-text-muted transition-colors"
-          >
-            <div className="absolute inset-0 bg-ror-text-main/5 group-hover/logo:bg-ror-text-main/10 transition-colors" />
-            <ArtifactLogo className="w-6 h-6 text-ror-text-main" />
-          </motion.div>
+          <RainShiftMark />
           <div className="text-left">
             <div className="text-2xl font-display text-ror-text-main tracking-[0.2em] leading-none group-hover/logo:text-white transition-colors">
               RAINSHIFT
@@ -298,6 +292,14 @@ export default function Home() {
         >
           Source code on GitHub
         </a>
+        <a
+          href="https://game-icons.net/1x1/lorc/dove.html"
+          target="_blank"
+          rel="noreferrer"
+          className="text-ror-text-muted hover:text-ror-text-main transition-colors underline underline-offset-4"
+        >
+          Dove icon by Lorc, CC BY 3.0
+        </a>
       </footer>
     </div>
   );
@@ -400,51 +402,5 @@ function ProtocolItem({ label, code }: { label: string; code: string }) {
         </span>
       </div>
     </div>
-  );
-}
-
-function ArtifactLogo({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" className={className}>
-      <title>Rainshift Logo</title>
-      {/* Outer Diamond */}
-      <path
-        d="M12 2L22 12L12 22L2 12L12 2Z"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-
-      {/* Inner Geometric Core */}
-      <path
-        d="M12 6L18 12L12 18L6 12L12 6Z"
-        fill="currentColor"
-        fillOpacity="0.2"
-      />
-      <path
-        d="M12 6L18 12L12 18L6 12L12 6Z"
-        stroke="currentColor"
-        strokeWidth="1"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-
-      {/* Central Vertical Line */}
-      <path
-        d="M12 6V18"
-        stroke="currentColor"
-        strokeWidth="1"
-        strokeLinecap="round"
-      />
-
-      {/* Horizontal Cross Line */}
-      <path
-        d="M6 12H18"
-        stroke="currentColor"
-        strokeWidth="1"
-        strokeLinecap="round"
-      />
-    </svg>
   );
 }
