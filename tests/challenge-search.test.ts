@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { challenges } from "@/data/challenges";
 import { survivorEntries } from "@/data/logbook/survivors";
+import { searchNicknames } from "@/data/search-nicknames";
 import type { Challenge } from "@/data/types";
 import { getUnlockAliases, matchChallenge } from "@/lib/challenge-search";
 
@@ -71,6 +72,37 @@ describe("matchChallenge", () => {
   it("doesn't match raw internal unlock keys", () => {
     expect(matchChallenge(byName("...To Be Left Alone"), "croco")).toBeNull();
     expect(matchChallenge(byName("Verified"), "toolbot")).toBeNull();
+  });
+
+  it("ignores punctuation in names and queries", () => {
+    expect(matchChallenge(byName("Verified"), "mult")).toEqual({
+      alias: "MUL-T",
+    });
+    expect(search("dios")).toContain("The Lone Survivor");
+    expect(matchChallenge(byName("Pause."), "pause")).toEqual({});
+  });
+
+  it.each([
+    ["lodr", "Loader"],
+    ["apr", "Armor-Piercing Rounds"],
+    ["teddy", "Tougher Times"],
+    ["meathook", "Sentient Meat Hook"],
+    ["ice band", "Runald's Band"],
+    ["crunder", "The Crowdfunder"],
+  ])("finds the unlock of nickname %s (%s)", (query, alias) => {
+    const matches = challenges.filter(
+      (c) => matchChallenge(c, query)?.alias === alias,
+    );
+    expect(matches.length).toBeGreaterThan(0);
+  });
+
+  it("only has nicknames for things achievements unlock", () => {
+    const unlockNames = new Set(
+      challenges.flatMap((c) => getUnlockAliases(c.id)),
+    );
+    for (const name of Object.keys(searchNicknames)) {
+      expect(unlockNames, name).toContain(name);
+    }
   });
 
   it("returns null when nothing matches", () => {
