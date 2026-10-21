@@ -5,7 +5,6 @@ const tags: Record<Exclude<DLC, "base">, { label: string; style: string }> = {
     label: "VOID",
     style: "border-ror-void text-ror-void bg-ror-void/10",
   },
-  // Boss yellow/gold for Seekers of the Storm
   sots: {
     label: "STORM",
     style: "border-ror-boss text-ror-boss bg-ror-boss/10",
@@ -20,7 +19,6 @@ const tags: Record<Exclude<DLC, "base">, { label: string; style: string }> = {
   },
 };
 
-/** Short DLC badge on challenge and logbook cards; nothing for the base game */
 export function DLCTag({ dlc }: { dlc: DLC }) {
   if (dlc === "base") return null;
   const { label, style } = tags[dlc];

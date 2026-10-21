@@ -1,5 +1,4 @@
 import { challenges } from "@/data/challenges";
-import { survivorEntries } from "@/data/logbook/survivors";
 import { searchNicknames } from "@/data/search-nicknames";
 import type { Challenge } from "@/data/types";
 import { getLogbookEntriesForChallenge } from "@/lib/challenge-logbook-mapping";
@@ -32,18 +31,21 @@ export function getUnlockAliases(challengeId: string): string[] {
   return unlockAliases.get(challengeId) ?? [];
 }
 
-// Challenge.survivor is the survivor's normalized name ("mult" for MUL-T)
-const survivorNameById = new Map(
-  survivorEntries.map((e) => [normalize(e.name), e.name]),
+// Keyed by normalized name, which is also what Challenge.survivor holds
+// ("mult" for MUL-T)
+const nicknamesByName = new Map(
+  Object.entries(searchNicknames).map(([name, nicknames]) => [
+    normalize(name),
+    nicknames,
+  ]),
 );
 
-function nicknamesOf(name: string | undefined): string[] {
-  return (name && searchNicknames[name]) || [];
+function nicknamesOf(name: string): string[] {
+  return nicknamesByName.get(normalize(name)) ?? [];
 }
 
 export interface ChallengeMatch {
-  // Name of the unlocked survivor/item/skill that matched, when the
-  // challenge's own text didn't
+  // Name of the unlock that matched, when the challenge's own text didn't
   alias?: string;
 }
 
@@ -59,13 +61,14 @@ export function matchChallenge(
   const q = normalize(query);
   if (!q) return {};
 
+  const survivor = challenge.survivor ?? "";
   const ownText = [
     challenge.name,
     challenge.description,
-    challenge.survivor,
-    ...nicknamesOf(survivorNameById.get(challenge.survivor ?? "")),
+    survivor,
+    ...nicknamesOf(survivor),
   ];
-  if (ownText.some((text) => text && normalize(text).includes(q))) {
+  if (ownText.some((text) => normalize(text).includes(q))) {
     return {};
   }
 

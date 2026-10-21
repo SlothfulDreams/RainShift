@@ -106,8 +106,9 @@ describe("matchChallenge", () => {
   it("ignores spaces in names and queries", () => {
     const voidFiend = challenges.filter((c) => c.survivor === "voidfiend");
     expect(voidFiend.length).toBeGreaterThan(0);
+    const results = search("void fiend");
     for (const challenge of voidFiend) {
-      expect(search("void fiend")).toContain(challenge.name);
+      expect(results).toContain(challenge.name);
     }
     expect(search("goathoof")).toContain('"Is This Bugged?"');
   });
