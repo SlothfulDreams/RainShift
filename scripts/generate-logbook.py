@@ -10,6 +10,7 @@ Mirrors how the game builds its logbook (RoR2.UI.LogBook.LogBookController):
 which items, equipment, monsters, stages, survivors and drones appear, and the
 save-file keys that unlock them. Writes src/data/logbook/<category>.ts and
 public/logbook/<entry-id>.webp, keeping existing entry ids and names stable.
+The "eclipse" category writes the Eclipse medal icons to public/eclipse/.
 
 Usage:
   uv run scripts/generate-logbook.py [--game "<path>"] [--only items,equipment]
@@ -456,7 +457,10 @@ def body_dlc(game: Game, body: str) -> str:
 
 
 def read_survivors(game: Game):
-    """Every SurvivorDef: survivor unlockable + body (for totalWins.<Body>)."""
+    """
+    Every SurvivorDef: survivor unlockable, body (for totalWins.<Body>) and
+    SurvivorDef.cachedName, its asset name (for Eclipse.<cachedName>.<level>).
+    """
     out = []
     for path in game.paths_of_type("SurvivorDef"):
         for obj, t in game.defs_of(path):
@@ -469,6 +473,7 @@ def read_survivors(game: Game):
                     "name": clean_name(game.english.get(t["displayNameToken"]) or body),
                     "unlockId": game.name_of(obj, t.get("unlockableDef")),
                     "body": body,
+                    "survivorDef": t["m_Name"],
                     "dlc": body_dlc(game, body),
                     "icon": lambda body=body: body_icon(game, body),
                 }
@@ -596,6 +601,7 @@ def ts_entry(e: dict) -> str:
         "unlockId",
         "pickupId",
         "body",
+        "survivorDef",
         "dlc",
         "rarity",
         "image",
@@ -606,12 +612,40 @@ def ts_entry(e: dict) -> str:
     return "  {\n" + "\n".join(lines) + "\n  },"
 
 
-def save_icon(img: Image.Image, entry_id: str):
+def save_icon(img: Image.Image, entry_id: str, out_dir: Path = OUT_DIR):
     img = img.convert("RGBA")
     img.thumbnail((ICON_SIZE, ICON_SIZE), Image.LANCZOS)
     buf = io.BytesIO()
     img.save(buf, "WEBP", quality=80, method=6)
-    (OUT_DIR / f"{entry_id}.webp").write_bytes(buf.getvalue())
+    (out_dir / f"{entry_id}.webp").write_bytes(buf.getvalue())
+
+
+ECLIPSE_LEVELS = range(1, 9)  # EclipseRun.minEclipseLevel..maxEclipseLevel
+ECLIPSE_MEDALS = {"": "Icon", "-gold": "IconGold", "-unearned": "IconUnearned"}
+
+
+def write_eclipse_icons(game: Game) -> int:
+    """
+    The medals character select shows per Eclipse level
+    (EclipseDifficultyMedalDisplay): unearned, beaten, and gold once every
+    survivor has beaten it. Writes public/eclipse/eclipse-<level><suffix>.webp.
+    """
+    out_dir = ROOT / "public" / "eclipse"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    paths = {Path(p).stem: p for p in game.asset_bundles}
+    count = 0
+    for level in ECLIPSE_LEVELS:
+        for suffix, variant in ECLIPSE_MEDALS.items():
+            stem = f"texDifficultyEclipse{level}{variant}"
+            env = game.env(game.asset_bundles[paths[stem]][0])
+            obj = next(
+                o
+                for o in env.objects
+                if o.type.name in ("Sprite", "Texture2D") and o.peek_name() == stem
+            )
+            save_icon(obj.read().image, f"eclipse-{level}{suffix}", out_dir)
+            count += 1
+    return count
 
 
 def generate(game: Game, category: str, existing_all: list):
@@ -660,13 +694,21 @@ def generate(game: Game, category: str, existing_all: list):
             "unlockId": g.get("unlockId"),
             "pickupId": g.get("pickupId"),
             "body": g.get("body"),
+            "survivorDef": g.get("survivorDef"),
             "dlc": g["dlc"],
             "rarity": g.get("rarity") or (e or {}).get("rarity"),
         }
         if e:
             diff = {
                 k: (e.get(k), new[k])
-                for k in ("unlockId", "pickupId", "body", "dlc", "rarity")
+                for k in (
+                    "unlockId",
+                    "pickupId",
+                    "body",
+                    "survivorDef",
+                    "dlc",
+                    "rarity",
+                )
                 if e.get(k) != new[k]
             }
             if diff:
@@ -706,7 +748,7 @@ def main():
     ap.add_argument("--game", type=Path, default=DEFAULT_GAME)
     ap.add_argument(
         "--only",
-        default=",".join(READERS),
+        default=",".join([*READERS, "eclipse"]),
         help="comma-separated categories (default: all)",
     )
     args = ap.parse_args()
@@ -716,6 +758,9 @@ def main():
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     for category in args.only.split(","):
         print(f"Generating {category}…", file=sys.stderr)
+        if category == "eclipse":
+            print(f"\neclipse: {write_eclipse_icons(game)} icons")
+            continue
         count, report = generate(game, category, existing)
         print(f"\n{category}: {count} entries")
         for key, lines in report.items():

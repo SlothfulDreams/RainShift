@@ -10,6 +10,7 @@ import {
   User,
   X,
 } from "lucide-react";
+import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 import { challenges } from "@/data/challenges";
 import type {
@@ -32,6 +33,7 @@ import {
 import { downloadFile } from "@/lib/utils";
 import { ChallengeCard } from "./ChallengeCard";
 import { CoinsEditor } from "./CoinsEditor";
+import { EclipseEditor, eclipseMedal } from "./EclipseEditor";
 import { LogbookEditor } from "./LogbookEditor";
 
 interface SaveEditorProps {
@@ -74,9 +76,9 @@ export function SaveEditor({
   >("all");
   const [selectedDLC, setSelectedDLC] = useState<DLC | "all">("all");
   const [hasChanges, setHasChanges] = useState(false);
-  const [activeTab, setActiveTab] = useState<"achievements" | "logbook">(
-    "achievements",
-  );
+  const [activeTab, setActiveTab] = useState<
+    "achievements" | "logbook" | "eclipse"
+  >("achievements");
   const [awardCoins, setAwardCoins] = useState(false);
 
   // Debounce search to prevent animation lag
@@ -309,7 +311,7 @@ export function SaveEditor({
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.25 }}
-          className="flex border-b border-ror-border"
+          className="flex overflow-x-auto border-b border-ror-border"
         >
           <button
             type="button"
@@ -340,6 +342,27 @@ export function SaveEditor({
           >
             <Book size={16} />
             Logbook
+          </button>
+          <button
+            type="button"
+            onClick={() => setActiveTab("eclipse")}
+            className={`
+              px-6 py-3 text-sm font-display uppercase tracking-wider transition-all flex items-center gap-2
+              ${
+                activeTab === "eclipse"
+                  ? "text-ror-text-main border-b-2 border-ror-orange-accent"
+                  : "text-ror-text-dim hover:text-ror-text-main"
+              }
+            `}
+          >
+            <Image
+              src={eclipseMedal(1, true, false)}
+              alt=""
+              width={18}
+              height={18}
+              unoptimized
+            />
+            Eclipse
           </button>
         </motion.div>
 
@@ -484,8 +507,13 @@ export function SaveEditor({
               )}
             </motion.div>
           </>
-        ) : (
+        ) : activeTab === "logbook" ? (
           <LogbookEditor
+            saveData={saveData}
+            onSaveDataChange={handleLogbookChange}
+          />
+        ) : (
+          <EclipseEditor
             saveData={saveData}
             onSaveDataChange={handleLogbookChange}
           />
