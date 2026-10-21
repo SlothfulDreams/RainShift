@@ -1,0 +1,145 @@
+"use client";
+
+import { motion } from "framer-motion";
+import Image from "next/image";
+import { startingKarmaLevels } from "@/data/karma-levels";
+import type { SaveData } from "@/data/types";
+import {
+  getStartingKarma,
+  isStartingKarmaUnlocked,
+  levelZeroChallenge,
+  setStartingKarma,
+} from "@/lib/karma";
+import { toggleAchievement } from "@/lib/save-operations";
+
+interface KarmaEditorProps {
+  saveData: SaveData;
+  onSaveDataChange: (saveData: SaveData) => void;
+  /** Award lunar coins when unlocking the Captain's achievement (Washed Away) */
+  awardCoins?: boolean;
+}
+
+/**
+ * Starting karma levels the run setup lets you pick (Hallowed Concepts
+ * update). Picking level N unlocks levels 1..N and locks the ones above.
+ */
+export function KarmaEditor({
+  saveData,
+  onSaveDataChange,
+  awardCoins = false,
+}: KarmaEditorProps) {
+  const current = getStartingKarma(saveData);
+  const currentLevel = startingKarmaLevels.find((l) => l.level === current);
+  const hasLevelZero = isStartingKarmaUnlocked(saveData, 0);
+  // Local copy so the null check still applies inside onClick
+  const captainChallenge = levelZeroChallenge;
+
+  return (
+    <div className="ror-card p-4 space-y-3">
+      {/* Section Header */}
+      <div className="flex items-center gap-3">
+        <div className="h-px flex-1 bg-gradient-to-r from-ror-lunar/40 to-transparent" />
+        <span className="text-[10px] uppercase tracking-[0.2em] text-ror-lunar font-display">
+          Starting Karma
+        </span>
+        <div className="h-px flex-1 bg-gradient-to-l from-ror-lunar/40 to-transparent" />
+      </div>
+
+      {/* Current level */}
+      <div className="flex items-center gap-3">
+        <div className="w-10 h-10 flex-shrink-0">
+          {currentLevel?.image && (
+            <Image
+              src={currentLevel.image}
+              alt=""
+              width={40}
+              height={40}
+              className="object-contain w-full h-full"
+              unoptimized
+            />
+          )}
+        </div>
+        <div className="min-w-0">
+          <p className="text-sm font-display text-ror-lunar tracking-wider">
+            Unlocked up to {current}
+          </p>
+          <p className="text-[10px] text-ror-text-dim leading-snug">
+            Winning a run unlocks the karma level you ended on.
+          </p>
+        </div>
+      </div>
+
+      {/* Level picker */}
+      <fieldset className="grid grid-cols-9 gap-0.5">
+        <legend className="sr-only">Unlock starting karma up to</legend>
+        {startingKarmaLevels.map((level) => {
+          const unlocked = isStartingKarmaUnlocked(saveData, level.level);
+          const selected = level.level === current;
+          // Clicking the current level again deselects just that level
+          const target =
+            selected && level.level > 0 ? level.level - 1 : level.level;
+          return (
+            <motion.button
+              key={level.level}
+              type="button"
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() =>
+                onSaveDataChange(
+                  setStartingKarma(saveData, target, { awardCoins }),
+                )
+              }
+              aria-pressed={selected}
+              aria-label={
+                target === level.level
+                  ? `Unlock starting karma up to ${level.level}`
+                  : `Lock starting karma level ${level.level}`
+              }
+              title={`${level.name}${unlocked ? "" : " (locked)"}: ${level.description}`}
+              className="aspect-square p-0.5 cursor-pointer focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-ror-lunar"
+            >
+              {level.image ? (
+                <Image
+                  src={level.image}
+                  alt=""
+                  width={32}
+                  height={32}
+                  className={`object-contain w-full h-full ${
+                    unlocked ? "" : "opacity-25 grayscale"
+                  }`}
+                  unoptimized
+                />
+              ) : (
+                <span className="text-[10px] font-mono">{level.level}</span>
+              )}
+            </motion.button>
+          );
+        })}
+      </fieldset>
+
+      {!hasLevelZero && captainChallenge && (
+        <div className="flex items-center justify-between gap-3">
+          <p className="text-[10px] text-ror-text-dim leading-snug">
+            {`Picking a level also unlocks the Captain (${captainChallenge.name}).`}
+          </p>
+          <button
+            type="button"
+            onClick={() =>
+              onSaveDataChange(
+                toggleAchievement(
+                  saveData,
+                  captainChallenge.achievement,
+                  true,
+                  { awardCoins },
+                ),
+              )
+            }
+            className="flex-shrink-0 min-h-11 px-3 text-[10px] uppercase tracking-wider font-display text-ror-lunar border border-ror-lunar/40 hover:bg-ror-lunar/10 hover:border-ror-lunar/60 transition-colors cursor-pointer focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-ror-lunar"
+          >
+            Unlock Captain
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}

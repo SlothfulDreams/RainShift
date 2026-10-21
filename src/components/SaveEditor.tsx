@@ -34,6 +34,7 @@ import { downloadFile } from "@/lib/utils";
 import { ChallengeCard } from "./ChallengeCard";
 import { CoinsEditor } from "./CoinsEditor";
 import { EclipseEditor, eclipseMedal } from "./EclipseEditor";
+import { KarmaEditor } from "./KarmaEditor";
 import { LogbookEditor } from "./LogbookEditor";
 
 interface SaveEditorProps {
@@ -166,7 +167,7 @@ export function SaveEditor({
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
-        className="w-full lg:w-80 flex-shrink-0 flex flex-col gap-4 sticky top-6 max-h-[calc(100vh-6rem)]"
+        className="w-full lg:w-80 flex-shrink-0 flex flex-col gap-4"
       >
         {/* CARD 1: Profile, Stats & Actions */}
         <div className="ror-card p-0 overflow-hidden flex flex-col">
@@ -195,7 +196,7 @@ export function SaveEditor({
           </div>
 
           {/* Stats Section */}
-          <div className="overflow-y-auto custom-scrollbar px-4 pt-4 pb-4">
+          <div className="px-4 pt-4 pb-4">
             <div className="space-y-4">
               <StatBar
                 label="ACHIEVEMENTS"
@@ -301,6 +302,19 @@ export function SaveEditor({
           transition={{ duration: 0.5, delay: 0.4 }}
         >
           <CoinsEditor coins={saveData.coins} onChange={handleCoinsChange} />
+        </motion.div>
+
+        {/* CARD 3: Starting Karma */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.45 }}
+        >
+          <KarmaEditor
+            saveData={saveData}
+            onSaveDataChange={handleLogbookChange}
+            awardCoins={awardCoins}
+          />
         </motion.div>
       </motion.aside>
 
