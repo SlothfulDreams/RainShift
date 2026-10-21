@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import {
   Book,
   Download,
+  Landmark,
   RotateCcw,
   Search,
   Trophy,
@@ -13,6 +14,7 @@ import {
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 import { challenges } from "@/data/challenges";
+import { newtAltars } from "@/data/newt-altars";
 import type {
   ChallengeCategory,
   DLC,
@@ -21,6 +23,7 @@ import type {
 } from "@/data/types";
 import { CATEGORY_NAMES, DLC_NAMES } from "@/data/types";
 import { getLogbookCountForChallenge } from "@/lib/challenge-logbook-mapping";
+import { countUnlockedNewtAltars } from "@/lib/newt-altars";
 import {
   calculateLogbookStats,
   calculateSaveStats,
@@ -36,6 +39,7 @@ import { CoinsEditor } from "./CoinsEditor";
 import { EclipseEditor, eclipseMedal } from "./EclipseEditor";
 import { KarmaEditor } from "./KarmaEditor";
 import { LogbookEditor } from "./LogbookEditor";
+import { NewtAltarEditor } from "./NewtAltarEditor";
 
 interface SaveEditorProps {
   initialSaveData: SaveData;
@@ -78,7 +82,7 @@ export function SaveEditor({
   const [selectedDLC, setSelectedDLC] = useState<DLC | "all">("all");
   const [hasChanges, setHasChanges] = useState(false);
   const [activeTab, setActiveTab] = useState<
-    "achievements" | "logbook" | "eclipse"
+    "achievements" | "logbook" | "eclipse" | "newts"
   >("achievements");
   const [awardCoins, setAwardCoins] = useState(false);
 
@@ -228,6 +232,12 @@ export function SaveEditor({
                 max={logbookStats.totalEntries}
                 color="var(--ror-equipment)"
               />
+              <StatBar
+                label="NEWT ALTARS"
+                value={countUnlockedNewtAltars(saveData)}
+                max={newtAltars.length}
+                color="var(--ror-lunar)"
+              />
             </div>
           </div>
 
@@ -331,7 +341,7 @@ export function SaveEditor({
             type="button"
             onClick={() => setActiveTab("achievements")}
             className={`
-              px-6 py-3 text-sm font-display uppercase tracking-wider transition-all flex items-center gap-2
+              shrink-0 whitespace-nowrap px-4 sm:px-6 py-3 text-sm font-display uppercase tracking-wider transition-all flex items-center gap-2
               ${
                 activeTab === "achievements"
                   ? "text-ror-text-main border-b-2 border-ror-orange-accent"
@@ -346,7 +356,7 @@ export function SaveEditor({
             type="button"
             onClick={() => setActiveTab("logbook")}
             className={`
-              px-6 py-3 text-sm font-display uppercase tracking-wider transition-all flex items-center gap-2
+              shrink-0 whitespace-nowrap px-4 sm:px-6 py-3 text-sm font-display uppercase tracking-wider transition-all flex items-center gap-2
               ${
                 activeTab === "logbook"
                   ? "text-ror-text-main border-b-2 border-ror-orange-accent"
@@ -361,7 +371,7 @@ export function SaveEditor({
             type="button"
             onClick={() => setActiveTab("eclipse")}
             className={`
-              px-6 py-3 text-sm font-display uppercase tracking-wider transition-all flex items-center gap-2
+              shrink-0 whitespace-nowrap px-4 sm:px-6 py-3 text-sm font-display uppercase tracking-wider transition-all flex items-center gap-2
               ${
                 activeTab === "eclipse"
                   ? "text-ror-text-main border-b-2 border-ror-orange-accent"
@@ -377,6 +387,21 @@ export function SaveEditor({
               unoptimized
             />
             Eclipse
+          </button>
+          <button
+            type="button"
+            onClick={() => setActiveTab("newts")}
+            className={`
+              shrink-0 whitespace-nowrap px-4 sm:px-6 py-3 text-sm font-display uppercase tracking-wider transition-all flex items-center gap-2
+              ${
+                activeTab === "newts"
+                  ? "text-ror-text-main border-b-2 border-ror-orange-accent"
+                  : "text-ror-text-dim hover:text-ror-text-main"
+              }
+            `}
+          >
+            <Landmark size={16} />
+            Newt Altars
           </button>
         </motion.div>
 
@@ -526,8 +551,13 @@ export function SaveEditor({
             saveData={saveData}
             onSaveDataChange={handleLogbookChange}
           />
-        ) : (
+        ) : activeTab === "eclipse" ? (
           <EclipseEditor
+            saveData={saveData}
+            onSaveDataChange={handleLogbookChange}
+          />
+        ) : (
+          <NewtAltarEditor
             saveData={saveData}
             onSaveDataChange={handleLogbookChange}
           />

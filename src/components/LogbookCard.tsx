@@ -2,8 +2,8 @@
 
 import { motion } from "framer-motion";
 import { Book, Check, Lock, Trophy } from "lucide-react";
-import Image from "next/image";
 import type { LogbookEntry } from "@/data/types";
+import { LogbookIcon } from "./LogbookIcon";
 
 interface LogbookCardProps {
   entry: LogbookEntry;
@@ -22,7 +22,6 @@ export function LogbookCard({
     onToggle(entry, !isUnlocked);
   };
 
-  const imageUrl = entry.image;
   const categoryColor = getCategoryColor(entry.category);
   const rarityColorClass = entry.rarity
     ? getRarityColorClass(entry.rarity)
@@ -73,23 +72,17 @@ export function LogbookCard({
           ${!isUnlocked && "opacity-50"}
         `}
         >
-          {imageUrl ? (
-            <Image
-              src={imageUrl}
-              alt={entry.name}
-              width={48}
-              height={48}
-              className="object-contain w-full h-full"
-              unoptimized
-            />
-          ) : (
-            <Book
-              size={20}
-              className={
-                isUnlocked ? "text-ror-text-main" : "text-ror-text-dim"
-              }
-            />
-          )}
+          <LogbookIcon
+            entry={entry}
+            fallback={
+              <Book
+                size={20}
+                className={
+                  isUnlocked ? "text-ror-text-main" : "text-ror-text-dim"
+                }
+              />
+            }
+          />
           {!isUnlocked && (
             <div className="absolute inset-0 flex items-center justify-center bg-black/50">
               <Lock size={12} className="text-ror-text-muted" />
